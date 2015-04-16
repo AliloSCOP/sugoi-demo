@@ -1,0 +1,15 @@
+<config
+	lang="fr"
+	langs="fr"
+	host="sugoi-demo"
+	name = "Sugoi Demo Site"
+	webmaster_email = "francois.barbut@gmail.com"
+	webmaster_name = "François"
+	database="mysql://root:@localhost/sugoi"
+	sqllog="1"
+	debug="1"
+	cache="0"
+	key="fnA0tkqknJu13RDFwZVa1dKgfHLFejtV"
+	maintain="0"
+	cachetpl="0"
+/>

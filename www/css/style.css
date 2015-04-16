@@ -1,0 +1,8 @@
+.sqlLog {
+	margin-top : 24px;
+	color : #888;
+	font-size : 11px;
+}
+.sqlLog .badSql {
+	color : red;
+}

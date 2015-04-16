@@ -1,0 +1,15 @@
+﻿::use 'design.mtt'::
+
+<h1>Error</h1>
+
+<pre>
+	::message::
+</pre>
+
+::if stack::
+	<h2>Stack</h2>
+	<pre>::stack::</pre>
+::end::
+
+
+::end::
