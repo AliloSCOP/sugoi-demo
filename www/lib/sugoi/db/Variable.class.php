@@ -3,22 +3,12 @@
 class sugoi_db_Variable extends sys_db_Object {
 	public function __construct() {
 		if(!php_Boot::$skip_constructor) {
-		$GLOBALS['%s']->push("sugoi.db.Variable::new");
-		$__hx__spos = $GLOBALS['%s']->length;
 		parent::__construct();
-		$GLOBALS['%s']->pop();
 	}}
 	public $name;
 	public $value;
 	public function __getManager() {
-		$GLOBALS['%s']->push("sugoi.db.Variable::__getManager");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$tmp = sugoi_db_Variable::$manager;
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return sugoi_db_Variable::$manager;
 	}
 	public function __call($m, $a) {
 		if(isset($this->$m) && is_callable($this->$m))
@@ -33,22 +23,14 @@ class sugoi_db_Variable extends sys_db_Object {
 	static function __meta__() { $args = func_get_args(); return call_user_func_array(self::$__meta__, $args); }
 	static $__meta__;
 	static function get($name) {
-		$GLOBALS['%s']->push("sugoi.db.Variable::get");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$v = sugoi_db_Variable::$manager->unsafeGet($name, false);
 		if($v === null) {
-			$GLOBALS['%s']->pop();
 			return null;
 		} else {
-			$tmp = $v->value;
-			$GLOBALS['%s']->pop();
-			return $tmp;
+			return $v->value;
 		}
-		$GLOBALS['%s']->pop();
 	}
 	static function set($name, $val) {
-		$GLOBALS['%s']->push("sugoi.db.Variable::set");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$v = sugoi_db_Variable::$manager->unsafeGet($name, true);
 		if($v === null) {
 			$v = new sugoi_db_Variable();
@@ -59,11 +41,8 @@ class sugoi_db_Variable extends sys_db_Object {
 			$v->value = Std::string($val);
 			$v->update();
 		}
-		$GLOBALS['%s']->pop();
 	}
 	static function increment($name, $inc = null) {
-		$GLOBALS['%s']->push("sugoi.db.Variable::increment");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if($inc === null) {
 			$inc = 1;
 		}
@@ -77,21 +56,14 @@ class sugoi_db_Variable extends sys_db_Object {
 			$v->value = Std::string(Std::parseInt($v->value) + 1);
 			$v->update();
 		}
-		$GLOBALS['%s']->pop();
 	}
 	static function getInt($name) {
-		$GLOBALS['%s']->push("sugoi.db.Variable::getInt");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$v = sugoi_db_Variable::$manager->unsafeGet($name, false);
 		if($v === null) {
-			$GLOBALS['%s']->pop();
 			return 0;
 		} else {
-			$tmp = Std::parseInt($v->value);
-			$GLOBALS['%s']->pop();
-			return $tmp;
+			return Std::parseInt($v->value);
 		}
-		$GLOBALS['%s']->pop();
 	}
 	static $manager;
 	function __toString() { return 'sugoi.db.Variable'; }

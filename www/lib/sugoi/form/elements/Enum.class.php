@@ -3,8 +3,6 @@
 class sugoi_form_elements_Enum extends sugoi_form_FormElement {
 	public function __construct($name, $label, $enumName, $value, $verticle = null, $labelRight = null) {
 		if(!php_Boot::$skip_constructor) {
-		$GLOBALS['%s']->push("sugoi.form.elements.Enum::new");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if($labelRight === null) {
 			$labelRight = true;
 		}
@@ -19,7 +17,6 @@ class sugoi_form_elements_Enum extends sugoi_form_FormElement {
 		$this->verticle = $verticle;
 		$this->labelRight = $labelRight;
 		$this->columns = 1;
-		$GLOBALS['%s']->pop();
 	}}
 	public $enumName;
 	public $selectMessage;
@@ -29,14 +26,9 @@ class sugoi_form_elements_Enum extends sugoi_form_FormElement {
 	public $checked;
 	public $columns;
 	public function populate() {
-		$GLOBALS['%s']->push("sugoi.form.elements.Enum::populate");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$this->value = Std::parseInt(App::$current->params->get(_hx_string_or_null($this->parentForm->name) . "_" . _hx_string_or_null($this->name)));
-		$GLOBALS['%s']->pop();
 	}
 	public function render() {
-		$GLOBALS['%s']->push("sugoi.form.elements.Enum::render");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$s = "";
 		$n = _hx_string_or_null($this->parentForm->name) . "_" . _hx_string_or_null($this->name);
 		$tagCss = $this->getClasses();
@@ -85,21 +77,10 @@ class sugoi_form_elements_Enum extends sugoi_form_FormElement {
 			}
 		}
 		$s .= "</tr></table>\x0A";
-		{
-			$GLOBALS['%s']->pop();
-			return $s;
-		}
-		$GLOBALS['%s']->pop();
+		return $s;
 	}
 	public function toString() {
-		$GLOBALS['%s']->push("sugoi.form.elements.Enum::toString");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$tmp = $this->render();
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return $this->render();
 	}
 	public function __call($m, $a) {
 		if(isset($this->$m) && is_callable($this->$m))

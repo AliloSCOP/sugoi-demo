@@ -3,40 +3,29 @@
 class php_db__PDO_DBNativeStrategy extends php_db__PDO_PHPNativeStrategy {
 	public function __construct($dbname) {
 		if(!php_Boot::$skip_constructor) {
-		$GLOBALS['%s']->push("php.db._PDO.DBNativeStrategy::new");
-		$__hx__spos = $GLOBALS['%s']->length;
 		parent::__construct();
 		$this->dbname = strtolower($dbname);
 		$this->key = _hx_string_or_null($dbname) . ":decl_type";
-		$GLOBALS['%s']->pop();
 	}}
 	public $dbname;
 	public $key;
 	public function map($data) {
-		$GLOBALS['%s']->push("php.db._PDO.DBNativeStrategy::map");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if(!isset($data[$this->key])) {
-			$tmp = parent::map($data);
-			$GLOBALS['%s']->pop();
-			return $tmp;
+			return parent::map($data);
 		}
 		$type = $data[$this->key];
 		$type = strtolower($type);
 		switch($type) {
 		case "real":{
-			$GLOBALS['%s']->pop();
 			return "float";
 		}break;
 		case "integer":{
-			$GLOBALS['%s']->pop();
 			return "int";
 		}break;
 		default:{
-			$GLOBALS['%s']->pop();
 			return "string";
 		}break;
 		}
-		$GLOBALS['%s']->pop();
 	}
 	public function __call($m, $a) {
 		if(isset($this->$m) && is_callable($this->$m))

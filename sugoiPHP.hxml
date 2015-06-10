@@ -1,0 +1,8 @@
+-lib dbadmin
+-lib templo
+-lib sugoi
+-cp src
+-cp lang/fr/tpl
+-php www
+-D spod_macro
+-main App

@@ -3,8 +3,6 @@
 class sugoi_form_FieldSet {
 	public function __construct($name = null, $label = null, $visible = null) {
 		if(!php_Boot::$skip_constructor) {
-		$GLOBALS['%s']->push("sugoi.form.FieldSet::new");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if($visible === null) {
 			$visible = true;
 		}
@@ -18,7 +16,6 @@ class sugoi_form_FieldSet {
 		$this->label = $label;
 		$this->visible = $visible;
 		$this->elements = (new _hx_array(array()));
-		$GLOBALS['%s']->pop();
 	}}
 	public $name;
 	public $form;
@@ -26,23 +23,10 @@ class sugoi_form_FieldSet {
 	public $visible;
 	public $elements;
 	public function getOpenTag() {
-		$GLOBALS['%s']->push("sugoi.form.FieldSet::getOpenTag");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$tmp = "<fieldset id=\"" . _hx_string_or_null($this->form->name) . "_" . _hx_string_or_null($this->name) . "\" name=\"" . _hx_string_or_null($this->form->name) . "_" . _hx_string_or_null($this->name) . "\" class=\"" . _hx_string_or_null(((($this->visible) ? "" : "fieldsetNoDisplay"))) . "\" ><legend>" . _hx_string_or_null($this->label) . "</legend>";
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return "<fieldset id=\"" . _hx_string_or_null($this->form->name) . "_" . _hx_string_or_null($this->name) . "\" name=\"" . _hx_string_or_null($this->form->name) . "_" . _hx_string_or_null($this->name) . "\" class=\"" . _hx_string_or_null(((($this->visible) ? "" : "fieldsetNoDisplay"))) . "\" ><legend>" . _hx_string_or_null($this->label) . "</legend>";
 	}
 	public function getCloseTag() {
-		$GLOBALS['%s']->push("sugoi.form.FieldSet::getCloseTag");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$GLOBALS['%s']->pop();
-			return "</fieldset>";
-		}
-		$GLOBALS['%s']->pop();
+		return "</fieldset>";
 	}
 	public function __call($m, $a) {
 		if(isset($this->$m) && is_callable($this->$m))

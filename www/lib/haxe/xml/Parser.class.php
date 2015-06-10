@@ -4,22 +4,14 @@ class haxe_xml_Parser {
 	public function __construct(){}
 	static $escapes;
 	static function parse($str, $strict = null) {
-		$GLOBALS['%s']->push("haxe.xml.Parser::parse");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if($strict === null) {
 			$strict = false;
 		}
 		$doc = Xml::createDocument();
 		haxe_xml_Parser::doParse($str, $strict, 0, $doc);
-		{
-			$GLOBALS['%s']->pop();
-			return $doc;
-		}
-		$GLOBALS['%s']->pop();
+		return $doc;
 	}
 	static function doParse($str, $strict, $p = null, $parent = null) {
-		$GLOBALS['%s']->push("haxe.xml.Parser::doParse");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if($p === null) {
 			$p = 0;
 		}
@@ -63,8 +55,10 @@ class haxe_xml_Parser {
 					$buf->b .= _hx_string_or_null(_hx_substr($str, $start, $p - $start));
 					$child = Xml::createPCData($buf->b);
 					$buf = new StringBuf();
-					$parent->addChild($child);
-					$nsubs++;
+					{
+						$parent->addChild($child);
+						$nsubs++;
+					}
 					$state = 0;
 					$next = 2;
 				} else {
@@ -79,8 +73,10 @@ class haxe_xml_Parser {
 			case 17:{
 				if($c === 93 && ord(substr($str,$p + 1,1)) === 93 && ord(substr($str,$p + 2,1)) === 62) {
 					$child1 = Xml::createCData(_hx_substr($str, $start, $p - $start));
-					$parent->addChild($child1);
-					$nsubs++;
+					{
+						$parent->addChild($child1);
+						$nsubs++;
+					}
 					$p += 2;
 					$state = 1;
 				}
@@ -140,7 +136,10 @@ class haxe_xml_Parser {
 						throw new HException("Expected node name");
 					}
 					$xml = Xml::createElement(_hx_substr($str, $start, $p - $start));
-					$parent->addChild($xml);
+					{
+						$parent->addChild($xml);
+						$nsubs++;
+					}
 					$state = 0;
 					$next = 4;
 					continue 2;
@@ -150,11 +149,9 @@ class haxe_xml_Parser {
 				switch($c) {
 				case 47:{
 					$state = 11;
-					$nsubs++;
 				}break;
 				case 62:{
 					$state = 9;
-					$nsubs++;
 				}break;
 				default:{
 					$state = 5;
@@ -272,10 +269,7 @@ class haxe_xml_Parser {
 					if($nsubs === 0) {
 						$parent->addChild(Xml::createPCData(""));
 					}
-					{
-						$GLOBALS['%s']->pop();
-						return $p;
-					}
+					return $p;
 				}break;
 				default:{
 					throw new HException("Expected >");
@@ -298,7 +292,11 @@ class haxe_xml_Parser {
 			}break;
 			case 15:{
 				if($c === 45 && ord(substr($str,$p + 1,1)) === 45 && ord(substr($str,$p + 2,1)) === 62) {
-					$parent->addChild(Xml::createComment(_hx_substr($str, $start, $p - $start)));
+					{
+						$xml1 = Xml::createComment(_hx_substr($str, $start, $p - $start));
+						$parent->addChild($xml1);
+						$nsubs++;
+					}
 					$p += 2;
 					$state = 1;
 				}
@@ -311,7 +309,11 @@ class haxe_xml_Parser {
 						$nbrackets--;
 					} else {
 						if($c === 62 && $nbrackets === 0) {
-							$parent->addChild(Xml::createDocType(_hx_substr($str, $start, $p - $start)));
+							{
+								$xml2 = Xml::createDocType(_hx_substr($str, $start, $p - $start));
+								$parent->addChild($xml2);
+								$nsubs++;
+							}
 							$state = 1;
 						}
 					}
@@ -321,7 +323,11 @@ class haxe_xml_Parser {
 				if($c === 63 && ord(substr($str,$p + 1,1)) === 62) {
 					$p++;
 					$str1 = _hx_substr($str, $start + 1, $p - $start - 2);
-					$parent->addChild(Xml::createProcessingInstruction($str1));
+					{
+						$xml3 = Xml::createProcessingInstruction($str1);
+						$parent->addChild($xml3);
+						$nsubs++;
+					}
 					$state = 1;
 				}
 			}break;
@@ -378,7 +384,7 @@ class haxe_xml_Parser {
 						$buf->b .= "&";
 						$buf->b .= _hx_string_or_null(_hx_substr($str, $start, $p - $start));
 						$p--;
-						$start = $p;
+						$start = $p + 1;
 						$state = $escapeNext;
 					}
 				}
@@ -397,24 +403,25 @@ class haxe_xml_Parser {
 		if($state === 13) {
 			if($p !== $start || $nsubs === 0) {
 				$buf->b .= _hx_string_or_null(_hx_substr($str, $start, $p - $start));
-				$parent->addChild(Xml::createPCData($buf->b));
+				{
+					$xml4 = Xml::createPCData($buf->b);
+					$parent->addChild($xml4);
+					$nsubs++;
+				}
 			}
-			{
-				$GLOBALS['%s']->pop();
-				return $p;
-			}
+			return $p;
 		}
 		if(!$strict && $state === 18 && $escapeNext === 13) {
 			$buf->b .= "&";
 			$buf->b .= _hx_string_or_null(_hx_substr($str, $start, $p - $start));
-			$parent->addChild(Xml::createPCData($buf->b));
 			{
-				$GLOBALS['%s']->pop();
-				return $p;
+				$xml5 = Xml::createPCData($buf->b);
+				$parent->addChild($xml5);
+				$nsubs++;
 			}
+			return $p;
 		}
 		throw new HException("Unexpected end");
-		$GLOBALS['%s']->pop();
 	}
 	function __toString() { return 'haxe.xml.Parser'; }
 }

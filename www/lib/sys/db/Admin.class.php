@@ -3,14 +3,11 @@
 class sys_db_Admin {
 	public function __construct() {
 		if(!php_Boot::$skip_constructor) {
-		$GLOBALS['%s']->push("sys.db.Admin::new");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$this->maxInstanceCount = 100;
 		$this->maxUploadSize = 1000000;
 		$this->allowDrop = false;
 		$this->countCache = new haxe_ds_StringMap();
 		$this->default_rights = _hx_anonymous(array("can" => _hx_anonymous(array("insert" => true, "delete" => true, "modify" => true, "truncate" => false)), "invisible" => (new _hx_array(array())), "readOnly" => (new _hx_array(array()))));
-		$GLOBALS['%s']->pop();
 	}}
 	public $style;
 	public $hasSyncAction;
@@ -20,87 +17,44 @@ class sys_db_Admin {
 	public $maxUploadSize;
 	public $maxInstanceCount;
 	public function execute($sql) {
-		$GLOBALS['%s']->push("sys.db.Admin::execute");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$tmp = sys_db_Manager::$cnx->request($sql);
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return sys_db_Manager::$cnx->request($sql);
 	}
 	public function request($t, $sql) {
-		$GLOBALS['%s']->push("sys.db.Admin::request");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$tmp = sys_db_Manager::$cnx->request($sql);
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return sys_db_Manager::$cnx->request($sql);
 	}
 	public function boolResult($sql) {
-		$GLOBALS['%s']->push("sys.db.Admin::boolResult");
-		$__hx__spos = $GLOBALS['%s']->length;
 		try {
 			$this->execute($sql);
-			{
-				$GLOBALS['%s']->pop();
-				return true;
-			}
+			return true;
 		}catch(Exception $__hx__e) {
 			$_ex_ = ($__hx__e instanceof HException) ? $__hx__e->e : $__hx__e;
 			$e = $_ex_;
 			{
-				$GLOBALS['%e'] = (new _hx_array(array()));
-				while($GLOBALS['%s']->length >= $__hx__spos) {
-					$GLOBALS['%e']->unshift($GLOBALS['%s']->pop());
-				}
-				$GLOBALS['%s']->push($GLOBALS['%e'][0]);
-				{
-					$GLOBALS['%s']->pop();
-					return false;
-				}
+				return false;
 			}
 		}
-		$GLOBALS['%s']->pop();
 	}
 	public function getTables() {
-		$GLOBALS['%s']->push("sys.db.Admin::getTables");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$tables = new _hx_array(array());
 		$classes = php_Lib::getClasses();
 		$this->crawl($tables, $classes);
 		$tables->sort(array(new _hx_lambda(array(&$classes, &$tables), "sys_db_Admin_0"), 'execute'));
-		{
-			$GLOBALS['%s']->pop();
-			return $tables;
-		}
-		$GLOBALS['%s']->pop();
+		return $tables;
 	}
 	public function has($a, $v) {
-		$GLOBALS['%s']->push("sys.db.Admin::has");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if(null == $a) throw new HException('null iterable');
 		$__hx__it = $a->iterator();
 		while($__hx__it->hasNext()) {
 			unset($x);
 			$x = $__hx__it->next();
 			if((is_object($_t = $x) && !($_t instanceof Enum) ? $_t === $v : $_t == $v)) {
-				$GLOBALS['%s']->pop();
 				return true;
 			}
 			unset($_t);
 		}
-		{
-			$GLOBALS['%s']->pop();
-			return false;
-		}
-		$GLOBALS['%s']->pop();
+		return false;
 	}
 	public function crawl($tables, $classes) {
-		$GLOBALS['%s']->push("sys.db.Admin::crawl");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$_g = 0;
 		$_g1 = Reflect::fields($classes);
 		while($_g < $_g1->length) {
@@ -110,9 +64,6 @@ class sys_db_Admin {
 			$c = _hx_char_at($cname, 0);
 			if((strcmp($c, "a")>= 0) && (strcmp($c, "z")<= 0)) {
 				$this->crawl($tables, $v);
-				continue;
-			}
-			if(haxe_rtti_Meta::getType($v)->rtti === null) {
 				continue;
 			}
 			$s = Type::getSuperClass($v);
@@ -126,11 +77,8 @@ class sys_db_Admin {
 			}
 			unset($v,$s,$cname,$c);
 		}
-		$GLOBALS['%s']->pop();
 	}
 	public function index($errorMsg = null) {
-		$GLOBALS['%s']->push("sys.db.Admin::index");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$this->style->begin("Tables");
 		$this->style->beginForm("doSync", null, null);
 		$this->style->beginTable(null);
@@ -141,6 +89,9 @@ class sys_db_Admin {
 		while($__hx__it->hasNext()) {
 			unset($r);
 			$r = $__hx__it->next();
+			if($rq->getResult(0) === null) {
+				continue;
+			}
 			$allTables->add($rq->getResult(0));
 		}
 		$windows = Sys::systemName() === "Windows";
@@ -194,11 +145,8 @@ class sys_db_Admin {
 			while($__hx__it->hasNext()) {
 				unset($t1);
 				$t1 = $__hx__it->next();
-				if($t1 === "ForumSearch") {
-					continue;
-				}
 				$this->style->beginItem();
-				$this->style->text("Table " . _hx_string_or_null($t1) . " does not have any matching object", null);
+				$this->style->text("Table \"" . _hx_string_or_null($t1) . "\" does not have any matching object", null);
 				$this->style->endItem();
 			}
 			$this->style->endList();
@@ -207,42 +155,27 @@ class sys_db_Admin {
 			$this->style->error($errorMsg);
 		}
 		$this->style->end();
-		$GLOBALS['%s']->pop();
 	}
 	public function isBinary($t) {
-		$GLOBALS['%s']->push("sys.db.Admin::isBinary");
-		$__hx__spos = $GLOBALS['%s']->length;
 		switch($t->index) {
 		case 18:case 16:case 17:case 19:{
-			$GLOBALS['%s']->pop();
 			return true;
 		}break;
 		default:{
-			$GLOBALS['%s']->pop();
 			return false;
 		}break;
 		}
-		$GLOBALS['%s']->pop();
 	}
 	public function canDisplay($m) {
-		$GLOBALS['%s']->push("sys.db.Admin::canDisplay");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$c = $this->countCache->get($m->table_name);
 		if($c !== null) {
-			$GLOBALS['%s']->pop();
 			return $c;
 		}
 		$c = $this->execute(sys_db_TableInfos::countRequest($m, $this->maxInstanceCount))->get_length() < $this->maxInstanceCount;
 		$this->countCache->set($m->table_name, $c);
-		{
-			$GLOBALS['%s']->pop();
-			return $c;
-		}
-		$GLOBALS['%s']->pop();
+		return $c;
 	}
 	public function inputField($table, $f, $id, $readonly, $defval = null, $rawValue = null) {
-		$GLOBALS['%s']->push("sys.db.Admin::inputField");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$prim = $this->has($table->primary, $f->name);
 		$insert = $id === null;
 		{
@@ -263,10 +196,7 @@ class sys_db_Admin {
 						$cname = $r->className;
 					}
 					$this->style->choiceField($r->prop, $values, Std::string($defval), _hx_string_or_null($cname) . "/edit/", !$insert && ($prim || $readonly), $r->className === "db.File");
-					{
-						$GLOBALS['%s']->pop();
-						return;
-					}
+					return;
 					unset($values,$cname);
 				}
 				unset($r);
@@ -283,10 +213,19 @@ class sys_db_Admin {
 				$defval = _hx_deref(new sys_db_Serialized($defval))->escape();
 			}break;
 			case 22:{
-				throw new HException("no NekoSerialized in php");
+				throw new HException("DNekoSerialized is only available on neko target");
 			}break;
 			case 30:{
-				$str = _hx_string_call($defval, "toString", array());
+				$str = null;
+				try {
+					$str = haxe_Serializer::run($table->manager->doUnserialize($f->name, $defval));
+				}catch(Exception $__hx__e) {
+					$_ex_ = ($__hx__e instanceof HException) ? $__hx__e->e : $__hx__e;
+					$e = $_ex_;
+					{
+						$str = "ERROR : " . Std::string($e);
+					}
+				}
 				$defval = _hx_deref(new sys_db_Serialized($str))->escape();
 			}break;
 			default:{}break;
@@ -296,7 +235,6 @@ class sys_db_Admin {
 			$this->style->binField($f->name, $table->nulls->exists($f->name), $defval, sys_db_Admin_2($this, $defval, $f, $id, $insert, $prim, $rawValue, $readonly, $table));
 		} else {
 			if($insert && $readonly) {
-				$GLOBALS['%s']->pop();
 				return;
 			} else {
 				if(!$insert && ($prim || $readonly)) {
@@ -306,11 +244,8 @@ class sys_db_Admin {
 				}
 			}
 		}
-		$GLOBALS['%s']->pop();
 	}
 	public function insert($table, $params = null, $error = null, $errorMsg = null) {
-		$GLOBALS['%s']->push("sys.db.Admin::insert");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$binary = false;
 		if(null == $table->fields) throw new HException('null iterable');
 		$__hx__it = $table->fields->iterator();
@@ -348,14 +283,10 @@ class sys_db_Admin {
 			$this->style->error($errorMsg);
 		}
 		$this->style->end();
-		$GLOBALS['%s']->pop();
 	}
-	public function updateField($fname, $v, $ftype) {
-		$GLOBALS['%s']->push("sys.db.Admin::updateField");
-		$__hx__spos = $GLOBALS['%s']->length;
+	public function updateField($fname, $v, $ftype, $table) {
 		switch($ftype->index) {
 		case 0:case 2:case 4:{
-			$GLOBALS['%s']->pop();
 			return null;
 		}break;
 		case 10:{
@@ -369,17 +300,11 @@ class sys_db_Admin {
 					$_ex_ = ($__hx__e instanceof HException) ? $__hx__e->e : $__hx__e;
 					$e = $_ex_;
 					{
-						$GLOBALS['%e'] = (new _hx_array(array()));
-						while($GLOBALS['%s']->length >= $__hx__spos) {
-							$GLOBALS['%e']->unshift($GLOBALS['%s']->pop());
-						}
-						$GLOBALS['%s']->push($GLOBALS['%e'][0]);
 						$d = null;
 					}
 				}
 			}
 			if($d === null) {
-				$GLOBALS['%s']->pop();
 				return null;
 			}
 			try {
@@ -388,21 +313,10 @@ class sys_db_Admin {
 				$_ex_ = ($__hx__e instanceof HException) ? $__hx__e->e : $__hx__e;
 				$e1 = $_ex_;
 				{
-					$GLOBALS['%e'] = (new _hx_array(array()));
-					while($GLOBALS['%s']->length >= $__hx__spos) {
-						$GLOBALS['%e']->unshift($GLOBALS['%s']->pop());
-					}
-					$GLOBALS['%s']->push($GLOBALS['%e'][0]);
-					{
-						$GLOBALS['%s']->pop();
-						return null;
-					}
+					return null;
 				}
 			}
-			{
-				$GLOBALS['%s']->pop();
-				return $d;
-			}
+			return $d;
 		}break;
 		case 11:case 12:{
 			$d1 = null;
@@ -415,17 +329,11 @@ class sys_db_Admin {
 					$_ex_ = ($__hx__e instanceof HException) ? $__hx__e->e : $__hx__e;
 					$e2 = $_ex_;
 					{
-						$GLOBALS['%e'] = (new _hx_array(array()));
-						while($GLOBALS['%s']->length >= $__hx__spos) {
-							$GLOBALS['%e']->unshift($GLOBALS['%s']->pop());
-						}
-						$GLOBALS['%s']->push($GLOBALS['%e'][0]);
 						$d1 = null;
 					}
 				}
 			}
 			if($d1 === null) {
-				$GLOBALS['%s']->pop();
 				return null;
 			}
 			try {
@@ -434,359 +342,226 @@ class sys_db_Admin {
 				$_ex_ = ($__hx__e instanceof HException) ? $__hx__e->e : $__hx__e;
 				$e3 = $_ex_;
 				{
-					$GLOBALS['%e'] = (new _hx_array(array()));
-					while($GLOBALS['%s']->length >= $__hx__spos) {
-						$GLOBALS['%e']->unshift($GLOBALS['%s']->pop());
-					}
-					$GLOBALS['%s']->push($GLOBALS['%e'][0]);
-					{
-						$GLOBALS['%s']->pop();
-						return null;
-					}
+					return null;
 				}
 			}
-			{
-				$GLOBALS['%s']->pop();
-				return $d1;
-			}
+			return $d1;
 		}break;
 		case 1:{
 			if($v === "") {
-				$GLOBALS['%s']->pop();
 				return 0;
 			}
-			{
-				$tmp = Std::parseInt($v);
-				$GLOBALS['%s']->pop();
-				return $tmp;
-			}
+			return Std::parseInt($v);
 		}break;
 		case 3:case 23:{
 			if($v === "") {
-				$GLOBALS['%s']->pop();
 				return 0;
 			}
 			$i = Std::parseInt($v);
 			if($i < 0) {
-				$GLOBALS['%s']->pop();
 				return null;
 			}
-			{
-				$GLOBALS['%s']->pop();
-				return $i;
-			}
+			return $i;
 		}break;
 		case 24:{
 			if($v === "") {
-				$GLOBALS['%s']->pop();
 				return 0;
 			}
 			$i1 = Std::parseInt($v);
 			if($i1 < -128 || $i1 > 127) {
-				$GLOBALS['%s']->pop();
 				return null;
 			}
-			{
-				$GLOBALS['%s']->pop();
-				return $i1;
-			}
+			return $i1;
 		}break;
 		case 25:{
 			if($v === "") {
-				$GLOBALS['%s']->pop();
 				return 0;
 			}
 			$i2 = Std::parseInt($v);
 			if($i2 < 0 || $i2 > 255) {
-				$GLOBALS['%s']->pop();
 				return null;
 			}
-			{
-				$GLOBALS['%s']->pop();
-				return $i2;
-			}
+			return $i2;
 		}break;
 		case 26:{
 			if($v === "") {
-				$GLOBALS['%s']->pop();
 				return 0;
 			}
 			$i3 = Std::parseInt($v);
 			if($i3 < -32768 || $i3 > 32767) {
-				$GLOBALS['%s']->pop();
 				return null;
 			}
-			{
-				$GLOBALS['%s']->pop();
-				return $i3;
-			}
+			return $i3;
 		}break;
 		case 27:{
 			if($v === "") {
-				$GLOBALS['%s']->pop();
 				return 0;
 			}
 			$i4 = Std::parseInt($v);
 			if($i4 < 0 || $i4 > 65535) {
-				$GLOBALS['%s']->pop();
 				return null;
 			}
-			{
-				$GLOBALS['%s']->pop();
-				return $i4;
-			}
+			return $i4;
 		}break;
 		case 28:{
 			if($v === "") {
-				$GLOBALS['%s']->pop();
 				return 0;
 			}
 			$i5 = Std::parseInt($v);
 			if($i5 < -8388608 || $i5 > 8388607) {
-				$GLOBALS['%s']->pop();
 				return null;
 			}
-			{
-				$GLOBALS['%s']->pop();
-				return $i5;
-			}
+			return $i5;
 		}break;
 		case 29:{
 			if($v === "") {
-				$GLOBALS['%s']->pop();
 				return 0;
 			}
 			$i6 = Std::parseInt($v);
 			if($i6 < 0 || $i6 > 16777215) {
-				$GLOBALS['%s']->pop();
 				return null;
 			}
-			{
-				$GLOBALS['%s']->pop();
-				return $i6;
-			}
+			return $i6;
 		}break;
 		case 5:{
 			if($v === "") {
-				$GLOBALS['%s']->pop();
 				return 0;
 			}
 			$i7 = Std::parseFloat($v);
 			if($i7 === null || !_hx_equal(_hx_mod($i7, 1), 0) || $i7 < -9.2233720368547758e+018 || $i7 > 9223372036854775807.0) {
-				$GLOBALS['%s']->pop();
 				return null;
 			}
-			{
-				$GLOBALS['%s']->pop();
-				return $i7;
-			}
+			return $i7;
 		}break;
 		case 7:case 6:{
 			if($v === "") {
-				$GLOBALS['%s']->pop();
 				return 0;
 			}
 			$fl = Std::parseFloat($v);
 			if(Math::isNaN($fl)) {
-				$GLOBALS['%s']->pop();
 				return null;
 			}
-			{
-				$GLOBALS['%s']->pop();
-				return $fl;
-			}
+			return $fl;
 		}break;
 		case 9:{
 			$n = _hx_deref($ftype)->params[0];
 			{
 				if(strlen($v) > $n) {
-					$GLOBALS['%s']->pop();
 					return null;
 				}
-				{
-					$GLOBALS['%s']->pop();
-					return $v;
-				}
+				return $v;
 			}
 		}break;
 		case 13:{
 			if(strlen($v) > 255) {
-				$GLOBALS['%s']->pop();
 				return null;
 			}
-			{
-				$GLOBALS['%s']->pop();
-				return $v;
-			}
+			return $v;
 		}break;
 		case 14:case 16:{
 			if(strlen($v) > 65535) {
-				$GLOBALS['%s']->pop();
 				return null;
 			}
-			{
-				$GLOBALS['%s']->pop();
-				return $v;
-			}
+			return $v;
 		}break;
 		case 15:case 18:{
 			if(strlen($v) > 16777215) {
-				$GLOBALS['%s']->pop();
 				return null;
 			}
-			{
-				$GLOBALS['%s']->pop();
-				return $v;
-			}
+			return $v;
 		}break;
 		case 19:{
 			$n1 = _hx_deref($ftype)->params[0];
 			{
 				if(strlen($v) > $n1) {
-					$GLOBALS['%s']->pop();
 					return null;
 				}
-				{
-					$GLOBALS['%s']->pop();
-					return $v;
-				}
+				return $v;
 			}
 		}break;
 		case 17:{
-			$GLOBALS['%s']->pop();
 			return $v;
 		}break;
 		case 8:{
-			$tmp = $v === "true";
-			$GLOBALS['%s']->pop();
-			return $tmp;
+			return $v === "true";
 		}break;
 		case 20:{
 			if($v === "") {
-				$GLOBALS['%s']->pop();
 				return null;
 			}
 			try {
-				{
-					$tmp = sys_db_Id::encode($v);
-					$GLOBALS['%s']->pop();
-					return $tmp;
-				}
+				return sys_db_Id::encode($v);
 			}catch(Exception $__hx__e) {
 				$_ex_ = ($__hx__e instanceof HException) ? $__hx__e->e : $__hx__e;
 				$e4 = $_ex_;
 				{
-					$GLOBALS['%e'] = (new _hx_array(array()));
-					while($GLOBALS['%s']->length >= $__hx__spos) {
-						$GLOBALS['%e']->unshift($GLOBALS['%s']->pop());
-					}
-					$GLOBALS['%s']->push($GLOBALS['%e'][0]);
-					{
-						$GLOBALS['%s']->pop();
-						return null;
-					}
+					return null;
 				}
 			}
 		}break;
 		case 21:{
-			$tmp = _hx_deref(new sys_db_Serialized($v))->encode();
-			$GLOBALS['%s']->pop();
-			return $tmp;
+			return _hx_deref(new sys_db_Serialized($v))->encode();
 		}break;
 		case 22:{
-			throw new HException("no nekoSerialized in php");
+			throw new HException("DNekoSerialized is only available on neko target");
+			return null;
 		}break;
 		case 30:{
 			$s = _hx_deref(new sys_db_Serialized($v))->encode();
 			if(strlen($s) > 16777215) {
-				$GLOBALS['%s']->pop();
 				return null;
 			}
-			{
-				$tmp = haxe_io_Bytes::ofString($s);
-				$GLOBALS['%s']->pop();
-				return $tmp;
-			}
+			return $table->manager->doSerialize($fname, haxe_Unserializer::run($s));
 		}break;
 		case 31:{
 			$e5 = _hx_deref($ftype)->params[0];
 			{
 				if($v === "") {
-					$GLOBALS['%s']->pop();
 					return 0;
 				}
 				$i8 = Std::parseInt($v);
 				$ev = Type::resolveEnum($e5);
 				if($i8 < 0 || $ev !== null && $i8 >= Type::getEnumConstructs($ev)->length) {
-					$GLOBALS['%s']->pop();
 					return null;
 				}
-				{
-					$GLOBALS['%s']->pop();
-					return $i8;
-				}
+				return $i8;
 			}
 		}break;
 		case 33:case 32:{
 			throw new HException("assert");
 		}break;
 		}
-		$GLOBALS['%s']->pop();
 	}
 	public function createInstance($table) {
-		$GLOBALS['%s']->push("sys.db.Admin::createInstance");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$c = Type::createEmptyInstance($table->cl);
-		$c->__init_object();
-		{
-			$GLOBALS['%s']->pop();
-			return $c;
+		if($c->_manager === null) {
+			$c->_manager = $c->__getManager();
 		}
-		$GLOBALS['%s']->pop();
+		return $c;
 	}
 	public function getRights($t = null, $table = null) {
-		$GLOBALS['%s']->push("sys.db.Admin::getRights");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if($t === null) {
 			$t = $this->createInstance($table);
 		}
 		if(_hx_field($t, "dbRights") === null) {
-			$tmp = $this->default_rights;
-			$GLOBALS['%s']->pop();
-			return $tmp;
+			return $this->default_rights;
 		}
 		$r = $t->dbRights();
 		if($r === null) {
-			$tmp = $this->default_rights;
-			$GLOBALS['%s']->pop();
-			return $tmp;
+			return $this->default_rights;
 		}
 		if(_hx_field($r, "can") === null) {
 			$r->can = $this->default_rights->can;
 		}
-		{
-			$GLOBALS['%s']->pop();
-			return $r;
-		}
-		$GLOBALS['%s']->pop();
+		return $r;
 	}
 	public function getSInfos($t) {
-		$GLOBALS['%s']->push("sys.db.Admin::getSInfos");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if(_hx_field($t, "dbSearch") === null) {
-			$GLOBALS['%s']->pop();
 			return null;
 		}
-		{
-			$tmp = $t->dbSearch();
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return $t->dbSearch();
 	}
 	public function doInsert($table, $params) {
-		$GLOBALS['%s']->push("sys.db.Admin::doInsert");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$inst = $this->createInstance($table);
 		$this->updateParams($table, $params);
 		if(null == $table->fields) throw new HException('null iterable');
@@ -806,10 +581,7 @@ class sys_db_Admin {
 						++$_g;
 						if($f->name === $r->key) {
 							$this->insert($table, $params, $f->name, null);
-							{
-								$GLOBALS['%s']->pop();
-								return;
-							}
+							return;
 						}
 						unset($r);
 					}
@@ -820,25 +592,17 @@ class sys_db_Admin {
 			$msg = null;
 			$v1 = null;
 			try {
-				$v1 = $this->updateField($f->name, $v, $f->type);
+				$v1 = $this->updateField($f->name, $v, $f->type, $table);
 			}catch(Exception $__hx__e) {
 				$_ex_ = ($__hx__e instanceof HException) ? $__hx__e->e : $__hx__e;
 				if(is_string($err = $_ex_)){
-					$GLOBALS['%e'] = (new _hx_array(array()));
-					while($GLOBALS['%s']->length >= $__hx__spos) {
-						$GLOBALS['%e']->unshift($GLOBALS['%s']->pop());
-					}
-					$GLOBALS['%s']->push($GLOBALS['%e'][0]);
 					$msg = $err;
 					$v1 = null;
 				} else throw $__hx__e;;
 			}
 			if($v1 === null) {
 				$this->insert($table, $params, $f->name, $msg);
-				{
-					$GLOBALS['%s']->pop();
-					return;
-				}
+				return;
 			}
 			$inst->{$f->name} = $v1;
 			unset($v1,$v,$msg,$err);
@@ -850,77 +614,52 @@ class sys_db_Admin {
 			if(!$this->getRights($inst, null)->can->insert) {
 				throw new HException("Can't insert");
 			}
+			if($inst === null) {
+				throw new HException("instance is null");
+			}
 			$inst->insert();
 			sys_db_Admin::log("Inserted " . _hx_string_or_null($table->name) . " " . _hx_string_or_null($table->identifier($inst)));
 		}catch(Exception $__hx__e) {
 			$_ex_ = ($__hx__e instanceof HException) ? $__hx__e->e : $__hx__e;
 			$e = $_ex_;
 			{
-				$GLOBALS['%e'] = (new _hx_array(array()));
-				while($GLOBALS['%s']->length >= $__hx__spos) {
-					$GLOBALS['%e']->unshift($GLOBALS['%s']->pop());
-				}
-				$GLOBALS['%s']->push($GLOBALS['%e'][0]);
 				$this->insert($table, $params, null, Std::string($e));
-				{
-					$GLOBALS['%s']->pop();
-					return;
-				}
+				return;
 			}
 		}
 		if($params->exists("__new")) {
 			$this->insert($table, $params, null, null);
-			{
-				$GLOBALS['%s']->pop();
-				return;
-			}
+			return;
 		}
-		$this->style->redirect(_hx_string_or_null($table->className) . "/edit/" . _hx_string_or_null($table->identifier($inst)));
-		$GLOBALS['%s']->pop();
+		$this->style->goto(_hx_string_or_null($table->className) . "/edit/" . _hx_string_or_null($table->identifier($inst)));
 	}
 	public function doCreate($table) {
-		$GLOBALS['%s']->push("sys.db.Admin::doCreate");
-		$__hx__spos = $GLOBALS['%s']->length;
 		try {
 			$this->execute($table->createRequest(false));
-			$this->style->redirect("");
+			$this->style->goto("");
 		}catch(Exception $__hx__e) {
 			$_ex_ = ($__hx__e instanceof HException) ? $__hx__e->e : $__hx__e;
 			$e = $_ex_;
 			{
-				$GLOBALS['%e'] = (new _hx_array(array()));
-				while($GLOBALS['%s']->length >= $__hx__spos) {
-					$GLOBALS['%e']->unshift($GLOBALS['%s']->pop());
-				}
-				$GLOBALS['%s']->push($GLOBALS['%e'][0]);
 				$this->index(Std::string($e));
 			}
 		}
-		$GLOBALS['%s']->pop();
 	}
 	public function doDrop($table) {
-		$GLOBALS['%s']->push("sys.db.Admin::doDrop");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if(!$this->allowDrop) {
 			throw new HException("Drop not allowed");
 		}
 		$this->execute($table->dropRequest());
-		$this->style->redirect("");
-		$GLOBALS['%s']->pop();
+		$this->style->goto("");
 	}
 	public function doCleanup($table) {
-		$GLOBALS['%s']->push("sys.db.Admin::doCleanup");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if(!$this->getRights(null, $table)->can->truncate) {
 			throw new HException("Can't cleanup");
 		}
 		$this->execute($table->truncateRequest());
-		$this->style->redirect("");
-		$GLOBALS['%s']->pop();
+		$this->style->goto("");
 	}
 	public function edit($table, $id, $params = null, $error = null, $errorMsg = null) {
-		$GLOBALS['%s']->push("sys.db.Admin::edit");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$obj = $table->fromIdentifier($id);
 		$objStr = null;
 		try {
@@ -929,11 +668,6 @@ class sys_db_Admin {
 			$_ex_ = ($__hx__e instanceof HException) ? $__hx__e->e : $__hx__e;
 			$e = $_ex_;
 			{
-				$GLOBALS['%e'] = (new _hx_array(array()));
-				while($GLOBALS['%s']->length >= $__hx__spos) {
-					$GLOBALS['%e']->unshift($GLOBALS['%s']->pop());
-				}
-				$GLOBALS['%s']->push($GLOBALS['%e'][0]);
 				$objStr = "#" . _hx_string_or_null($id);
 			}
 		}
@@ -941,10 +675,7 @@ class sys_db_Admin {
 		if($obj === null) {
 			$this->style->error("This object does not exists");
 			$this->style->end();
-			{
-				$GLOBALS['%s']->pop();
-				return;
-			}
+			return;
 		}
 		$binary = false;
 		if(null == $table->fields) throw new HException('null iterable');
@@ -994,18 +725,12 @@ class sys_db_Admin {
 			$this->style->error($errorMsg);
 		}
 		$this->style->end();
-		$GLOBALS['%s']->pop();
 	}
 	public function doEdit($table, $id, $params) {
-		$GLOBALS['%s']->push("sys.db.Admin::doEdit");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$inst = $table->fromIdentifier($id);
 		if($inst === null) {
-			$this->style->redirect(_hx_string_or_null($table->className) . "/edit/" . _hx_string_or_null($id));
-			{
-				$GLOBALS['%s']->pop();
-				return;
-			}
+			$this->style->goto(_hx_string_or_null($table->className) . "/edit/" . _hx_string_or_null($id));
+			return;
 		}
 		$this->updateParams($table, $params);
 		$rights = $this->getRights($inst, null);
@@ -1028,16 +753,11 @@ class sys_db_Admin {
 			$msg = null;
 			$v1 = null;
 			try {
-				$v1 = $this->updateField($f->name, $v, $f->type);
+				$v1 = $this->updateField($f->name, $v, $f->type, $table);
 			}catch(Exception $__hx__e) {
 				$_ex_ = ($__hx__e instanceof HException) ? $__hx__e->e : $__hx__e;
 				$err = $_ex_;
 				{
-					$GLOBALS['%e'] = (new _hx_array(array()));
-					while($GLOBALS['%s']->length >= $__hx__spos) {
-						$GLOBALS['%e']->unshift($GLOBALS['%s']->pop());
-					}
-					$GLOBALS['%s']->push($GLOBALS['%e'][0]);
 					$msg = $err;
 					$v1 = null;
 				}
@@ -1067,10 +787,7 @@ class sys_db_Admin {
 					unset($_g1,$_g);
 				}
 				$this->edit($table, $id, $params, $f->name, $msg);
-				{
-					$GLOBALS['%s']->pop();
-					return;
-				}
+				return;
 			}
 			$bin = $this->isBinary($f->type);
 			if(Std::is($v1, _hx_qtype("String")) && $v1 === "" && $bin) {
@@ -1096,24 +813,13 @@ class sys_db_Admin {
 			$_ex_ = ($__hx__e instanceof HException) ? $__hx__e->e : $__hx__e;
 			$e = $_ex_;
 			{
-				$GLOBALS['%e'] = (new _hx_array(array()));
-				while($GLOBALS['%s']->length >= $__hx__spos) {
-					$GLOBALS['%e']->unshift($GLOBALS['%s']->pop());
-				}
-				$GLOBALS['%s']->push($GLOBALS['%e'][0]);
 				$this->edit($table, $id, $params, null, Std::string($e));
-				{
-					$GLOBALS['%s']->pop();
-					return;
-				}
+				return;
 			}
 		}
-		$this->style->redirect(_hx_string_or_null($table->className) . "/edit/" . _hx_string_or_null($table->identifier($inst)));
-		$GLOBALS['%s']->pop();
+		$this->style->goto(_hx_string_or_null($table->className) . "/edit/" . _hx_string_or_null($table->identifier($inst)));
 	}
 	public function updateParams($table, $params) {
-		$GLOBALS['%s']->push("sys.db.Admin::updateParams");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$tmp = php_Web::getMultipart($this->maxUploadSize);
 		if(null == $tmp) throw new HException('null iterable');
 		$__hx__it = $tmp->keys();
@@ -1187,60 +893,39 @@ class sys_db_Admin {
 			}
 			unset($_t);
 		}
-		$GLOBALS['%s']->pop();
 	}
 	public function doDelete($table, $id) {
-		$GLOBALS['%s']->push("sys.db.Admin::doDelete");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$inst = $table->fromIdentifier($id);
 		if($inst === null) {
-			$this->style->redirect(_hx_string_or_null($table->className) . "/edit/" . _hx_string_or_null($id));
-			{
-				$GLOBALS['%s']->pop();
-				return;
-			}
+			$this->style->goto(_hx_string_or_null($table->className) . "/edit/" . _hx_string_or_null($id));
+			return;
 		}
 		if(!$this->getRights($inst, null)->can->delete) {
 			$this->edit($table, $id, null, null, "Can't Delete");
-			{
-				$GLOBALS['%s']->pop();
-				return;
-			}
+			return;
 		}
 		$inst->delete();
 		sys_db_Admin::log("Deleted " . _hx_string_or_null($table->name) . " " . _hx_string_or_null($id));
-		$this->style->redirect("");
-		$GLOBALS['%s']->pop();
+		$this->style->goto("");
 	}
 	public function doDownload($table, $id, $field) {
-		$GLOBALS['%s']->push("sys.db.Admin::doDownload");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$inst = $table->fromIdentifier($id);
 		if($inst === null) {
-			$this->style->redirect(_hx_string_or_null($table->className) . "/edit/" . _hx_string_or_null($id));
-			{
-				$GLOBALS['%s']->pop();
-				return;
-			}
+			$this->style->goto(_hx_string_or_null($table->className) . "/edit/" . _hx_string_or_null($id));
+			return;
 		}
 		$rights = $this->getRights($inst, null);
 		$f = $table->hfields->get($field);
 		$data = Reflect::field($inst, $field);
 		if($this->has($rights->invisible, $field) || $data === null || !$this->isBinary($f)) {
 			$this->edit($table, $id, null, null, "Can't Download data");
-			{
-				$GLOBALS['%s']->pop();
-				return;
-			}
+			return;
 		}
 		header("Content-Type" . ": " . "text/binary");
 		header("Content-Length" . ": " . Std::string(strlen($data)));
 		Sys::hprint($data);
-		$GLOBALS['%s']->pop();
 	}
 	public function search($table, $params) {
-		$GLOBALS['%s']->push("sys.db.Admin::search");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$this->style->begin("Search " . _hx_string_or_null($table->name));
 		$pagesize = 30;
 		$page = Std::parseInt($params->get("__p"));
@@ -1446,11 +1131,6 @@ class sys_db_Admin {
 						$_ex_ = ($__hx__e instanceof HException) ? $__hx__e->e : $__hx__e;
 						$e = $_ex_;
 						{
-							$GLOBALS['%e'] = (new _hx_array(array()));
-							while($GLOBALS['%s']->length >= $__hx__spos) {
-								$GLOBALS['%e']->unshift($GLOBALS['%s']->pop());
-							}
-							$GLOBALS['%s']->push($GLOBALS['%e'][0]);
 							if(!Std::is($data, _hx_qtype("Date"))) {
 								php_Lib::rethrow($e);
 							}
@@ -1530,11 +1210,8 @@ class sys_db_Admin {
 			$this->style->text("Next", null);
 		}
 		$this->style->end();
-		$GLOBALS['%s']->pop();
 	}
 	public function syncAction($t, $act, $text, $def = null) {
-		$GLOBALS['%s']->push("sys.db.Admin::syncAction");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if(!$this->hasSyncAction) {
 			$this->style->beginList();
 			$this->hasSyncAction = true;
@@ -1543,11 +1220,8 @@ class sys_db_Admin {
 		$this->style->checkBox(_hx_string_or_null($t->className) . "@" . _hx_string_or_null($act->join("@")), (($def === null) ? true : $def));
 		$this->style->text($text, null);
 		$this->style->endItem();
-		$GLOBALS['%s']->pop();
 	}
 	public function doSync($params) {
-		$GLOBALS['%s']->push("sys.db.Admin::doSync");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$order = (new _hx_array(array("create", "add", "reldel", "idxdel", "update", "remove", "rename", "idxadd", "reladd")));
 		$cmd = new _hx_array(array());
 		if(null == $params) throw new HException('null iterable');
@@ -1608,37 +1282,19 @@ class sys_db_Admin {
 					$_ex_ = ($__hx__e instanceof HException) ? $__hx__e->e : $__hx__e;
 					$e = $_ex_;
 					{
-						$GLOBALS['%e'] = (new _hx_array(array()));
-						while($GLOBALS['%s']->length >= $__hx__spos) {
-							$GLOBALS['%e']->unshift($GLOBALS['%s']->pop());
-						}
-						$GLOBALS['%s']->push($GLOBALS['%e'][0]);
 						$this->index(Std::string($e));
-						{
-							$GLOBALS['%s']->pop();
-							return;
-						}
+						return;
 					}
 				}
 				unset($tname,$table,$field,$e,$data,$act);
 			}
 		}
-		$this->style->redirect("");
-		$GLOBALS['%s']->pop();
+		$this->style->goto("");
 	}
 	public function indexId($i) {
-		$GLOBALS['%s']->push("sys.db.Admin::indexId");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$tmp = Std::string($i->unique) . "@" . _hx_string_or_null($i->keys->join("@"));
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return Std::string($i->unique) . "@" . _hx_string_or_null($i->keys->join("@"));
 	}
 	public function needSync($t) {
-		$GLOBALS['%s']->push("sys.db.Admin::needSync");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$desc = $this->execute($t->descriptionRequest())->getResult(1);
 		$inf = sys_db_TableInfos::fromDescription($desc);
 		$renames = new haxe_ds_StringMap();
@@ -1659,7 +1315,7 @@ class sys_db_Admin {
 					if(!$t->hfields->exists($n) && Type::enumEq($inf->fields->get($n), $f->type) && (is_object($_t = $inf->nulls->get($n)) && !($_t instanceof Enum) ? $_t === $t->nulls->get($f->name) : $_t == $t->nulls->get($f->name))) {
 						$rename = true;
 						$renames->set($n, true);
-						$this->syncAction($t, (new _hx_array(array("rename", $n, $f->name))), "Rename field " . _hx_string_or_null($n) . " to " . _hx_string_or_null($f->name), null);
+						$this->syncAction($t, (new _hx_array(array("rename", $n, $f->name))), "Rename field \"" . _hx_string_or_null($n) . "\" to \"" . _hx_string_or_null($f->name) . "\"", null);
 						break;
 					}
 					unset($_t);
@@ -1837,16 +1493,9 @@ class sys_db_Admin {
 		if($this->hasSyncAction) {
 			$this->style->endList();
 		}
-		{
-			$tmp = $this->hasSyncAction;
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return $this->hasSyncAction;
 	}
 	public function process($url = null) {
-		$GLOBALS['%s']->push("sys.db.Admin::process");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if($url === null) {
 			$url = _hx_explode("/", php_Web::getURI());
 			$url->shift();
@@ -1865,18 +1514,12 @@ class sys_db_Admin {
 			case "":{
 				$this->style = new sys_db_AdminStyle(null);
 				$this->index(null);
-				{
-					$GLOBALS['%s']->pop();
-					return;
-				}
+				return;
 			}break;
 			case "doSync":{
 				$this->style = new sys_db_AdminStyle(null);
 				$this->doSync($params);
-				{
-					$GLOBALS['%s']->pop();
-					return;
-				}
+				return;
 			}break;
 			}
 		}
@@ -1918,7 +1561,6 @@ class sys_db_Admin {
 			throw new HException("Unknown action " . _hx_string_or_null($act));
 		}break;
 		}
-		$GLOBALS['%s']->pop();
 	}
 	public function __call($m, $a) {
 		if(isset($this->$m) && is_callable($this->$m))
@@ -1930,14 +1572,8 @@ class sys_db_Admin {
 		else
 			throw new HException('Unable to call <'.$m.'>');
 	}
-	static function log($msg) {
-		$GLOBALS['%s']->push("sys.db.Admin::log");
-		$__hx__spos = $GLOBALS['%s']->length;
-		$GLOBALS['%s']->pop();
-	}
+	static function log($msg) {}
 	static function handler() {
-		$GLOBALS['%s']->push("sys.db.Admin::handler");
-		$__hx__spos = $GLOBALS['%s']->length;
 		sys_db_Manager::initialize();
 		try {
 			_hx_deref(new sys_db_Admin())->process(null);
@@ -1945,23 +1581,15 @@ class sys_db_Admin {
 			$_ex_ = ($__hx__e instanceof HException) ? $__hx__e->e : $__hx__e;
 			$e = $_ex_;
 			{
-				$GLOBALS['%e'] = (new _hx_array(array()));
-				while($GLOBALS['%s']->length >= $__hx__spos) {
-					$GLOBALS['%e']->unshift($GLOBALS['%s']->pop());
-				}
-				$GLOBALS['%s']->push($GLOBALS['%e'][0]);
 				sys_db_Manager::$cnx->rollback();
-				Sys::hprint("<pre>");
-				Sys::hprint(Std::string($e));
+				Sys::hprint("<h2>Error :</h2>" . Std::string($e));
+				Sys::hprint("<h2>Stack :</h2><pre>");
 				Sys::hprint(haxe_CallStack::toString(haxe_CallStack::exceptionStack()));
 				Sys::hprint("</pre>");
 			}
 		}
-		$GLOBALS['%s']->pop();
 	}
 	static function initializeDatabase($initIndexes = null, $initRelations = null) {
-		$GLOBALS['%s']->push("sys.db.Admin::initializeDatabase");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if($initRelations === null) {
 			$initRelations = true;
 		}
@@ -2007,39 +1635,25 @@ class sys_db_Admin {
 				unset($t1);
 			}
 		}
-		$GLOBALS['%s']->pop();
 	}
 	function __toString() { return 'sys.db.Admin'; }
 }
 function sys_db_Admin_0(&$classes, &$tables, $t1, $t2) {
 	{
-		$GLOBALS['%s']->push("sys.db.Admin::getTables@93");
-		$__hx__spos2 = $GLOBALS['%s']->length;
 		if((strcmp($t1->name, $t2->name)> 0)) {
-			$GLOBALS['%s']->pop();
 			return 1;
 		} else {
 			if((strcmp($t1->name, $t2->name)< 0)) {
-				$GLOBALS['%s']->pop();
 				return -1;
 			} else {
-				$GLOBALS['%s']->pop();
 				return 0;
 			}
 		}
-		$GLOBALS['%s']->pop();
 	}
 }
 function sys_db_Admin_1(&$_g, &$_g1, &$defval, &$f, &$id, &$insert, &$prim, &$r, &$rawValue, &$readonly, &$table, &$values, $d) {
 	{
-		$GLOBALS['%s']->push("sys.db.Admin::inputField@205");
-		$__hx__spos2 = $GLOBALS['%s']->length;
-		{
-			$tmp = _hx_anonymous(array("id" => Std::string(Reflect::field($d, $r->manager->table_keys[0])), "str" => $d->toString()));
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return _hx_anonymous(array("id" => Std::string(Reflect::field($d, $r->manager->table_keys[0])), "str" => $d->toString()));
 	}
 }
 function sys_db_Admin_2(&$__hx__this, &$defval, &$f, &$id, &$insert, &$prim, &$rawValue, &$readonly, &$table) {
@@ -2065,8 +1679,6 @@ function sys_db_Admin_4(&$__hx__this, &$cur1, &$curNeg1, &$f6, &$fields, &$hasNe
 }
 function sys_db_Admin_5(&$cmd, &$order, &$params, $c1, $c2) {
 	{
-		$GLOBALS['%s']->push("sys.db.Admin::doSync@864");
-		$__hx__spos2 = $GLOBALS['%s']->length;
 		$p1 = 0;
 		$p2 = 0;
 		{
@@ -2084,12 +1696,7 @@ function sys_db_Admin_5(&$cmd, &$order, &$params, $c1, $c2) {
 				unset($i);
 			}
 		}
-		{
-			$tmp = $p1 - $p2;
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return $p1 - $p2;
 	}
 }
 function sys_db_Admin_6(&$__hx__this, &$desc, &$hidx, &$i4, &$iname, &$inf, &$renames, &$t, &$used) {
@@ -2100,13 +1707,6 @@ function sys_db_Admin_6(&$__hx__this, &$desc, &$hidx, &$i4, &$iname, &$inf, &$re
 }
 function sys_db_Admin_7(&$defval, &$f, &$id, &$insert, &$prim, &$rawValue, &$readonly, &$table) {
 	{
-		$GLOBALS['%s']->push("sys.db.Admin::initializeDatabase@243");
-		$__hx__spos2 = $GLOBALS['%s']->length;
-		{
-			$tmp = _hx_string_or_null($table->name) . "/doDownload/" . _hx_string_or_null($id) . "/" . _hx_string_or_null($f->name);
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return _hx_string_or_null($table->name) . "/doDownload/" . _hx_string_or_null($id) . "/" . _hx_string_or_null($f->name);
 	}
 }

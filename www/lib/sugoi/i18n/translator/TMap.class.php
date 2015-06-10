@@ -3,18 +3,13 @@
 class sugoi_i18n_translator_TMap implements sugoi_i18n_translator_ITranslator{
 	public function __construct($arr, $lang) {
 		if(!php_Boot::$skip_constructor) {
-		$GLOBALS['%s']->push("sugoi.i18n.translator.TMap::new");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$this->texts = null;
 		$this->lang = $lang;
 		$this->texts = $arr;
-		$GLOBALS['%s']->pop();
 	}}
 	public $texts;
 	public $lang;
 	public function _($key, $data = null) {
-		$GLOBALS['%s']->push("sugoi.i18n.translator.TMap::_");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if($key === null) {
 			throw new HException("key is null");
 		}
@@ -42,11 +37,7 @@ class sugoi_i18n_translator_TMap implements sugoi_i18n_translator_ITranslator{
 				unset($k);
 			}
 		}
-		{
-			$GLOBALS['%s']->pop();
-			return $str;
-		}
-		$GLOBALS['%s']->pop();
+		return $str;
 	}
 	public function __call($m, $a) {
 		if(isset($this->$m) && is_callable($this->$m))

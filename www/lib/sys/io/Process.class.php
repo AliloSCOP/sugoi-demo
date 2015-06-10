@@ -3,8 +3,6 @@
 class sys_io_Process {
 	public function __construct($cmd, $args) {
 		if(!php_Boot::$skip_constructor) {
-		$GLOBALS['%s']->push("sys.io.Process::new");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$pipes = array();
 		$descriptorspec = array(
 			array('pipe', 'r'),
@@ -18,7 +16,6 @@ class sys_io_Process {
 		$this->stdin = new sys_io__Process_Stdin($pipes[0]);
 		$this->stdout = new sys_io__Process_Stdout($pipes[1]);
 		$this->stderr = new sys_io__Process_Stdout($pipes[2]);
-		$GLOBALS['%s']->pop();
 	}}
 	public $p;
 	public $st;
@@ -27,19 +24,14 @@ class sys_io_Process {
 	public $stderr;
 	public $stdin;
 	public function close() {
-		$GLOBALS['%s']->push("sys.io.Process::close");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if(null === $this->st) {
 			$this->st = proc_get_status($this->p);
 		}
 		$this->replaceStream($this->stderr);
 		$this->replaceStream($this->stdout);
 		$this->cl = proc_close($this->p);
-		$GLOBALS['%s']->pop();
 	}
 	public function sargs($args) {
-		$GLOBALS['%s']->push("sys.io.Process::sargs");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$b = "";
 		{
 			$_g = 0;
@@ -54,15 +46,9 @@ class sys_io_Process {
 				unset($arg);
 			}
 		}
-		{
-			$GLOBALS['%s']->pop();
-			return $b;
-		}
-		$GLOBALS['%s']->pop();
+		return $b;
 	}
 	public function replaceStream($input) {
-		$GLOBALS['%s']->push("sys.io.Process::replaceStream");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$fp = fopen("php://memory", "r+");
 		while(true) {
 			$s = fread($input->p, 8192);
@@ -74,11 +60,8 @@ class sys_io_Process {
 		}
 		rewind($fp);
 		$input->p = $fp;
-		$GLOBALS['%s']->pop();
 	}
 	public function exitCode() {
-		$GLOBALS['%s']->push("sys.io.Process::exitCode");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if(null === $this->cl) {
 			$this->st = proc_get_status($this->p);
 			while($this->st["running"]) {
@@ -88,15 +71,10 @@ class sys_io_Process {
 			$this->close();
 		}
 		if($this->st["exitcode"] < 0) {
-			$tmp = $this->cl;
-			$GLOBALS['%s']->pop();
-			return $tmp;
+			return $this->cl;
 		} else {
-			$tmp = $this->st["exitcode"];
-			$GLOBALS['%s']->pop();
-			return $tmp;
+			return $this->st["exitcode"];
 		}
-		$GLOBALS['%s']->pop();
 	}
 	public function __call($m, $a) {
 		if(isset($this->$m) && is_callable($this->$m))

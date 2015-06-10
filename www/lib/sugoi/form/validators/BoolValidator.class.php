@@ -3,8 +3,6 @@
 class sugoi_form_validators_BoolValidator extends sugoi_form_Validator {
 	public function __construct($valid, $error = null) {
 		if(!php_Boot::$skip_constructor) {
-		$GLOBALS['%s']->push("sugoi.form.validators.BoolValidator::new");
-		$__hx__spos = $GLOBALS['%s']->length;
 		parent::__construct();
 		$this->valid = $valid;
 		if($error !== null) {
@@ -12,22 +10,14 @@ class sugoi_form_validators_BoolValidator extends sugoi_form_Validator {
 		} else {
 			$this->errorNotValid = "Not valid.";
 		}
-		$GLOBALS['%s']->pop();
 	}}
 	public $errorNotValid;
 	public $valid;
 	public function isValid($value) {
-		$GLOBALS['%s']->push("sugoi.form.validators.BoolValidator::isValid");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if(!$this->valid) {
 			$this->errors->push($this->errorNotValid);
 		}
-		{
-			$tmp = $this->valid;
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return $this->valid;
 	}
 	public function __call($m, $a) {
 		if(isset($this->$m) && is_callable($this->$m))

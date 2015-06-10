@@ -3,8 +3,6 @@
 class sugoi_form_Form {
 	public function __construct($name, $action = null, $method = null) {
 		if(!php_Boot::$skip_constructor) {
-		$GLOBALS['%s']->push("sugoi.form.Form::new");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$this->requiredClass = "formRequired";
 		$this->requiredErrorClass = "formRequiredError";
 		$this->invalidErrorClass = "formInvalidError";
@@ -26,10 +24,7 @@ class sugoi_form_Form {
 		$this->extraErrors = new HList();
 		$this->fieldsets = new haxe_ds_StringMap();
 		$this->addFieldset("__default", new sugoi_form_FieldSet("__default", "Default", false));
-		$this->wymEditorCount = 0;
-		$this->submittedButtonName = null;
 		$this->addElement(new sugoi_form_elements_CSRFProtection(), null, null);
-		$GLOBALS['%s']->pop();
 	}}
 	public $id;
 	public $name;
@@ -46,11 +41,8 @@ class sugoi_form_Form {
 	public $labelRequiredIndicator;
 	public $defaultClass;
 	public $multipart;
-	public $submittedButtonName;
-	public $wymEditorCount;
+	public $submitButtonLabel;
 	public function addElement($element, $index = null, $fieldSetKey = null) {
-		$GLOBALS['%s']->push("sugoi.form.Form::addElement");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if($fieldSetKey === null) {
 			$fieldSetKey = "__default";
 		}
@@ -69,15 +61,9 @@ class sugoi_form_Form {
 			}
 			$this->fieldsets->get($fieldSetKey)->elements->push($element);
 		}
-		{
-			$GLOBALS['%s']->pop();
-			return $element;
-		}
-		$GLOBALS['%s']->pop();
+		return $element;
 	}
 	public function removeElement($element) {
-		$GLOBALS['%s']->push("sugoi.form.Form::removeElement");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if($this->elements->remove($element)) {
 			$element->parentForm = null;
 			if(null == $this->fieldsets) throw new HException('null iterable');
@@ -87,58 +73,29 @@ class sugoi_form_Form {
 				$fs = $__hx__it->next();
 				$fs->elements->remove($element);
 			}
-			{
-				$GLOBALS['%s']->pop();
-				return true;
-			}
+			return true;
 		}
-		{
-			$GLOBALS['%s']->pop();
-			return false;
-		}
-		$GLOBALS['%s']->pop();
+		return false;
 	}
 	public function setSubmitButton($el) {
-		$GLOBALS['%s']->push("sugoi.form.Form::setSubmitButton");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$this->submitButton = $el;
 		$this->submitButton->parentForm = $this;
-		{
-			$GLOBALS['%s']->pop();
-			return $el;
-		}
-		$GLOBALS['%s']->pop();
+		return $el;
 	}
 	public function addFieldset($fieldSetKey, $fieldSet) {
-		$GLOBALS['%s']->push("sugoi.form.Form::addFieldset");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$fieldSet->form = $this;
 		$this->fieldsets->set($fieldSetKey, $fieldSet);
-		$GLOBALS['%s']->pop();
 	}
 	public function getFieldsets() {
-		$GLOBALS['%s']->push("sugoi.form.Form::getFieldsets");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$tmp = $this->fieldsets;
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return $this->fieldsets;
 	}
 	public function getLabel($elementName) {
-		$GLOBALS['%s']->push("sugoi.form.Form::getLabel");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$tmp = $this->getElement($elementName)->getLabel();
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return $this->getElement($elementName)->getLabel();
 	}
 	public function getElement($name) {
-		$GLOBALS['%s']->push("sugoi.form.Form::getElement");
-		$__hx__spos = $GLOBALS['%s']->length;
+		if($name === null || $name === "") {
+			throw new HException("Element name is null");
+		}
 		{
 			$_g = 0;
 			$_g1 = $this->elements;
@@ -146,77 +103,59 @@ class sugoi_form_Form {
 				$element = $_g1[$_g];
 				++$_g;
 				if($element->name === $name) {
-					$GLOBALS['%s']->pop();
 					return $element;
 				}
 				unset($element);
 			}
 		}
-		throw new HException("Cannot access Form Element: '" . _hx_string_or_null($name) . "'");
-		{
-			$GLOBALS['%s']->pop();
-			return null;
-		}
-		$GLOBALS['%s']->pop();
+		throw new HException("Cannot access form element: '" . _hx_string_or_null($name) . "'");
+		return null;
 	}
 	public function removeElementByName($name) {
-		$GLOBALS['%s']->push("sugoi.form.Form::removeElementByName");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$e = $this->getElement($name);
 		if($e !== null) {
 			$this->removeElement($e);
 		}
-		$GLOBALS['%s']->pop();
 	}
 	public function getValueOf($elementName) {
-		$GLOBALS['%s']->push("sugoi.form.Form::getValueOf");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$s = $this->getElement($elementName)->value;
-		{
-			$tmp = trim($s);
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return trim($s);
 	}
 	public function getElementTyped($name, $type) {
-		$GLOBALS['%s']->push("sugoi.form.Form::getElementTyped");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$o = $this->getElement($name);
-		{
-			$GLOBALS['%s']->pop();
-			return $o;
-		}
-		$GLOBALS['%s']->pop();
+		return $o;
 	}
 	public function getData() {
-		$GLOBALS['%s']->push("sugoi.form.Form::getData");
-		$__hx__spos = $GLOBALS['%s']->length;
-		$data = _hx_anonymous(array());
+		$data = new haxe_ds_StringMap();
 		{
 			$_g = 0;
 			$_g1 = $this->getElements();
 			while($_g < $_g1->length) {
 				$element = $_g1[$_g];
 				++$_g;
-				$data->{$element->name} = $element->value;
-				if(Std::is($element, _hx_qtype("sugoi.form.elements.DateSelector"))) {
-					$ds = null;
-					$ds = $element;
-					unset($ds);
+				if(Std::is($element->value, _hx_qtype("String"))) {
+					$val = null;
+					{
+						$s = $element->value;
+						$val = trim($s);
+						unset($s);
+					}
+					if($val === "") {
+						$val = null;
+					}
+					$data->set($element->name, $val);
+					unset($val);
+				} else {
+					$value = $element->value;
+					$data->set($element->name, $value);
+					unset($value);
 				}
 				unset($element);
 			}
 		}
-		{
-			$GLOBALS['%s']->pop();
-			return $data;
-		}
-		$GLOBALS['%s']->pop();
+		return $data;
 	}
-	public function populateElements($custom = null) {
-		$GLOBALS['%s']->push("sugoi.form.Form::populateElements");
-		$__hx__spos = $GLOBALS['%s']->length;
+	public function populate($custom = null) {
 		if($custom !== null) {
 			$_g = 0;
 			$_g1 = $this->getElements();
@@ -243,49 +182,45 @@ class sugoi_form_Form {
 				}
 			}
 		}
-		$GLOBALS['%s']->pop();
 	}
 	public function toSpod($obj) {
-		$GLOBALS['%s']->push("sugoi.form.Form::toSpod");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if(!$this->isValid()) {
 			throw new HException("submitted form should be valid");
 		}
 		$data = $this->getData();
-		$id = Std::parseInt(Reflect::field($data, "id"));
+		$id = Std::parseInt($data->get("id"));
 		if($id === 0) {
 			$id = null;
 		}
 		if($id !== null) {
 			$obj->lock();
 		}
-		{
-			$_g = 0;
-			$_g1 = Reflect::fields($data);
-			while($_g < $_g1->length) {
-				$f = $_g1[$_g];
-				++$_g;
-				if($this->getElement($f) === null) {
-					throw new HException("field '" . _hx_string_or_null($f) . "' was not in the original form");
-				}
-				$v = Reflect::field($data, $f);
-				if($v !== null && $f !== "id") {
-					if(Std::is($v, _hx_qtype("String"))) {
-						$v = trim($v);
-						if($v === "") {
-							$v = null;
-						}
-					}
-					$obj->{$f} = $v;
-				}
-				unset($v,$f);
+		if(null == $data) throw new HException('null iterable');
+		$__hx__it = $data->keys();
+		while($__hx__it->hasNext()) {
+			unset($f);
+			$f = $__hx__it->next();
+			if($this->getElement($f) === null) {
+				throw new HException("field '" . _hx_string_or_null($f) . "' was not in the original form");
 			}
+			$v = $data->get($f);
+			if($v !== null && $f !== "id") {
+				if(Std::is($v, _hx_qtype("String"))) {
+					{
+						$s = $v;
+						$v = trim($s);
+						unset($s);
+					}
+					if(_hx_equal($v, "")) {
+						$v = null;
+					}
+				}
+				$obj->{$f} = $v;
+			}
+			unset($v);
 		}
-		$GLOBALS['%s']->pop();
 	}
 	public function clearData() {
-		$GLOBALS['%s']->push("sugoi.form.Form::clearData");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$element = null;
 		{
 			$_g = 0;
@@ -297,39 +232,21 @@ class sugoi_form_Form {
 				unset($element1);
 			}
 		}
-		$GLOBALS['%s']->pop();
 	}
 	public function getOpenTag() {
-		$GLOBALS['%s']->push("sugoi.form.Form::getOpenTag");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$tmp = "<form id=\"" . _hx_string_or_null($this->id) . "\" class=\"" . _hx_string_or_null((((sugoi_form_Form::$USE_TWITTER_BOOTSTRAP) ? "form-horizontal" : ""))) . "\" name=\"" . _hx_string_or_null($this->name) . "\" method=\"" . Std::string($this->method) . "\" action=\"" . _hx_string_or_null($this->action) . "\" " . _hx_string_or_null(((($this->multipart) ? "enctype=\"multipart/form-data\"" : ""))) . " >";
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return "<form id=\"" . _hx_string_or_null($this->id) . "\" class=\"" . _hx_string_or_null((((sugoi_form_Form::$USE_TWITTER_BOOTSTRAP) ? "form-horizontal" : ""))) . "\" name=\"" . _hx_string_or_null($this->name) . "\" method=\"" . Std::string($this->method) . "\" action=\"" . _hx_string_or_null($this->action) . "\" " . _hx_string_or_null(((($this->multipart) ? "enctype=\"multipart/form-data\"" : ""))) . " >";
 	}
 	public function getCloseTag() {
-		$GLOBALS['%s']->push("sugoi.form.Form::getCloseTag");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$s = new StringBuf();
 		$s->add("<div style=\"clear:both; height:0px;\">&nbsp;</div>");
 		$s->add("<input type=\"hidden\" name=\"" . _hx_string_or_null($this->name) . "_formSubmitted\" value=\"true\" /></form>");
-		{
-			$tmp = $s->b;
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return $s->b;
 	}
 	public function isValid() {
-		$GLOBALS['%s']->push("sugoi.form.Form::isValid");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if(!$this->isSubmitted()) {
-			$GLOBALS['%s']->pop();
 			return false;
 		}
-		$this->populateElements(null);
+		$this->populate(null);
 		$valid = true;
 		{
 			$_g = 0;
@@ -347,31 +264,15 @@ class sugoi_form_Form {
 		if($this->extraErrors->length > 0) {
 			$valid = false;
 		}
-		{
-			$GLOBALS['%s']->pop();
-			return $valid;
-		}
-		$GLOBALS['%s']->pop();
+		return $valid;
 	}
 	public function checkToken() {
-		$GLOBALS['%s']->push("sugoi.form.Form::checkToken");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$tmp = $this->isValid();
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return $this->isValid();
 	}
 	public function addError($error) {
-		$GLOBALS['%s']->push("sugoi.form.Form::addError");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$this->extraErrors->add($error);
-		$GLOBALS['%s']->pop();
 	}
 	public function getErrorsList() {
-		$GLOBALS['%s']->push("sugoi.form.Form::getErrorsList");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$this->isValid();
 		$errors = new HList();
 		if(null == $this->extraErrors) throw new HException('null iterable');
@@ -397,47 +298,19 @@ class sugoi_form_Form {
 				unset($element);
 			}
 		}
-		{
-			$GLOBALS['%s']->pop();
-			return $errors;
-		}
-		$GLOBALS['%s']->pop();
+		return $errors;
 	}
 	public function getElements() {
-		$GLOBALS['%s']->push("sugoi.form.Form::getElements");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$tmp = $this->elements;
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return $this->elements;
 	}
 	public function isSubmitted() {
-		$GLOBALS['%s']->push("sugoi.form.Form::isSubmitted");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$tmp = App::$current->params->get(_hx_string_or_null($this->name) . "_formSubmitted") === "true";
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return App::$current->params->get(_hx_string_or_null($this->name) . "_formSubmitted") === "true";
 	}
 	public function getSubmittedValue() {
-		$GLOBALS['%s']->push("sugoi.form.Form::getSubmittedValue");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$tmp = App::$current->params->get(_hx_string_or_null($this->name) . "_formSubmitted");
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return App::$current->params->get(_hx_string_or_null($this->name) . "_formSubmitted");
 	}
 	public function getErrors() {
-		$GLOBALS['%s']->push("sugoi.form.Form::getErrors");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if(!$this->isSubmitted()) {
-			$GLOBALS['%s']->pop();
 			return "";
 		}
 		$s = new StringBuf();
@@ -459,16 +332,9 @@ class sugoi_form_Form {
 				$s->add("</div>");
 			}
 		}
-		{
-			$tmp = $s->b;
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return $s->b;
 	}
 	public function toString() {
-		$GLOBALS['%s']->push("sugoi.form.Form::toString");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$s = new StringBuf();
 		$s->add($this->getOpenTag());
 		if($this->isSubmitted()) {
@@ -489,17 +355,12 @@ class sugoi_form_Form {
 		if($this->submitButton !== null) {
 			$this->submitButton->parentForm = $this;
 		} else {
-			$this->submitButton = new sugoi_form_elements_Submit("submit", "OK");
+			$this->submitButton = new sugoi_form_elements_Submit("submit", sugoi_form_Form_0($this, $s));
 			$this->submitButton->parentForm = $this;
 		}
 		$s->add($this->submitButton->getFullRow());
 		$s->add($this->getCloseTag());
-		{
-			$tmp = $s->b;
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return $s->b;
 	}
 	public function __call($m, $a) {
 		if(isset($this->$m) && is_callable($this->$m))
@@ -513,9 +374,8 @@ class sugoi_form_Form {
 	}
 	static $translator;
 	static $USE_TWITTER_BOOTSTRAP = true;
+	static $USE_DATEPICKER = true;
 	static function fromObject($obj) {
-		$GLOBALS['%s']->push("sugoi.form.Form::fromObject");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$form = new sugoi_form_Form("fromObj", null, null);
 		{
 			$_g = 0;
@@ -523,35 +383,24 @@ class sugoi_form_Form {
 			while($_g < $_g1->length) {
 				$f = $_g1[$_g];
 				++$_g;
-				$form->addElement(new sugoi_form_elements_Input($f, $f, Reflect::field($obj, $f), null, null, null, null), null, null);
-				unset($f);
+				$val = null;
+				{
+					$s = Reflect::field($obj, $f);
+					$val = trim($s);
+					unset($s);
+				}
+				if($val === "") {
+					$val = null;
+				}
+				$form->addElement(new sugoi_form_elements_Input($f, $f, $val, null, null, null, null), null, null);
+				unset($val,$f);
 			}
 		}
-		$form->populateElements($obj);
-		{
-			$GLOBALS['%s']->pop();
-			return $form;
-		}
-		$GLOBALS['%s']->pop();
+		$form->populate($obj);
+		return $form;
 	}
 	static function fromSpod($obj) {
-		$GLOBALS['%s']->push("sugoi.form.Form::fromSpod");
-		$__hx__spos = $GLOBALS['%s']->length;
-		$name = "";
-		try {
-			$name = $obj->toString();
-		}catch(Exception $__hx__e) {
-			$_ex_ = ($__hx__e instanceof HException) ? $__hx__e->e : $__hx__e;
-			$e = $_ex_;
-			{
-				$GLOBALS['%e'] = (new _hx_array(array()));
-				while($GLOBALS['%s']->length >= $__hx__spos) {
-					$GLOBALS['%e']->unshift($GLOBALS['%s']->pop());
-				}
-				$GLOBALS['%s']->push($GLOBALS['%e'][0]);
-				$name = Type::getClassName(Type::getClass($obj));
-			}
-		}
+		$name = Type::getClassName(Type::getClass($obj));
 		$form = new sugoi_form_Form("form" . _hx_string_or_null(haxe_crypto_Md5::encode($name)), null, null);
 		$ti = new sys_db_TableInfos(Type::getClassName(Type::getClass($obj)));
 		$t = sugoi_form_Form::$translator;
@@ -563,9 +412,9 @@ class sugoi_form_Form {
 		while($__hx__it->hasNext()) {
 			unset($f);
 			$f = $__hx__it->next();
-			$e1 = null;
+			$e = null;
 			$v = Reflect::field($obj, $f->name);
-			$rl = Lambda::filter($ti->relations, array(new _hx_lambda(array(&$e, &$e1, &$f, &$form, &$name, &$obj, &$t, &$ti, &$v), "sugoi_form_Form_0"), 'execute'));
+			$rl = Lambda::filter($ti->relations, array(new _hx_lambda(array(&$e, &$f, &$form, &$name, &$obj, &$t, &$ti, &$v), "sugoi_form_Form_1"), 'execute'));
 			$isNull = $ti->nulls->get($f->name);
 			if($rl->length > 0) {
 				$r1 = $rl->first();
@@ -575,40 +424,40 @@ class sugoi_form_Form {
 				if($objMeta !== null && _hx_field($objMeta, "formPopulate") !== null) {
 					$objects = Reflect::callMethod($obj, Reflect::field($obj, Std::string($objMeta->formPopulate[0])), (new _hx_array(array())));
 				} else {
-					$objects = $r1->manager->all(false)->map(array(new _hx_lambda(array(&$e, &$e1, &$f, &$form, &$isNull, &$meta, &$name, &$obj, &$objMeta, &$objects, &$r1, &$rl, &$t, &$ti, &$v), "sugoi_form_Form_1"), 'execute'));
+					$objects = $r1->manager->all(false)->map(array(new _hx_lambda(array(&$e, &$f, &$form, &$isNull, &$meta, &$name, &$obj, &$objMeta, &$objects, &$r1, &$rl, &$t, &$ti, &$v), "sugoi_form_Form_2"), 'execute'));
 				}
-				$e1 = new sugoi_form_elements_Selectbox($f->name, $t->_($r1->prop, null), Lambda::harray($objects), $v, !$isNull, null, null);
+				$e = new sugoi_form_elements_Selectbox($f->name, $t->_($r1->prop, null), Lambda::harray($objects), $v, !$isNull, null, null);
 				unset($r1,$objects,$objMeta,$meta);
 			} else {
 				{
 					$_g = $f->type;
 					switch($_g->index) {
 					case 1:{
-						$e1 = new sugoi_form_elements_Input($f->name, $t->_($f->name, null), $v, !$isNull, null, null, null);
+						$e = new sugoi_form_elements_Input($f->name, $t->_($f->name, null), $v, !$isNull, null, null, null);
 					}break;
 					case 0:case 2:{
-						$e1 = new sugoi_form_elements_Hidden($t->_($f->name, null), $v, null, null, null);
+						$e = new sugoi_form_elements_Hidden($t->_($f->name, null), $v, null, null, null);
 					}break;
 					case 20:{
-						$e1 = new sugoi_form_elements_Input($f->name, $t->_($f->name, null), $v, null, null, null, null);
+						$e = new sugoi_form_elements_Input($f->name, $t->_($f->name, null), $v, null, null, null, null);
 					}break;
 					case 23:{
 						$auto = _hx_deref($_g)->params[1];
 						$fl = _hx_deref($_g)->params[0];
-						$e1 = new sugoi_form_elements_Flags($f->name, $t->_($f->name, null), Lambda::harray($fl), Std::parseInt($v), false, null);
+						$e = new sugoi_form_elements_Flags($f->name, $t->_($f->name, null), Lambda::harray($fl), Std::parseInt($v), false, null);
 					}break;
 					case 24:case 3:case 6:case 7:{
-						$e1 = new sugoi_form_elements_Input($f->name, $t->_($f->name, null), $v, null, null, null, null);
+						$e = new sugoi_form_elements_Input($f->name, $t->_($f->name, null), $v, null, null, null, null);
 					}break;
 					case 8:{
-						$e1 = new sugoi_form_elements_Checkbox($f->name, $t->_($f->name, null), Std::string($v) === "true", null, null);
+						$e = new sugoi_form_elements_Checkbox($f->name, $t->_($f->name, null), Std::string($v) === "true", null, null);
 					}break;
 					case 9:{
 						$n = _hx_deref($_g)->params[0];
-						$e1 = new sugoi_form_elements_Input($f->name, $t->_($f->name, null), $v, !$isNull, null, "lenght=" . _hx_string_rec($n, ""), null);
+						$e = new sugoi_form_elements_Input($f->name, $t->_($f->name, null), $v, !$isNull, null, "lenght=" . _hx_string_rec($n, ""), null);
 					}break;
 					case 13:case 14:case 15:case 21:{
-						$e1 = new sugoi_form_elements_TextArea($f->name, $t->_($f->name, null), $v, !$isNull, null, null);
+						$e = new sugoi_form_elements_TextArea($f->name, $t->_($f->name, null), $v, !$isNull, null, null);
 					}break;
 					case 12:case 11:{
 						$d1 = Date::now();
@@ -616,16 +465,15 @@ class sugoi_form_Form {
 							$d1 = Date::fromString(Std::string($v));
 						}catch(Exception $__hx__e) {
 							$_ex_ = ($__hx__e instanceof HException) ? $__hx__e->e : $__hx__e;
-							$e2 = $_ex_;
-							{
-								$GLOBALS['%e'] = (new _hx_array(array()));
-								while($GLOBALS['%s']->length >= $__hx__spos) {
-									$GLOBALS['%e']->unshift($GLOBALS['%s']->pop());
-								}
-								$GLOBALS['%s']->push($GLOBALS['%e'][0]);
-							}
+							$e1 = $_ex_;
+							{}
 						}
-						$e1 = new sugoi_form_elements_DateInput($f->name, $t->_($f->name, null), $d1, null, null, null, null, null);
+						if(sugoi_form_Form::$USE_DATEPICKER) {
+							$e = new sugoi_form_elements_DatePicker($f->name, $t->_($f->name, null), $d1, null, null, null, null, null);
+							$e->format = "LLLL";
+						} else {
+							$e = new sugoi_form_elements_DateInput($f->name, $t->_($f->name, null), $d1, null, null, null, null, null);
+						}
 					}break;
 					case 10:{
 						$d2 = Date::now();
@@ -633,60 +481,48 @@ class sugoi_form_Form {
 							$d2 = Date::fromString(Std::string($v));
 						}catch(Exception $__hx__e) {
 							$_ex_ = ($__hx__e instanceof HException) ? $__hx__e->e : $__hx__e;
-							$e3 = $_ex_;
-							{
-								$GLOBALS['%e'] = (new _hx_array(array()));
-								while($GLOBALS['%s']->length >= $__hx__spos) {
-									$GLOBALS['%e']->unshift($GLOBALS['%s']->pop());
-								}
-								$GLOBALS['%s']->push($GLOBALS['%e'][0]);
-							}
+							$e2 = $_ex_;
+							{}
 						}
-						$e1 = new sugoi_form_elements_DateDropdowns($f->name, $t->_($f->name, null), $d2, null, null, null, null, null);
+						if(sugoi_form_Form::$USE_DATEPICKER) {
+							$e = new sugoi_form_elements_DatePicker($f->name, $t->_($f->name, null), $d2, null, null, null, null, null);
+							$e->format = "LL";
+						} else {
+							$e = new sugoi_form_elements_DateDropdowns($f->name, $t->_($f->name, null), $d2, null, null, null, null, null);
+						}
 					}break;
 					case 31:{
 						$name1 = _hx_deref($_g)->params[0];
-						$e1 = new sugoi_form_elements_Enum($f->name, $t->_($f->name, null), $name1, Std::parseInt($v), null, null);
+						$e = new sugoi_form_elements_Enum($f->name, $t->_($f->name, null), $name1, Std::parseInt($v), null, null);
 					}break;
 					default:{
-						$e1 = new sugoi_form_elements_Input($f->name, $t->_($f->name, null), "unknown field type : " . Std::string($f->type) . ", value : " . _hx_string_or_null($v), null, null, null, null);
+						$e = new sugoi_form_elements_Input($f->name, $t->_($f->name, null), "unknown field type : " . Std::string($f->type) . ", value : " . _hx_string_or_null($v), null, null, null, null);
 					}break;
 					}
 					unset($_g);
 				}
 			}
-			$form->addElement($e1, null, null);
-			unset($v,$rl,$isNull,$e1);
+			$form->addElement($e, null, null);
+			unset($v,$rl,$isNull,$e);
 		}
-		{
-			$GLOBALS['%s']->pop();
-			return $form;
-		}
-		$GLOBALS['%s']->pop();
+		return $form;
 	}
 	function __toString() { return $this->toString(); }
 }
-function sugoi_form_Form_0(&$e, &$e1, &$f, &$form, &$name, &$obj, &$t, &$ti, &$v, $r) {
-	{
-		$GLOBALS['%s']->push("sugoi.form.Form::fromSpod@286");
-		$__hx__spos2 = $GLOBALS['%s']->length;
-		{
-			$tmp = $r->key === $f->name;
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+function sugoi_form_Form_0(&$__hx__this, &$s) {
+	if($__hx__this->submitButtonLabel !== null) {
+		return $__hx__this->submitButtonLabel;
+	} else {
+		return "OK";
 	}
 }
-function sugoi_form_Form_1(&$e, &$e1, &$f, &$form, &$isNull, &$meta, &$name, &$obj, &$objMeta, &$objects, &$r1, &$rl, &$t, &$ti, &$v, $d) {
+function sugoi_form_Form_1(&$e, &$f, &$form, &$name, &$obj, &$t, &$ti, &$v, $r) {
 	{
-		$GLOBALS['%s']->push("sugoi.form.Form::fromSpod@302");
-		$__hx__spos2 = $GLOBALS['%s']->length;
-		{
-			$tmp = _hx_anonymous(array("key" => Std::string(Reflect::field($d, $r1->manager->table_keys[0])), "value" => $d->toString()));
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return $r->key === $f->name;
+	}
+}
+function sugoi_form_Form_2(&$e, &$f, &$form, &$isNull, &$meta, &$name, &$obj, &$objMeta, &$objects, &$r1, &$rl, &$t, &$ti, &$v, $d) {
+	{
+		return _hx_anonymous(array("key" => Std::string(Reflect::field($d, $r1->manager->table_keys[0])), "value" => $d->toString()));
 	}
 }

@@ -3,8 +3,6 @@
 class sugoi_form_ListData {
 	public function __construct(){}
 	static function getDateElement($low, $high, $labels = null) {
-		$GLOBALS['%s']->push("sugoi.form.ListData::getDateElement");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$data = (new _hx_array(array()));
 		if($labels !== null) {
 			$_g1 = $low;
@@ -24,15 +22,35 @@ class sugoi_form_ListData {
 				unset($n,$i1);
 			}
 		}
+		return $data;
+	}
+	static function getMinutes() {
+		$data = (new _hx_array(array()));
 		{
-			$GLOBALS['%s']->pop();
-			return $data;
+			$_g = 0;
+			while($_g < 12) {
+				$i = $_g++;
+				$x = $i * 5;
+				$data->push(_hx_anonymous(array("key" => Std::string($x), "value" => Std::string(sugoi_form_ListData_1($_g, $data, $i, $x)))));
+				unset($x,$i);
+			}
 		}
-		$GLOBALS['%s']->pop();
+		return $data;
+	}
+	static function fromArray($arr) {
+		$data = (new _hx_array(array()));
+		{
+			$_g = 0;
+			while($_g < $arr->length) {
+				$a = $arr[$_g];
+				++$_g;
+				$data->push(_hx_anonymous(array("key" => Std::string($a), "value" => Std::string($a))));
+				unset($a);
+			}
+		}
+		return $data;
 	}
 	static function getDays($reverse = null) {
-		$GLOBALS['%s']->push("sugoi.form.ListData::getDays");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if($reverse === null) {
 			$reverse = true;
 		}
@@ -47,17 +65,11 @@ class sugoi_form_ListData {
 				unset($n,$i);
 			}
 		}
-		{
-			$GLOBALS['%s']->pop();
-			return $data;
-		}
-		$GLOBALS['%s']->pop();
+		return $data;
 	}
 	static $months_short;
 	static $months;
 	static function getMonths($short = null) {
-		$GLOBALS['%s']->push("sugoi.form.ListData::getMonths");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if($short === null) {
 			$short = false;
 		}
@@ -79,15 +91,9 @@ class sugoi_form_ListData {
 				unset($i);
 			}
 		}
-		{
-			$GLOBALS['%s']->pop();
-			return $out;
-		}
-		$GLOBALS['%s']->pop();
+		return $out;
 	}
 	static function getYears($from, $to, $reverse = null) {
-		$GLOBALS['%s']->push("sugoi.form.ListData::getYears");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if($reverse === null) {
 			$reverse = true;
 		}
@@ -111,15 +117,9 @@ class sugoi_form_ListData {
 				unset($n1,$i1);
 			}
 		}
-		{
-			$GLOBALS['%s']->pop();
-			return $data;
-		}
-		$GLOBALS['%s']->pop();
+		return $data;
 	}
 	static function hashToList($hash, $startCounter = null) {
-		$GLOBALS['%s']->push("sugoi.form.ListData::hashToList");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if($startCounter === null) {
 			$startCounter = 0;
 		}
@@ -131,15 +131,9 @@ class sugoi_form_ListData {
 			$key = $__hx__it->next();
 			$data->add(_hx_anonymous(array("key" => $key, "value" => $hash->get($key))));
 		}
-		{
-			$GLOBALS['%s']->pop();
-			return $data;
-		}
-		$GLOBALS['%s']->pop();
+		return $data;
 	}
 	static function arrayToList($array, $startCounter = null) {
-		$GLOBALS['%s']->push("sugoi.form.ListData::arrayToList");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if($startCounter === null) {
 			$startCounter = 0;
 		}
@@ -155,15 +149,9 @@ class sugoi_form_ListData {
 				unset($v);
 			}
 		}
-		{
-			$GLOBALS['%s']->pop();
-			return $data;
-		}
-		$GLOBALS['%s']->pop();
+		return $data;
 	}
 	static function flatArraytoList($array) {
-		$GLOBALS['%s']->push("sugoi.form.ListData::flatArraytoList");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$data = new HList();
 		{
 			$_g = 0;
@@ -174,11 +162,7 @@ class sugoi_form_ListData {
 				unset($i);
 			}
 		}
-		{
-			$GLOBALS['%s']->pop();
-			return $data;
-		}
-		$GLOBALS['%s']->pop();
+		return $data;
 	}
 	function __toString() { return 'sugoi.form.ListData'; }
 }
@@ -189,5 +173,12 @@ function sugoi_form_ListData_0(&$_g11, &$_g2, &$data, &$high, &$i1, &$labels, &$
 		return "0" . _hx_string_or_null($n);
 	} else {
 		return $n;
+	}
+}
+function sugoi_form_ListData_1(&$_g, &$data, &$i, &$x) {
+	if($x < 10) {
+		return "0" . _hx_string_rec($x, "");
+	} else {
+		return $x;
 	}
 }

@@ -3,8 +3,6 @@
 class sys_db_Manager {
 	public function __construct($classval) {
 		if(!php_Boot::$skip_constructor) {
-		$GLOBALS['%s']->push("sys.db.Manager::new");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$m = haxe_rtti_Meta::getType($classval)->rtti;
 		if($m === null) {
 			throw new HException("Missing @rtti for class " . _hx_string_or_null(Type::getClassName($classval)));
@@ -13,50 +11,26 @@ class sys_db_Manager {
 		$this->table_name = $this->quoteField($this->table_infos->name);
 		$this->table_keys = $this->table_infos->key;
 		$this->class_proto = $classval;
-		$GLOBALS['%s']->pop();
 	}}
 	public $table_infos;
 	public $table_name;
 	public $table_keys;
 	public $class_proto;
 	public function all($lock = null) {
-		$GLOBALS['%s']->push("sys.db.Manager::all");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$tmp = $this->unsafeObjects("SELECT * FROM " . _hx_string_or_null($this->table_name), $lock);
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return $this->unsafeObjects("SELECT * FROM " . _hx_string_or_null($this->table_name), $lock);
 	}
 	public function quote($s) {
-		$GLOBALS['%s']->push("sys.db.Manager::quote");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$tmp = $this->getCnx()->quote($s);
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return $this->getCnx()->quote($s);
 	}
 	public function doUpdateCache($x, $name, $v) {
-		$GLOBALS['%s']->push("sys.db.Manager::doUpdateCache");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$cache = Reflect::field($x, "cache_" . _hx_string_or_null($name));
 		if($cache === null) {
-			$GLOBALS['%s']->pop();
 			return $v;
 		}
 		$v1 = $this->doSerialize($name, $cache->v);
-		{
-			$GLOBALS['%s']->pop();
-			return $v1;
-		}
-		$GLOBALS['%s']->pop();
+		return $v1;
 	}
 	public function doInsert($x) {
-		$GLOBALS['%s']->push("sys.db.Manager::doInsert");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$this->unmake($x);
 		$s = new StringBuf();
 		$fields = new HList();
@@ -147,25 +121,18 @@ class sys_db_Manager {
 			$x->{$this->table_keys[0]} = $value2;
 		}
 		$this->addToCache($x);
-		$GLOBALS['%s']->pop();
 	}
 	public function doUpdate($x) {
-		$GLOBALS['%s']->push("sys.db.Manager::doUpdate");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if(!$x->_lock) {
 			throw new HException("Cannot update a not locked object");
 		}
 		$upd = $this->getUpdateStatement($x);
 		if($upd === null) {
-			$GLOBALS['%s']->pop();
 			return;
 		}
 		$this->unsafeExecute($upd);
-		$GLOBALS['%s']->pop();
 	}
 	public function getUpdateStatement($x) {
-		$GLOBALS['%s']->push("sys.db.Manager::getUpdateStatement");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$this->unmake($x);
 		$s = new StringBuf();
 		$s->add("UPDATE ");
@@ -221,21 +188,13 @@ class sys_db_Manager {
 			}
 		}
 		if(!$mod) {
-			$GLOBALS['%s']->pop();
 			return null;
 		}
 		$s->add(" WHERE ");
 		$this->addKeys($s, $x);
-		{
-			$tmp = $s->b;
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return $s->b;
 	}
 	public function doDelete($x) {
-		$GLOBALS['%s']->push("sys.db.Manager::doDelete");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$s = new StringBuf();
 		$s->add("DELETE FROM ");
 		$s->add($this->table_name);
@@ -243,13 +202,9 @@ class sys_db_Manager {
 		$this->addKeys($s, $x);
 		$this->unsafeExecute($s->b);
 		$this->removeFromCache($x);
-		$GLOBALS['%s']->pop();
 	}
 	public function doLock($i) {
-		$GLOBALS['%s']->push("sys.db.Manager::doLock");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if($i->_lock) {
-			$GLOBALS['%s']->pop();
 			return;
 		}
 		$s = new StringBuf();
@@ -260,11 +215,8 @@ class sys_db_Manager {
 		if((is_object($_t = $this->unsafeObject($s->b, true)) && !($_t instanceof Enum) ? $_t !== $i : $_t != $i)) {
 			throw new HException("Could not lock object (was deleted ?); try restarting transaction");
 		}
-		$GLOBALS['%s']->pop();
 	}
 	public function objectToString($it) {
-		$GLOBALS['%s']->push("sys.db.Manager::objectToString");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$s = new StringBuf();
 		$s->add($this->table_name);
 		if($this->table_keys->length === 1) {
@@ -292,50 +244,27 @@ class sys_db_Manager {
 			}
 			$s->add(")");
 		}
-		{
-			$tmp = $s->b;
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return $s->b;
 	}
 	public function doSerialize($field, $v) {
-		$GLOBALS['%s']->push("sys.db.Manager::doSerialize");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$s = new haxe_Serializer();
 		$s->useEnumIndex = true;
 		$s->serialize($v);
 		$str = $s->toString();
-		{
-			$tmp = haxe_io_Bytes::ofString($str);
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return haxe_io_Bytes::ofString($str);
 	}
 	public function doUnserialize($field, $b) {
-		$GLOBALS['%s']->push("sys.db.Manager::doUnserialize");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if($b === null) {
-			$GLOBALS['%s']->pop();
 			return null;
 		}
 		$str = null;
 		$str = $b->toString();
 		if($str === "") {
-			$GLOBALS['%s']->pop();
 			return null;
 		}
-		{
-			$tmp = haxe_Unserializer::run($str);
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return haxe_Unserializer::run($str);
 	}
 	public function normalizeCache($x) {
-		$GLOBALS['%s']->push("sys.db.Manager::normalizeCache");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$_g = 0;
 		$_g1 = Reflect::fields($x);
 		while($_g < $_g1->length) {
@@ -429,11 +358,8 @@ class sys_db_Manager {
 			}
 			unset($val,$info,$f);
 		}
-		$GLOBALS['%s']->pop();
 	}
 	public function cacheObject($x, $lock) {
-		$GLOBALS['%s']->push("sys.db.Manager::cacheObject");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$o = Type::createEmptyInstance($this->class_proto);
 		$o->_manager = $this;
 		$this->normalizeCache($x);
@@ -456,38 +382,18 @@ class sys_db_Manager {
 		$o->{"__cache__"} = $x;
 		$this->addToCache($o);
 		$o->_lock = $lock;
-		{
-			$GLOBALS['%s']->pop();
-			return $o;
-		}
-		$GLOBALS['%s']->pop();
+		return $o;
 	}
-	public function make($x) {
-		$GLOBALS['%s']->push("sys.db.Manager::make");
-		$__hx__spos = $GLOBALS['%s']->length;
-		$GLOBALS['%s']->pop();
-	}
-	public function unmake($x) {
-		$GLOBALS['%s']->push("sys.db.Manager::unmake");
-		$__hx__spos = $GLOBALS['%s']->length;
-		$GLOBALS['%s']->pop();
-	}
+	public function make($x) {}
+	public function unmake($x) {}
 	public function quoteField($f) {
-		$GLOBALS['%s']->push("sys.db.Manager::quoteField");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if(sys_db_Manager::$KEYWORDS->exists(strtolower($f))) {
-			$tmp = "`" . _hx_string_or_null($f) . "`";
-			$GLOBALS['%s']->pop();
-			return $tmp;
+			return "`" . _hx_string_or_null($f) . "`";
 		} else {
-			$GLOBALS['%s']->pop();
 			return $f;
 		}
-		$GLOBALS['%s']->pop();
 	}
 	public function addKeys($s, $x) {
-		$GLOBALS['%s']->push("sys.db.Manager::addKeys");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$first = true;
 		{
 			$_g = 0;
@@ -510,21 +416,11 @@ class sys_db_Manager {
 				unset($k,$f);
 			}
 		}
-		$GLOBALS['%s']->pop();
 	}
 	public function unsafeExecute($sql) {
-		$GLOBALS['%s']->push("sys.db.Manager::unsafeExecute");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$tmp = $this->getCnx()->request($sql);
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return $this->getCnx()->request($sql);
 	}
 	public function unsafeObject($sql, $lock) {
-		$GLOBALS['%s']->push("sys.db.Manager::unsafeObject");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if($lock !== false) {
 			$lock = true;
 			$sql .= _hx_string_or_null($this->getLockMode());
@@ -537,26 +433,18 @@ class sys_db_Manager {
 			$r1 = null;
 		}
 		if($r1 === null) {
-			$GLOBALS['%s']->pop();
 			return null;
 		}
 		$this->normalizeCache($r1);
 		$c = $this->getFromCache($r1, $lock);
 		if($c !== null) {
-			$GLOBALS['%s']->pop();
 			return $c;
 		}
 		$r1 = $this->cacheObject($r1, $lock);
 		$this->make($r1);
-		{
-			$GLOBALS['%s']->pop();
-			return $r1;
-		}
-		$GLOBALS['%s']->pop();
+		return $r1;
 	}
 	public function unsafeObjects($sql, $lock) {
-		$GLOBALS['%s']->push("sys.db.Manager::unsafeObjects");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if($lock !== false) {
 			$lock = true;
 			$sql .= _hx_string_or_null($this->getLockMode());
@@ -579,21 +467,12 @@ class sys_db_Manager {
 			}
 			unset($c);
 		}
-		{
-			$GLOBALS['%s']->pop();
-			return $l2;
-		}
-		$GLOBALS['%s']->pop();
+		return $l2;
 	}
 	public function unsafeDelete($sql) {
-		$GLOBALS['%s']->push("sys.db.Manager::unsafeDelete");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$this->unsafeExecute($sql);
-		$GLOBALS['%s']->pop();
 	}
 	public function unsafeGet($id, $lock = null) {
-		$GLOBALS['%s']->push("sys.db.Manager::unsafeGet");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if($lock === null) {
 			$lock = true;
 		}
@@ -601,12 +480,10 @@ class sys_db_Manager {
 			throw new HException("Invalid number of keys");
 		}
 		if($id === null) {
-			$GLOBALS['%s']->pop();
 			return null;
 		}
 		$x = $this->getFromCacheKey(Std::string($id) . _hx_string_or_null($this->table_name));
 		if($x !== null && (!$lock || $x->_lock)) {
-			$GLOBALS['%s']->pop();
 			return $x;
 		}
 		$s = new StringBuf();
@@ -616,22 +493,14 @@ class sys_db_Manager {
 		$s->add($this->quoteField($this->table_keys[0]));
 		$s->add(" = ");
 		$this->getCnx()->addValue($s, $id);
-		{
-			$tmp = $this->unsafeObject($s->b, $lock);
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return $this->unsafeObject($s->b, $lock);
 	}
 	public function unsafeGetWithKeys($keys, $lock = null) {
-		$GLOBALS['%s']->push("sys.db.Manager::unsafeGetWithKeys");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if($lock === null) {
 			$lock = true;
 		}
 		$x = $this->getFromCacheKey($this->makeCacheKey($keys));
 		if($x !== null && (!$lock || $x->_lock)) {
-			$GLOBALS['%s']->pop();
 			return $x;
 		}
 		$s = new StringBuf();
@@ -639,46 +508,18 @@ class sys_db_Manager {
 		$s->add($this->table_name);
 		$s->add(" WHERE ");
 		$this->addKeys($s, $keys);
-		{
-			$tmp = $this->unsafeObject($s->b, $lock);
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return $this->unsafeObject($s->b, $lock);
 	}
 	public function dbClass() {
-		$GLOBALS['%s']->push("sys.db.Manager::dbClass");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$tmp = $this->class_proto;
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return $this->class_proto;
 	}
 	public function getCnx() {
-		$GLOBALS['%s']->push("sys.db.Manager::getCnx");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$tmp = sys_db_Manager::$cnx;
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return sys_db_Manager::$cnx;
 	}
 	public function getLockMode() {
-		$GLOBALS['%s']->push("sys.db.Manager::getLockMode");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$tmp = sys_db_Manager::$lockMode;
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return sys_db_Manager::$lockMode;
 	}
 	public function initRelation($r) {
-		$GLOBALS['%s']->push("sys.db.Manager::initRelation");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$spod = Type::resolveClass($r->type);
 		if($spod === null) {
 			throw new HException("Missing spod type " . _hx_string_or_null($r->type));
@@ -693,27 +534,17 @@ class sys_db_Manager {
 		if($manager->table_keys->length !== 1) {
 			throw new HException("Relation " . _hx_string_or_null($r->prop) . "(" . _hx_string_or_null($r->key) . ") on a multiple key table");
 		}
-		$GLOBALS['%s']->pop();
 	}
 	public function h__get($x, $prop, $key, $lock) {
-		$GLOBALS['%s']->push("sys.db.Manager::__get");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$v = Reflect::field($x, $prop);
 		if($v !== null) {
-			$GLOBALS['%s']->pop();
 			return $v;
 		}
 		$y = $this->unsafeGet(Reflect::field($x, $key), $lock);
 		$x->{$prop} = $v;
-		{
-			$GLOBALS['%s']->pop();
-			return $y;
-		}
-		$GLOBALS['%s']->pop();
+		return $y;
 	}
 	public function h__set($x, $prop, $key, $v) {
-		$GLOBALS['%s']->push("sys.db.Manager::__set");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$x->{$prop} = $v;
 		if($v === null) {
 			$x->{$key} = null;
@@ -721,25 +552,15 @@ class sys_db_Manager {
 			$value = Reflect::field($v, $this->table_keys[0]);
 			$x->{$key} = $value;
 		}
-		{
-			$GLOBALS['%s']->pop();
-			return $v;
-		}
-		$GLOBALS['%s']->pop();
+		return $v;
 	}
 	public function makeCacheKey($x) {
-		$GLOBALS['%s']->push("sys.db.Manager::makeCacheKey");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if($this->table_keys->length === 1) {
 			$k = Reflect::field($x, $this->table_keys[0]);
 			if($k === null) {
 				throw new HException("Missing key " . _hx_string_or_null($this->table_keys[0]));
 			}
-			{
-				$tmp = Std::string($k) . _hx_string_or_null($this->table_name);
-				$GLOBALS['%s']->pop();
-				return $tmp;
-			}
+			return Std::string($k) . _hx_string_or_null($this->table_name);
 		}
 		$s = new StringBuf();
 		{
@@ -758,38 +579,18 @@ class sys_db_Manager {
 			}
 		}
 		$s->add($this->table_name);
-		{
-			$tmp = $s->b;
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return $s->b;
 	}
 	public function addToCache($x) {
-		$GLOBALS['%s']->push("sys.db.Manager::addToCache");
-		$__hx__spos = $GLOBALS['%s']->length;
 		sys_db_Manager::$object_cache->set($this->makeCacheKey($x), $x);
-		$GLOBALS['%s']->pop();
 	}
 	public function removeFromCache($x) {
-		$GLOBALS['%s']->push("sys.db.Manager::removeFromCache");
-		$__hx__spos = $GLOBALS['%s']->length;
 		sys_db_Manager::$object_cache->remove($this->makeCacheKey($x));
-		$GLOBALS['%s']->pop();
 	}
 	public function getFromCacheKey($key) {
-		$GLOBALS['%s']->push("sys.db.Manager::getFromCacheKey");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$tmp = sys_db_Manager::$object_cache->get($key);
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return sys_db_Manager::$object_cache->get($key);
 	}
 	public function getFromCache($x, $lock) {
-		$GLOBALS['%s']->push("sys.db.Manager::getFromCache");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$c = sys_db_Manager::$object_cache->get($this->makeCacheKey($x));
 		if($c !== null && $lock && !$c->_lock) {
 			{
@@ -823,11 +624,7 @@ class sys_db_Manager {
 			$c->{"__cache__"} = $x;
 			$this->make($c);
 		}
-		{
-			$GLOBALS['%s']->pop();
-			return $c;
-		}
-		$GLOBALS['%s']->pop();
+		return $c;
 	}
 	public function __call($m, $a) {
 		if(isset($this->$m) && is_callable($this->$m))
@@ -845,43 +642,38 @@ class sys_db_Manager {
 	static $init_list;
 	static $KEYWORDS;
 	static function set_cnx($c) {
-		$GLOBALS['%s']->push("sys.db.Manager::set_cnx");
-		$__hx__spos = $GLOBALS['%s']->length;
 		sys_db_Manager::$cnx = $c;
 		if($c !== null && $c->dbName() === "MySQL") {
 			sys_db_Manager::$lockMode = " FOR UPDATE";
 		} else {
 			sys_db_Manager::$lockMode = "";
 		}
-		{
-			$GLOBALS['%s']->pop();
-			return $c;
-		}
-		$GLOBALS['%s']->pop();
+		return $c;
 	}
 	static function getFieldName($field) {
-		$GLOBALS['%s']->push("sys.db.Manager::getFieldName");
-		$__hx__spos = $GLOBALS['%s']->length;
 		{
 			$_g = $field->t;
 			switch($_g->index) {
 			case 30:case 31:{
-				$tmp = "data_" . _hx_string_or_null($field->name);
-				$GLOBALS['%s']->pop();
-				return $tmp;
+				return "data_" . _hx_string_or_null($field->name);
 			}break;
 			default:{
-				$tmp = $field->name;
-				$GLOBALS['%s']->pop();
-				return $tmp;
+				return $field->name;
 			}break;
 			}
 		}
-		$GLOBALS['%s']->pop();
+	}
+	static function nullCompare($a, $b, $eq) {
+		if(sys_db_Manager::$cnx->dbName() !== "MySQL") {
+			return _hx_string_or_null($a) . _hx_string_or_null(((($eq) ? " = " : " != "))) . _hx_string_or_null($b);
+		}
+		$sql = _hx_string_or_null($a) . " <=> " . _hx_string_or_null($b);
+		if(!$eq) {
+			$sql = "NOT(" . _hx_string_or_null($sql) . ")";
+		}
+		return $sql;
 	}
 	static function initialize() {
-		$GLOBALS['%s']->push("sys.db.Manager::initialize");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$l = sys_db_Manager::$init_list;
 		sys_db_Manager::$init_list = new HList();
 		if(null == $l) throw new HException('null iterable');
@@ -899,35 +691,17 @@ class sys_db_Manager {
 			}
 			unset($_g1,$_g);
 		}
-		$GLOBALS['%s']->pop();
 	}
 	static function cleanup() {
-		$GLOBALS['%s']->push("sys.db.Manager::cleanup");
-		$__hx__spos = $GLOBALS['%s']->length;
 		sys_db_Manager::$object_cache = new haxe_ds_StringMap();
-		$GLOBALS['%s']->pop();
 	}
 	static function quoteAny($v) {
-		$GLOBALS['%s']->push("sys.db.Manager::quoteAny");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$s = new StringBuf();
 		sys_db_Manager::$cnx->addValue($s, $v);
-		{
-			$tmp = $s->b;
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return $s->b;
 	}
 	static function __depends() {
-		$GLOBALS['%s']->push("sys.db.Manager::__depends");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$tmp = haxe_io_Bytes::alloc(0)->toString();
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return haxe_io_Bytes::alloc(0)->toString();
 	}
 	static $__properties__ = array("set_cnx" => "set_cnx");
 	function __toString() { return 'sys.db.Manager'; }

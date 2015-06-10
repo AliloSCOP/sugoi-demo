@@ -3,8 +3,6 @@
 class sys_db_Id {
 	public function __construct(){}
 	static function encode($id) {
-		$GLOBALS['%s']->push("sys.db.Id::encode");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$l = strlen($id);
 		if($l > 6) {
 			throw new HException("Invalid identifier '" . _hx_string_or_null($id) . "'");
@@ -25,19 +23,12 @@ class sys_db_Id {
 			$k += $c;
 			unset($c);
 		}
-		{
-			$GLOBALS['%s']->pop();
-			return $k;
-		}
-		$GLOBALS['%s']->pop();
+		return $k;
 	}
 	static function decode($id) {
-		$GLOBALS['%s']->push("sys.db.Id::decode");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$s = new StringBuf();
 		if($id < 1) {
 			if($id === 0) {
-				$GLOBALS['%s']->pop();
 				return "";
 			}
 			throw new HException("Invalid ID " . _hx_string_rec($id, ""));
@@ -52,12 +43,7 @@ class sys_db_Id {
 			$id >>= 5;
 			unset($k);
 		}
-		{
-			$tmp = $s->b;
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return $s->b;
 	}
 	function __toString() { return 'sys.db.Id'; }
 }

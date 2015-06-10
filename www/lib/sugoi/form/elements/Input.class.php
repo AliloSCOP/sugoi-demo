@@ -3,8 +3,6 @@
 class sugoi_form_elements_Input extends sugoi_form_FormElement {
 	public function __construct($name, $label, $value = null, $required = null, $validators = null, $attributes = null, $disabled = null) {
 		if(!php_Boot::$skip_constructor) {
-		$GLOBALS['%s']->push("sugoi.form.elements.Input::new");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if($disabled === null) {
 			$disabled = false;
 		}
@@ -29,7 +27,6 @@ class sugoi_form_elements_Input extends sugoi_form_FormElement {
 			$this->cssClass = "form-control";
 		}
 		$this->width = 180;
-		$GLOBALS['%s']->pop();
 	}}
 	public $password;
 	public $width;
@@ -39,8 +36,6 @@ class sugoi_form_elements_Input extends sugoi_form_FormElement {
 	public $printRequired;
 	public $formatter;
 	public function render() {
-		$GLOBALS['%s']->push("sugoi.form.elements.Input::render");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$n = _hx_string_or_null($this->parentForm->name) . "_" . _hx_string_or_null($this->name);
 		$tType = null;
 		if($this->password) {
@@ -60,22 +55,10 @@ class sugoi_form_elements_Input extends sugoi_form_FormElement {
 		} else {
 			$style = "";
 		}
-		{
-			$tmp = "<input " . _hx_string_or_null($style) . " class=\"" . _hx_string_or_null($this->getClasses()) . "\" type=\"" . _hx_string_or_null($tType) . "\" name=\"" . _hx_string_or_null($n) . "\" id=\"" . _hx_string_or_null($n) . "\" value=\"" . _hx_string_or_null(sugoi_form_elements_Input_0($this, $n, $style, $tType)) . "\"  " . _hx_string_or_null($this->attributes) . " " . _hx_string_or_null(((($this->disabled) ? "disabled" : ""))) . "/>" . _hx_string_or_null(((($this->required && $this->parentForm->isSubmitted() && $this->printRequired) ? " required" : "")));
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return "<input " . _hx_string_or_null($style) . " class=\"" . _hx_string_or_null($this->getClasses()) . "\" type=\"" . _hx_string_or_null($tType) . "\" name=\"" . _hx_string_or_null($n) . "\" id=\"" . _hx_string_or_null($n) . "\" value=\"" . _hx_string_or_null(sugoi_form_elements_Input_0($this, $n, $style, $tType)) . "\"  " . _hx_string_or_null($this->attributes) . " " . _hx_string_or_null(((($this->disabled) ? "disabled" : ""))) . "/>" . _hx_string_or_null(((($this->required && $this->parentForm->isSubmitted() && $this->printRequired) ? " required" : "")));
 	}
 	public function toString() {
-		$GLOBALS['%s']->push("sugoi.form.elements.Input::toString");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$tmp = $this->render();
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return $this->render();
 	}
 	public function __call($m, $a) {
 		if(isset($this->$m) && is_callable($this->$m))

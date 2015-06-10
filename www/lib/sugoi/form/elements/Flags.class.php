@@ -3,8 +3,6 @@
 class sugoi_form_elements_Flags extends sugoi_form_FormElement {
 	public function __construct($name, $label, $data, $value, $verticle = null, $labelRight = null) {
 		if(!php_Boot::$skip_constructor) {
-		$GLOBALS['%s']->push("sugoi.form.elements.Flags::new");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if($labelRight === null) {
 			$labelRight = true;
 		}
@@ -34,7 +32,6 @@ class sugoi_form_elements_Flags extends sugoi_form_FormElement {
 			}
 		}
 		$this->columns = 1;
-		$GLOBALS['%s']->pop();
 	}}
 	public $data;
 	public $selectMessage;
@@ -44,8 +41,6 @@ class sugoi_form_elements_Flags extends sugoi_form_FormElement {
 	public $checked;
 	public $columns;
 	public function populate() {
-		$GLOBALS['%s']->push("sugoi.form.elements.Flags::populate");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$v = php_Web::getParamValues(_hx_string_or_null($this->parentForm->name) . "_" . _hx_string_or_null($this->name));
 		$this->value = 0;
 		if($v !== null) {
@@ -70,11 +65,8 @@ class sugoi_form_elements_Flags extends sugoi_form_FormElement {
 			}
 			$this->value = $val;
 		}
-		$GLOBALS['%s']->pop();
 	}
 	public function render() {
-		$GLOBALS['%s']->push("sugoi.form.elements.Flags::render");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$s = "";
 		$n = _hx_string_or_null($this->parentForm->name) . "_" . _hx_string_or_null($this->name);
 		$tagCss = $this->getClasses();
@@ -125,21 +117,10 @@ class sugoi_form_elements_Flags extends sugoi_form_FormElement {
 			}
 			$s .= "</tr></table>\x0A";
 		}
-		{
-			$GLOBALS['%s']->pop();
-			return $s;
-		}
-		$GLOBALS['%s']->pop();
+		return $s;
 	}
 	public function toString() {
-		$GLOBALS['%s']->push("sugoi.form.elements.Flags::toString");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$tmp = $this->render();
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return $this->render();
 	}
 	public function __call($m, $a) {
 		if(isset($this->$m) && is_callable($this->$m))

@@ -3,8 +3,6 @@
 class sys_db_TableInfos {
 	public function __construct($cname) {
 		if(!php_Boot::$skip_constructor) {
-		$GLOBALS['%s']->push("sys.db.TableInfos::new");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$this->hfields = new haxe_ds_StringMap();
 		$this->fields = new HList();
 		$this->nulls = new haxe_ds_StringMap();
@@ -28,7 +26,6 @@ class sys_db_TableInfos {
 		$a = _hx_explode(".", $cname);
 		$this->name = $a->pop();
 		$this->processClass();
-		$GLOBALS['%s']->pop();
 	}}
 	public $primary;
 	public $cl;
@@ -41,8 +38,6 @@ class sys_db_TableInfos {
 	public $indexes;
 	public $manager;
 	public function processClass() {
-		$GLOBALS['%s']->push("sys.db.TableInfos::processClass");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$rtti = haxe_rtti_Meta::getType($this->cl)->rtti;
 		if($rtti === null) {
 			throw new HException("Class " . _hx_string_or_null($this->name) . " does not have RTTI");
@@ -94,31 +89,15 @@ class sys_db_TableInfos {
 				unset($i);
 			}
 		}
-		$GLOBALS['%s']->pop();
 	}
 	public function escape($name) {
-		$GLOBALS['%s']->push("sys.db.TableInfos::escape");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$m = $this->manager;
-		{
-			$tmp = $m->quoteField($name);
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return $m->quoteField($name);
 	}
 	public function isRelationActive($r) {
-		$GLOBALS['%s']->push("sys.db.TableInfos::isRelationActive");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$GLOBALS['%s']->pop();
-			return true;
-		}
-		$GLOBALS['%s']->pop();
+		return true;
 	}
 	public function createRequest($full) {
-		$GLOBALS['%s']->push("sys.db.TableInfos::createRequest");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$str = "CREATE TABLE " . _hx_string_or_null($this->escape($this->name)) . " (\x0A";
 		$keys = $this->fields->iterator();
 		$__hx__it = $keys;
@@ -159,134 +138,59 @@ class sys_db_TableInfos {
 		if(sys_db_TableInfos::$ENGINE !== null) {
 			$str .= " ENGINE=" . _hx_string_or_null(sys_db_TableInfos::$ENGINE);
 		}
-		{
-			$GLOBALS['%s']->pop();
-			return $str;
-		}
-		$GLOBALS['%s']->pop();
+		return $str;
 	}
 	public function relationInfos($r) {
-		$GLOBALS['%s']->push("sys.db.TableInfos::relationInfos");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if($r->manager->table_keys->length !== 1) {
 			throw new HException("Relation on a multiple-keys table");
 		}
 		$rq = "CONSTRAINT " . _hx_string_or_null($this->escape(_hx_string_or_null($this->name) . "_" . _hx_string_or_null($r->prop))) . " FOREIGN KEY (" . _hx_string_or_null($this->escape($r->key)) . ") REFERENCES " . _hx_string_or_null($this->escape($r->manager->table_name)) . "(" . _hx_string_or_null($this->escape($r->manager->table_keys[0])) . ") ";
 		$rq .= "ON DELETE " . _hx_string_or_null(((($this->nulls->get($r->key) && $r->cascade !== true) ? "SET NULL" : "CASCADE"))) . "\x0A";
-		{
-			$GLOBALS['%s']->pop();
-			return $rq;
-		}
-		$GLOBALS['%s']->pop();
+		return $rq;
 	}
 	public function fieldInfos($f) {
-		$GLOBALS['%s']->push("sys.db.TableInfos::fieldInfos");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$tmp = _hx_string_or_null(sys_db_TableInfos_0($this, $f)) . _hx_string_or_null(((($this->nulls->exists($f->name)) ? "" : " NOT NULL")));
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return _hx_string_or_null(sys_db_TableInfos_0($this, $f)) . _hx_string_or_null(((($this->nulls->exists($f->name)) ? "" : " NOT NULL")));
 	}
 	public function dropRequest() {
-		$GLOBALS['%s']->push("sys.db.TableInfos::dropRequest");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$tmp = "DROP TABLE " . _hx_string_or_null($this->escape($this->name));
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return "DROP TABLE " . _hx_string_or_null($this->escape($this->name));
 	}
 	public function truncateRequest() {
-		$GLOBALS['%s']->push("sys.db.TableInfos::truncateRequest");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$tmp = "TRUNCATE TABLE " . _hx_string_or_null($this->escape($this->name));
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return "TRUNCATE TABLE " . _hx_string_or_null($this->escape($this->name));
 	}
 	public function descriptionRequest() {
-		$GLOBALS['%s']->push("sys.db.TableInfos::descriptionRequest");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$tmp = "SHOW CREATE TABLE " . _hx_string_or_null($this->escape($this->name));
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return "SHOW CREATE TABLE " . _hx_string_or_null($this->escape($this->name));
 	}
 	public function existsRequest() {
-		$GLOBALS['%s']->push("sys.db.TableInfos::existsRequest");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$tmp = "SELECT * FROM " . _hx_string_or_null($this->escape($this->name)) . " LIMIT 0";
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return "SELECT * FROM " . _hx_string_or_null($this->escape($this->name)) . " LIMIT 0";
 	}
 	public function addFieldRequest($fname) {
-		$GLOBALS['%s']->push("sys.db.TableInfos::addFieldRequest");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$ftype = $this->hfields->get($fname);
 		if($ftype === null) {
 			throw new HException("No field " . _hx_string_or_null($fname));
 		}
 		$rq = "ALTER TABLE " . _hx_string_or_null($this->escape($this->name)) . " ADD ";
-		{
-			$tmp = _hx_string_or_null($rq) . _hx_string_or_null($this->escape($fname)) . " " . _hx_string_or_null($this->fieldInfos(_hx_anonymous(array("name" => $fname, "type" => $ftype))));
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return _hx_string_or_null($rq) . _hx_string_or_null($this->escape($fname)) . " " . _hx_string_or_null($this->fieldInfos(_hx_anonymous(array("name" => $fname, "type" => $ftype))));
 	}
 	public function removeFieldRequest($fname) {
-		$GLOBALS['%s']->push("sys.db.TableInfos::removeFieldRequest");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$tmp = "ALTER TABLE " . _hx_string_or_null($this->escape($this->name)) . " DROP " . _hx_string_or_null($this->escape($fname));
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return "ALTER TABLE " . _hx_string_or_null($this->escape($this->name)) . " DROP " . _hx_string_or_null($this->escape($fname));
 	}
 	public function renameFieldRequest($old, $newname) {
-		$GLOBALS['%s']->push("sys.db.TableInfos::renameFieldRequest");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$ftype = $this->hfields->get($newname);
 		if($ftype === null) {
 			throw new HException("No field " . _hx_string_or_null($newname));
 		}
 		$rq = "ALTER TABLE " . _hx_string_or_null($this->escape($this->name)) . " CHANGE " . _hx_string_or_null($this->escape($old)) . " ";
-		{
-			$tmp = _hx_string_or_null($rq) . _hx_string_or_null($this->escape($newname)) . " " . _hx_string_or_null($this->fieldInfos(_hx_anonymous(array("name" => $newname, "type" => $ftype))));
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return _hx_string_or_null($rq) . _hx_string_or_null($this->escape($newname)) . " " . _hx_string_or_null($this->fieldInfos(_hx_anonymous(array("name" => $newname, "type" => $ftype))));
 	}
 	public function updateFieldRequest($fname) {
-		$GLOBALS['%s']->push("sys.db.TableInfos::updateFieldRequest");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$ftype = $this->hfields->get($fname);
 		if($ftype === null) {
 			throw new HException("No field " . _hx_string_or_null($fname));
 		}
 		$rq = "ALTER TABLE " . _hx_string_or_null($this->escape($this->name)) . " MODIFY ";
-		{
-			$tmp = _hx_string_or_null($rq) . _hx_string_or_null($this->escape($fname)) . " " . _hx_string_or_null($this->fieldInfos(_hx_anonymous(array("name" => $fname, "type" => $ftype))));
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return _hx_string_or_null($rq) . _hx_string_or_null($this->escape($fname)) . " " . _hx_string_or_null($this->fieldInfos(_hx_anonymous(array("name" => $fname, "type" => $ftype))));
 	}
 	public function addRelationRequest($key, $prop) {
-		$GLOBALS['%s']->push("sys.db.TableInfos::addRelationRequest");
-		$__hx__spos = $GLOBALS['%s']->length;
 		{
 			$_g = 0;
 			$_g1 = $this->relations;
@@ -294,40 +198,20 @@ class sys_db_TableInfos {
 				$r = $_g1[$_g];
 				++$_g;
 				if($r->key === $key && $r->prop === $prop) {
-					$tmp = "ALTER TABLE " . _hx_string_or_null($this->escape($this->name)) . " ADD " . _hx_string_or_null($this->relationInfos($r));
-					$GLOBALS['%s']->pop();
-					return $tmp;
-					unset($tmp);
+					return "ALTER TABLE " . _hx_string_or_null($this->escape($this->name)) . " ADD " . _hx_string_or_null($this->relationInfos($r));
 				}
 				unset($r);
 			}
 		}
 		throw new HException("No such relation : " . _hx_string_or_null($prop) . "(" . _hx_string_or_null($key) . ")");
-		$GLOBALS['%s']->pop();
 	}
 	public function deleteRelationRequest($rel) {
-		$GLOBALS['%s']->push("sys.db.TableInfos::deleteRelationRequest");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$tmp = "ALTER TABLE " . _hx_string_or_null($this->escape($this->name)) . " DROP FOREIGN KEY " . _hx_string_or_null($this->escape($rel));
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return "ALTER TABLE " . _hx_string_or_null($this->escape($this->name)) . " DROP FOREIGN KEY " . _hx_string_or_null($this->escape($rel));
 	}
 	public function indexName($idx) {
-		$GLOBALS['%s']->push("sys.db.TableInfos::indexName");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$tmp = _hx_string_or_null($this->name) . "_" . _hx_string_or_null($idx->join("_"));
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return _hx_string_or_null($this->name) . "_" . _hx_string_or_null($idx->join("_"));
 	}
 	public function addIndexRequest($idx, $unique) {
-		$GLOBALS['%s']->push("sys.db.TableInfos::addIndexRequest");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$eidx = new _hx_array(array());
 		{
 			$_g = 0;
@@ -348,26 +232,12 @@ class sys_db_TableInfos {
 				unset($k,$i,$f);
 			}
 		}
-		{
-			$tmp = "ALTER TABLE " . _hx_string_or_null($this->escape($this->name)) . " ADD " . _hx_string_or_null(((($unique) ? "UNIQUE " : ""))) . "INDEX " . _hx_string_or_null($this->escape($this->indexName($idx))) . "(" . _hx_string_or_null($eidx->join(",")) . ")";
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return "ALTER TABLE " . _hx_string_or_null($this->escape($this->name)) . " ADD " . _hx_string_or_null(((($unique) ? "UNIQUE " : ""))) . "INDEX " . _hx_string_or_null($this->escape($this->indexName($idx))) . "(" . _hx_string_or_null($eidx->join(",")) . ")";
 	}
 	public function deleteIndexRequest($idx) {
-		$GLOBALS['%s']->push("sys.db.TableInfos::deleteIndexRequest");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$tmp = "ALTER TABLE " . _hx_string_or_null($this->escape($this->name)) . " DROP INDEX " . _hx_string_or_null($this->escape($idx));
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return "ALTER TABLE " . _hx_string_or_null($this->escape($this->name)) . " DROP INDEX " . _hx_string_or_null($this->escape($idx));
 	}
 	public function updateFields($o, $fields) {
-		$GLOBALS['%s']->push("sys.db.TableInfos::updateFields");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$me = $this;
 		$s = new StringBuf();
 		$s->add("UPDATE ");
@@ -391,29 +261,15 @@ class sys_db_TableInfos {
 		$s->add(" WHERE ");
 		$m = $this->manager;
 		$m->addKeys($s, $o);
-		{
-			$tmp = $s->b;
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return $s->b;
 	}
 	public function identifier($o) {
-		$GLOBALS['%s']->push("sys.db.TableInfos::identifier");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if($this->primary === null) {
 			throw new HException("No primary key");
 		}
-		{
-			$tmp = $this->primary->map(array(new _hx_lambda(array(&$o), "sys_db_TableInfos_1"), 'execute'))->join("@");
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return $this->primary->map(array(new _hx_lambda(array(&$o), "sys_db_TableInfos_1"), 'execute'))->join("@");
 	}
 	public function fromIdentifier($id) {
-		$GLOBALS['%s']->push("sys.db.TableInfos::fromIdentifier");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$ids = _hx_explode("@", $id);
 		if($this->primary === null) {
 			throw new HException("No primary key");
@@ -431,66 +287,40 @@ class sys_db_TableInfos {
 			$keys->{$p} = $value;
 			unset($value);
 		}
-		{
-			$tmp = $this->manager->unsafeGetWithKeys($keys, null);
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return $this->manager->unsafeGetWithKeys($keys, null);
 	}
 	public function makeNativeValue($t, $v) {
-		$GLOBALS['%s']->push("sys.db.TableInfos::makeNativeValue");
-		$__hx__spos = $GLOBALS['%s']->length;
 		switch($t->index) {
 		case 1:case 3:case 0:case 2:case 20:case 23:case 24:{
-			$tmp = Std::parseInt($v);
-			$GLOBALS['%s']->pop();
-			return $tmp;
+			return Std::parseInt($v);
 		}break;
 		case 25:case 26:case 27:case 29:case 28:{
-			$tmp = Std::parseInt($v);
-			$GLOBALS['%s']->pop();
-			return $tmp;
+			return Std::parseInt($v);
 		}break;
 		case 7:case 6:case 5:case 4:{
-			$tmp = Std::parseFloat($v);
-			$GLOBALS['%s']->pop();
-			return $tmp;
+			return Std::parseFloat($v);
 		}break;
 		case 10:case 11:case 12:{
-			$tmp = Date::fromString($v);
-			$GLOBALS['%s']->pop();
-			return $tmp;
+			return Date::fromString($v);
 		}break;
 		case 8:{
-			$tmp = $v === "true";
-			$GLOBALS['%s']->pop();
-			return $tmp;
+			return $v === "true";
 		}break;
 		case 15:case 9:case 14:case 13:case 18:case 16:case 17:case 21:case 22:case 19:{
-			$tmp = $v;
-			$GLOBALS['%s']->pop();
-			return $tmp;
+			return $v;
 		}break;
 		case 30:{
-			$tmp = $v;
-			$GLOBALS['%s']->pop();
-			return $tmp;
+			return $v;
 		}break;
 		case 31:{
-			$tmp = $v;
-			$GLOBALS['%s']->pop();
-			return $tmp;
+			return $v;
 		}break;
 		case 33:case 32:{
 			throw new HException("assert");
 		}break;
 		}
-		$GLOBALS['%s']->pop();
 	}
 	public function fromSearch($params, $order, $pos, $count) {
-		$GLOBALS['%s']->push("sys.db.TableInfos::fromSearch");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$rop = new EReg("^([<>]=?)(.+)\$", "");
 		$cond = "TRUE";
 		$m = $this->manager;
@@ -540,12 +370,7 @@ class sys_db_TableInfos {
 			}
 		}
 		$sql = "SELECT * FROM " . _hx_string_or_null($this->escape($this->name)) . " WHERE " . _hx_string_or_null($cond) . " LIMIT " . _hx_string_rec($pos, "") . "," . _hx_string_rec($count, "");
-		{
-			$tmp = $this->manager->unsafeObjects($sql, false);
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return $this->manager->unsafeObjects($sql, false);
 	}
 	public function __call($m, $a) {
 		if(isset($this->$m) && is_callable($this->$m))
@@ -560,32 +385,15 @@ class sys_db_TableInfos {
 	static $ENGINE = "InnoDB";
 	static $OLD_COMPAT = false;
 	static function unescape($field) {
-		$GLOBALS['%s']->push("sys.db.TableInfos::unescape");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if(strlen($field) > 1 && _hx_char_at($field, 0) === "`" && _hx_char_at($field, strlen($field) - 1) === "`") {
-			$tmp = _hx_substr($field, 1, strlen($field) - 2);
-			$GLOBALS['%s']->pop();
-			return $tmp;
+			return _hx_substr($field, 1, strlen($field) - 2);
 		}
-		{
-			$GLOBALS['%s']->pop();
-			return $field;
-		}
-		$GLOBALS['%s']->pop();
+		return $field;
 	}
 	static function countRequest($m, $max) {
-		$GLOBALS['%s']->push("sys.db.TableInfos::countRequest");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$tmp = "SELECT " . _hx_string_or_null($m->quoteField($m->table_keys[0])) . " FROM " . _hx_string_or_null($m->quoteField($m->table_name)) . " LIMIT " . _hx_string_rec($max, "");
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return "SELECT " . _hx_string_or_null($m->quoteField($m->table_keys[0])) . " FROM " . _hx_string_or_null($m->quoteField($m->table_name)) . " LIMIT " . _hx_string_rec($max, "");
 	}
 	static function fromTypeDescription($desc) {
-		$GLOBALS['%s']->push("sys.db.TableInfos::fromTypeDescription");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$fdesc = _hx_explode(" ", strtoupper($desc));
 		$ftype = $fdesc->shift();
 		$tparam = new EReg("^([A-Za-z]+)\\(([0-9]+)\\)\$", "");
@@ -722,7 +530,6 @@ class sys_db_TableInfos {
 		}break;
 		}
 		if($t === null) {
-			$GLOBALS['%s']->pop();
 			return null;
 		}
 		while($fdesc->length > 0) {
@@ -730,7 +537,6 @@ class sys_db_TableInfos {
 			switch($d) {
 			case "NOT":{
 				if($fdesc->shift() !== "NULL") {
-					$GLOBALS['%s']->pop();
 					return null;
 				}
 				$nullable = false;
@@ -741,10 +547,7 @@ class sys_db_TableInfos {
 					if($v === "NULL") {
 						continue 2;
 					}
-					{
-						$GLOBALS['%s']->pop();
-						return null;
-					}
+					return null;
 				}
 				$def = null;
 				switch($t->index) {
@@ -777,35 +580,25 @@ class sys_db_TableInfos {
 				}break;
 				}
 				if($v !== $def && !sys_db_TableInfos::$OLD_COMPAT) {
-					$GLOBALS['%s']->pop();
 					return null;
 				}
 			}break;
 			case "NULL":{
 				if(!$nullable) {
-					$GLOBALS['%s']->pop();
 					return null;
 				}
 				$nullable = true;
 				continue 2;
 			}break;
 			default:{
-				$GLOBALS['%s']->pop();
 				return null;
 			}break;
 			}
 			unset($d);
 		}
-		{
-			$tmp = _hx_anonymous(array("t" => $t, "nullable" => $nullable));
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return _hx_anonymous(array("t" => $t, "nullable" => $nullable));
 	}
 	static function fromDescription($desc) {
-		$GLOBALS['%s']->push("sys.db.TableInfos::fromDescription");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$r = new EReg("^CREATE TABLE `([^`]*)` \\((.*)\\)( ENGINE=([^ ]+))?( AUTO_INCREMENT=[^ ]+)?( DEFAULT CHARSET=.*)?\$", "sm");
 		if(!$r->match($desc)) {
 			throw new HException("Invalid " . _hx_string_or_null($desc));
@@ -893,88 +686,53 @@ class sys_db_TableInfos {
 				unset($f);
 			}
 		}
-		{
-			$tmp = _hx_anonymous(array("table" => $tname, "fields" => $fields, "nulls" => $nulls, "indexes" => $indexes, "relations" => $relations, "primary" => $primary));
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return _hx_anonymous(array("table" => $tname, "fields" => $fields, "nulls" => $nulls, "indexes" => $indexes, "relations" => $relations, "primary" => $primary));
 	}
 	static function sameDBStorage($dt, $rt) {
-		$GLOBALS['%s']->push("sys.db.TableInfos::sameDBStorage");
-		$__hx__spos = $GLOBALS['%s']->length;
 		switch($rt->index) {
 		case 20:{
-			$tmp = $dt === sys_db_RecordType::$DInt;
-			$GLOBALS['%s']->pop();
-			return $tmp;
+			return $dt === sys_db_RecordType::$DInt;
 		}break;
 		case 23:{
 			$auto = _hx_deref($rt)->params[1];
 			$fl = _hx_deref($rt)->params[0];
 			if($auto) {
 				if($fl->length <= 8) {
-					$tmp = $dt === sys_db_RecordType::$DTinyUInt;
-					$GLOBALS['%s']->pop();
-					return $tmp;
+					return $dt === sys_db_RecordType::$DTinyUInt;
 				} else {
 					if($fl->length <= 16) {
-						$tmp = $dt === sys_db_RecordType::$DSmallUInt;
-						$GLOBALS['%s']->pop();
-						return $tmp;
+						return $dt === sys_db_RecordType::$DSmallUInt;
 					} else {
 						if($fl->length <= 24) {
-							$tmp = $dt === sys_db_RecordType::$DMediumUInt;
-							$GLOBALS['%s']->pop();
-							return $tmp;
+							return $dt === sys_db_RecordType::$DMediumUInt;
 						} else {
-							$tmp = $dt === sys_db_RecordType::$DInt;
-							$GLOBALS['%s']->pop();
-							return $tmp;
+							return $dt === sys_db_RecordType::$DInt;
 						}
 					}
 				}
 			} else {
-				$tmp = $dt === sys_db_RecordType::$DInt;
-				$GLOBALS['%s']->pop();
-				return $tmp;
+				return $dt === sys_db_RecordType::$DInt;
 			}
 		}break;
 		case 21:{
-			$tmp = $dt === sys_db_RecordType::$DText;
-			$GLOBALS['%s']->pop();
-			return $tmp;
+			return $dt === sys_db_RecordType::$DText;
 		}break;
 		case 22:{
-			$tmp = $dt === sys_db_RecordType::$DBinary;
-			$GLOBALS['%s']->pop();
-			return $tmp;
+			return $dt === sys_db_RecordType::$DBinary;
 		}break;
 		case 30:{
-			$tmp = $dt === sys_db_RecordType::$DBinary;
-			$GLOBALS['%s']->pop();
-			return $tmp;
+			return $dt === sys_db_RecordType::$DBinary;
 		}break;
 		case 31:{
-			$tmp = $dt === sys_db_RecordType::$DTinyUInt;
-			$GLOBALS['%s']->pop();
-			return $tmp;
+			return $dt === sys_db_RecordType::$DTinyUInt;
 		}break;
 		default:{
-			$GLOBALS['%s']->pop();
 			return false;
 		}break;
 		}
-		$GLOBALS['%s']->pop();
 	}
 	static function allTablesRequest() {
-		$GLOBALS['%s']->push("sys.db.TableInfos::allTablesRequest");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$GLOBALS['%s']->pop();
-			return "SHOW TABLES";
-		}
-		$GLOBALS['%s']->pop();
+		return "SHOW TABLES";
 	}
 	function __toString() { return 'sys.db.TableInfos'; }
 }
@@ -1099,14 +857,7 @@ function sys_db_TableInfos_0(&$__hx__this, &$f) {
 }
 function sys_db_TableInfos_1(&$o, $p) {
 	{
-		$GLOBALS['%s']->push("sys.db.TableInfos::identifier@301");
-		$__hx__spos2 = $GLOBALS['%s']->length;
-		{
-			$tmp = _hx_explode(".", Std::string(Reflect::field($o, $p)))->join("~");
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return _hx_explode(".", Std::string(Reflect::field($o, $p)))->join("~");
 	}
 }
 function sys_db_TableInfos_2(&$__hx__this, &$cond, &$count, &$f, &$m, &$order, &$p, &$params, &$pos, &$rop, &$v) {
@@ -1116,27 +867,15 @@ function sys_db_TableInfos_2(&$__hx__this, &$cond, &$count, &$f, &$m, &$order, &
 		$_ex_ = ($__hx__e instanceof HException) ? $__hx__e->e : $__hx__e;
 		$e = $_ex_;
 		{
-			$GLOBALS['%e'] = (new _hx_array(array()));
-			while($GLOBALS['%s']->length >= $__hx__spos) {
-				$GLOBALS['%e']->unshift($GLOBALS['%s']->pop());
-			}
-			$GLOBALS['%s']->push($GLOBALS['%e'][0]);
 			return 0;
 		}
 	}
 }
 function sys_db_TableInfos_3(&$_g, &$desc, &$f, &$field_r, &$fields, &$foreign_r, &$fs, &$idxname, &$index_key_r, &$index_r, &$indexes, &$matches, &$nulls, &$primary, &$primary_r, &$r, &$relations, &$tname, &$unique, $r1) {
 	{
-		$GLOBALS['%s']->push("sys.db.TableInfos::fromDescription@518");
-		$__hx__spos2 = $GLOBALS['%s']->length;
 		if(!$index_key_r->match($r1)) {
 			throw new HException("Invalid index key " . _hx_string_or_null($r1));
 		}
-		{
-			$tmp = $index_key_r->matched(1);
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return $index_key_r->matched(1);
 	}
 }

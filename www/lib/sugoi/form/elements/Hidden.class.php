@@ -3,8 +3,6 @@
 class sugoi_form_elements_Hidden extends sugoi_form_FormElement {
 	public function __construct($name, $value = null, $required = null, $display = null, $attributes = null) {
 		if(!php_Boot::$skip_constructor) {
-		$GLOBALS['%s']->push("sugoi.form.elements.Hidden::new");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if($attributes === null) {
 			$attributes = "";
 		}
@@ -20,12 +18,9 @@ class sugoi_form_elements_Hidden extends sugoi_form_FormElement {
 		$this->required = $required;
 		$this->display = $display;
 		$this->attributes = $attributes;
-		$GLOBALS['%s']->pop();
 	}}
 	public $display;
 	public function render() {
-		$GLOBALS['%s']->push("sugoi.form.elements.Hidden::render");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$n = _hx_string_or_null($this->parentForm->name) . "_" . _hx_string_or_null($this->name);
 		$type = null;
 		if($this->display) {
@@ -33,32 +28,13 @@ class sugoi_form_elements_Hidden extends sugoi_form_FormElement {
 		} else {
 			$type = "hidden";
 		}
-		{
-			$tmp = "<input type=\"" . _hx_string_or_null($type) . "\" name=\"" . _hx_string_or_null($n) . "\" id=\"" . _hx_string_or_null($n) . "\" value=\"" . Std::string($this->value) . "\"/>";
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return "<input type=\"" . _hx_string_or_null($type) . "\" name=\"" . _hx_string_or_null($n) . "\" id=\"" . _hx_string_or_null($n) . "\" value=\"" . Std::string($this->value) . "\"/>";
 	}
 	public function getFullRow() {
-		$GLOBALS['%s']->push("sugoi.form.elements.Hidden::getFullRow");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$tmp = $this->render();
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return $this->render();
 	}
 	public function toString() {
-		$GLOBALS['%s']->push("sugoi.form.elements.Hidden::toString");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$tmp = $this->render();
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return $this->render();
 	}
 	public function __call($m, $a) {
 		if(isset($this->$m) && is_callable($this->$m))

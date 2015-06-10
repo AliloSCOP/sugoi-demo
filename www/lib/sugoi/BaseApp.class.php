@@ -3,14 +3,11 @@
 class sugoi_BaseApp {
 	public function __construct() {
 		if(!php_Boot::$skip_constructor) {
-		$GLOBALS['%s']->push("sugoi.BaseApp::new");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if(sugoi_BaseApp::$config === null) {
 			$this->loadConfig();
 		}
 		$this->cookieName = "sid";
 		$this->cookieDomain = "." . _hx_string_or_null(App::$config->HOST);
-		$GLOBALS['%s']->pop();
 	}}
 	public $cnx;
 	public $template;
@@ -22,48 +19,30 @@ class sugoi_BaseApp {
 	public $cookieName;
 	public $cookieDomain;
 	public function loadConfig() {
-		$GLOBALS['%s']->push("sugoi.BaseApp::loadConfig");
-		$__hx__spos = $GLOBALS['%s']->length;
 		App::$config = sugoi_BaseApp::$config = new sugoi_Config();
-		$GLOBALS['%s']->pop();
 	}
 	public function loadTemplate($t) {
-		$GLOBALS['%s']->push("sugoi.BaseApp::loadTemplate");
-		$__hx__spos = $GLOBALS['%s']->length;
 		templo_Loader::$OPTIMIZED = App::$config->DEBUG === false;
 		templo_Loader::$BASE_DIR = App::$config->TPL;
 		templo_Loader::$TMP_DIR = App::$config->TPL_TMP;
 		if($t === null) {
-			$GLOBALS['%s']->pop();
 			return null;
 		}
-		{
-			$tmp = new templo_Loader($t);
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return new templo_Loader($t);
 	}
 	public function setTemplate($t) {
-		$GLOBALS['%s']->push("sugoi.BaseApp::setTemplate");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if($t === null) {
 			$this->template = null;
 		} else {
 			$this->template = $this->loadTemplate($t);
 		}
-		$GLOBALS['%s']->pop();
 	}
 	public function initLang($lang) {
-		$GLOBALS['%s']->push("sugoi.BaseApp::initLang");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if(!Lambda::has(App::$config->LANGS, $lang)) {
-			$GLOBALS['%s']->pop();
 			return false;
 		}
 		$this->session->lang = $lang;
 		if($lang === App::$config->LANG) {
-			$GLOBALS['%s']->pop();
 			return false;
 		}
 		App::$config->LANG = $lang;
@@ -71,25 +50,15 @@ class sugoi_BaseApp {
 		App::$config->TPL = _hx_string_or_null($path) . "tpl/";
 		App::$config->TPL_TMP = _hx_string_or_null($path) . "tmp/";
 		$this->initLocale();
-		{
-			$GLOBALS['%s']->pop();
-			return true;
-		}
-		$GLOBALS['%s']->pop();
+		return true;
 	}
 	public function initLocale() {
-		$GLOBALS['%s']->push("sugoi.BaseApp::initLocale");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if(!Sys::setTimeLocale("en_US.UTF-8")) {
 			Sys::setTimeLocale("en");
 		}
-		$GLOBALS['%s']->pop();
 	}
 	public function saveAndClose() {
-		$GLOBALS['%s']->push("sugoi.BaseApp::saveAndClose");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if($this->cnx === null) {
-			$GLOBALS['%s']->pop();
 			return;
 		}
 		if($this->session->sid !== null) {
@@ -99,22 +68,19 @@ class sugoi_BaseApp {
 		$this->cnx->close();
 		$this->cnx->close = array(new _hx_lambda(array(), "sugoi_BaseApp_0"), 'execute');
 		$this->cnx->request = array(new _hx_lambda(array(), "sugoi_BaseApp_1"), 'execute');
-		$GLOBALS['%s']->pop();
 	}
 	public function executeTemplate($save = null) {
-		$GLOBALS['%s']->push("sugoi.BaseApp::executeTemplate");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$this->view->init();
 		$result = $this->template->execute($this->view);
 		if($save) {
 			$this->saveAndClose();
 		}
+		if(_hx_substr($result, 0, 4) === "null") {
+			$result = _hx_substr($result, 4, null);
+		}
 		Sys::hprint($result);
-		$GLOBALS['%s']->pop();
 	}
 	public function onMeta($m, $args) {
-		$GLOBALS['%s']->push("sugoi.BaseApp::onMeta");
-		$__hx__spos = $GLOBALS['%s']->length;
 		switch($m) {
 		case "tpl":{
 			$this->setTemplate($args[0]);
@@ -131,11 +97,8 @@ class sugoi_BaseApp {
 		}break;
 		default:{}break;
 		}
-		$GLOBALS['%s']->pop();
 	}
 	public function detectLang() {
-		$GLOBALS['%s']->push("sugoi.BaseApp::detectLang");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$l = php_Web::getClientHeader("Accept-Language");
 		if($l !== null) {
 			$_g = 0;
@@ -153,7 +116,6 @@ class sugoi_BaseApp {
 						$a = $_g3[$_g2];
 						++$_g2;
 						if($a === $l1) {
-							$GLOBALS['%s']->pop();
 							return $a;
 						}
 						unset($a);
@@ -163,16 +125,9 @@ class sugoi_BaseApp {
 				unset($l1);
 			}
 		}
-		{
-			$tmp = App::$config->LANGS[App::$config->LANGS->length - 1];
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return App::$config->LANGS[App::$config->LANGS->length - 1];
 	}
 	public function setupLang() {
-		$GLOBALS['%s']->push("sugoi.BaseApp::setupLang");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if($this->session->lang === null) {
 			if($this->user === null) {
 				$this->session->lang = $this->detectLang();
@@ -185,11 +140,8 @@ class sugoi_BaseApp {
 			$this->session->lang = $lang;
 		}
 		$this->initLang($this->session->lang);
-		$GLOBALS['%s']->pop();
 	}
 	public function rollback() {
-		$GLOBALS['%s']->push("sugoi.BaseApp::rollback");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if($this->cnx !== null) {
 			$this->cnx->rollback();
 		}
@@ -197,19 +149,13 @@ class sugoi_BaseApp {
 		if($this->user !== null && $this->session !== null) {
 			$this->user = $this->session->get_user();
 		}
-		$GLOBALS['%s']->pop();
 	}
 	public function setCookie($oldCookie) {
-		$GLOBALS['%s']->push("sugoi.BaseApp::setCookie");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if($this->session !== null && $this->session->sid !== null && $this->session->sid !== $oldCookie) {
 			header("Set-Cookie" . ": " . _hx_string_or_null((_hx_string_or_null($this->cookieName) . "=" . _hx_string_or_null($this->session->sid) . "; path=/;")));
 		}
-		$GLOBALS['%s']->pop();
 	}
 	public function mainLoop() {
-		$GLOBALS['%s']->push("sugoi.BaseApp::mainLoop");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$this->params = php_Web::getParams();
 		$sids = (new _hx_array(array()));
 		$cookieSid = null;
@@ -234,10 +180,7 @@ class sugoi_BaseApp {
 		if($this->maintain) {
 			$this->setTemplate("maintain.mtt");
 			$this->executeTemplate(null);
-			{
-				$GLOBALS['%s']->pop();
-				return;
-			}
+			return;
 		}
 		try {
 			$url = php_Web::getURI();
@@ -250,27 +193,14 @@ class sugoi_BaseApp {
 		}catch(Exception $__hx__e) {
 			$_ex_ = ($__hx__e instanceof HException) ? $__hx__e->e : $__hx__e;
 			if(($e = $_ex_) instanceof haxe_web_DispatchError){
-				$GLOBALS['%e'] = (new _hx_array(array()));
-				while($GLOBALS['%s']->length >= $__hx__spos) {
-					$GLOBALS['%e']->unshift($GLOBALS['%s']->pop());
-				}
-				$GLOBALS['%s']->push($GLOBALS['%e'][0]);
 				if(App::$config->DEBUG) {
 					php_Lib::rethrow($e);
 				}
 				$this->cnx->rollback();
 				php_Web::redirect("/");
-				{
-					$GLOBALS['%s']->pop();
-					return;
-				}
+				return;
 			}
 			else if(($e1 = $_ex_) instanceof sugoi_ControllerAction){
-				$GLOBALS['%e'] = (new _hx_array(array()));
-				while($GLOBALS['%s']->length >= $__hx__spos) {
-					$GLOBALS['%e']->unshift($GLOBALS['%s']->pop());
-				}
-				$GLOBALS['%s']->push($GLOBALS['%e'][0]);
 				switch($e1->index) {
 				case 0:{
 					$url1 = _hx_deref($e1)->params[0];
@@ -345,11 +275,8 @@ class sugoi_BaseApp {
 		} else {
 			$this->executeTemplate(true);
 		}
-		$GLOBALS['%s']->pop();
 	}
 	public function logError($e, $stack = null) {
-		$GLOBALS['%s']->push("sugoi.BaseApp::logError");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$stack1 = null;
 		if($stack !== null) {
 			$stack1 = $stack;
@@ -368,11 +295,10 @@ class sugoi_BaseApp {
 		$e1->date = Date::now();
 		$e1->error = $message->b;
 		$e1->insert();
-		$GLOBALS['%s']->pop();
 	}
 	public function errorHandler($e) {
-		$GLOBALS['%s']->push("sugoi.BaseApp::errorHandler");
-		$__hx__spos = $GLOBALS['%s']->length;
+		throw new HException($e);
+		return;
 		try {
 			$stack = haxe_CallStack::toString(haxe_CallStack::exceptionStack());
 			if($this->cnx !== null) {
@@ -391,11 +317,6 @@ class sugoi_BaseApp {
 			$_ex_ = ($__hx__e instanceof HException) ? $__hx__e->e : $__hx__e;
 			$e1 = $_ex_;
 			{
-				$GLOBALS['%e'] = (new _hx_array(array()));
-				while($GLOBALS['%s']->length >= $__hx__spos) {
-					$GLOBALS['%e']->unshift($GLOBALS['%s']->pop());
-				}
-				$GLOBALS['%s']->push($GLOBALS['%e'][0]);
 				Sys::hprint("<pre>");
 				Sys::println("Error : " . _hx_string_or_null(sugoi_BaseApp_3($this, $e, $e1)));
 				Sys::println(haxe_CallStack::toString(haxe_CallStack::exceptionStack()));
@@ -407,11 +328,6 @@ class sugoi_BaseApp {
 					$_ex_ = ($__hx__e instanceof HException) ? $__hx__e->e : $__hx__e;
 					$e3 = $_ex_;
 					{
-						$GLOBALS['%e'] = (new _hx_array(array()));
-						while($GLOBALS['%s']->length >= $__hx__spos) {
-							$GLOBALS['%e']->unshift($GLOBALS['%s']->pop());
-						}
-						$GLOBALS['%s']->push($GLOBALS['%e'][0]);
 						Sys::println("Initializing Database...");
 						sys_db_Admin::initializeDatabase(null, null);
 						Sys::println("Done");
@@ -420,20 +336,14 @@ class sugoi_BaseApp {
 				Sys::hprint("</pre>");
 			}
 		}
-		$GLOBALS['%s']->pop();
 	}
 	public function init() {
-		$GLOBALS['%s']->push("sugoi.BaseApp::init");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$this->maintain = App::$config->getBool("maintain", null);
 		if($this->maintain) {
 			$this->view = new View();
 			$this->setTemplate("maintain.mtt");
 			$this->executeTemplate(false);
-			{
-				$GLOBALS['%s']->pop();
-				return false;
-			}
+			return false;
 		}
 		try {
 			$dbstr = App::$config->get("database", null);
@@ -448,55 +358,34 @@ class sugoi_BaseApp {
 			$_ex_ = ($__hx__e instanceof HException) ? $__hx__e->e : $__hx__e;
 			$e = $_ex_;
 			{
-				$GLOBALS['%e'] = (new _hx_array(array()));
-				while($GLOBALS['%s']->length >= $__hx__spos) {
-					$GLOBALS['%e']->unshift($GLOBALS['%s']->pop());
-				}
-				$GLOBALS['%s']->push($GLOBALS['%e'][0]);
 				$this->errorHandler($e);
-				{
-					$GLOBALS['%s']->pop();
-					return false;
-				}
+				return false;
 			}
 		}
 		if(App::$config->SQL_LOG) {
 			$this->cnx = new sugoi_tools_DebugConnection($this->cnx);
 		}
-		{
-			$GLOBALS['%s']->pop();
-			return true;
-		}
-		$GLOBALS['%s']->pop();
+		return true;
 	}
 	public function cloneApp() {
-		$GLOBALS['%s']->push("sugoi.BaseApp::cloneApp");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$app = new App();
 		$bapp = $app;
 		$bapp->cnx = $this->cnx;
 		$bapp->view = new View();
 		App::$current = $app;
 		$bapp->mainLoop();
-		$GLOBALS['%s']->pop();
 	}
 	public function run() {
-		$GLOBALS['%s']->push("sugoi.BaseApp::run");
-		$__hx__spos = $GLOBALS['%s']->length;
-		sys_db_Transaction::main($this->cnx, (isset($this->cloneApp) ? $this->cloneApp: array($this, "cloneApp")), array(new _hx_lambda(array(), "sugoi_BaseApp_4"), 'execute'));
+		sys_db_Transaction::main($this->cnx, (isset($this->cloneApp) ? $this->cloneApp: array($this, "cloneApp")), null);
 		App::$current = null;
-		$GLOBALS['%s']->pop();
 	}
 	public function sendHeaders() {
-		$GLOBALS['%s']->push("sugoi.BaseApp::sendHeaders");
-		$__hx__spos = $GLOBALS['%s']->length;
 		header("Cache-Control" . ": " . "no-store, no-cache, must-revalidate");
 		header("Pragma" . ": " . "no-cache");
 		header("Expires" . ": " . "-1");
 		header("P3P" . ": " . "CP=\"ALL DSP COR NID CURa OUR STP PUR\"");
 		header("Content-Type" . ": " . "text/html; Charset=UTF-8");
 		header("Expires" . ": " . "Mon, 26 Jul 1997 05:00:00 GMT");
-		$GLOBALS['%s']->pop();
 	}
 	public function __call($m, $a) {
 		if(isset($this->$m) && is_callable($this->$m))
@@ -510,40 +399,24 @@ class sugoi_BaseApp {
 	}
 	static $config;
 	static function main() {
-		$GLOBALS['%s']->push("sugoi.BaseApp::main");
-		$__hx__spos = $GLOBALS['%s']->length;
 		App::$current = new App();
 		$a = App::$current;
 		$a->sendHeaders();
 		if(!$a->init()) {
 			$a = null;
-			{
-				$GLOBALS['%s']->pop();
-				return;
-			}
+			return;
 		}
 		$a->run();
 		$a = null;
-		$GLOBALS['%s']->pop();
 	}
 	function __toString() { return 'sugoi.BaseApp'; }
 }
 function sugoi_BaseApp_0() {
-	{
-		$GLOBALS['%s']->push("sugoi.BaseApp::saveAndClose@83");
-		$__hx__spos2 = $GLOBALS['%s']->length;
-		$GLOBALS['%s']->pop();
-	}
+	{}
 }
 function sugoi_BaseApp_1($s) {
 	{
-		$GLOBALS['%s']->push("sugoi.BaseApp::saveAndClose@84");
-		$__hx__spos2 = $GLOBALS['%s']->length;
-		{
-			$GLOBALS['%s']->pop();
-			return null;
-		}
-		$GLOBALS['%s']->pop();
+		return null;
 	}
 }
 function sugoi_BaseApp_2(&$__hx__this, &$e, &$e1, &$message, &$stack, &$stack1) {
@@ -558,21 +431,7 @@ function sugoi_BaseApp_3(&$__hx__this, &$e, &$e1) {
 		$_ex_ = ($__hx__e instanceof HException) ? $__hx__e->e : $__hx__e;
 		$e2 = $_ex_;
 		{
-			$GLOBALS['%e'] = (new _hx_array(array()));
-			while($GLOBALS['%s']->length >= $__hx__spos) {
-				$GLOBALS['%e']->unshift($GLOBALS['%s']->pop());
-			}
-			$GLOBALS['%s']->push($GLOBALS['%e'][0]);
 			return "???";
 		}
-	}
-}
-function sugoi_BaseApp_4($e) {
-	{
-		$GLOBALS['%s']->push("sugoi.BaseApp::run@315");
-		$__hx__spos2 = $GLOBALS['%s']->length;
-		$b = App::$current;
-		$b->errorHandler($e);
-		$GLOBALS['%s']->pop();
 	}
 }

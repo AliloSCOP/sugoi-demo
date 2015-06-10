@@ -3,15 +3,12 @@
 class haxe_Serializer {
 	public function __construct() {
 		if(!php_Boot::$skip_constructor) {
-		$GLOBALS['%s']->push("haxe.Serializer::new");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$this->buf = new StringBuf();
 		$this->cache = new _hx_array(array());
 		$this->useCache = haxe_Serializer::$USE_CACHE;
 		$this->useEnumIndex = haxe_Serializer::$USE_ENUM_INDEX;
 		$this->shash = new haxe_ds_StringMap();
 		$this->scount = 0;
-		$GLOBALS['%s']->pop();
 	}}
 	public $buf;
 	public $cache;
@@ -20,26 +17,14 @@ class haxe_Serializer {
 	public $useCache;
 	public $useEnumIndex;
 	public function toString() {
-		$GLOBALS['%s']->push("haxe.Serializer::toString");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$tmp = $this->buf->b;
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return $this->buf->b;
 	}
 	public function serializeString($s) {
-		$GLOBALS['%s']->push("haxe.Serializer::serializeString");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$x = $this->shash->get($s);
 		if($x !== null) {
 			$this->buf->add("R");
 			$this->buf->add($x);
-			{
-				$GLOBALS['%s']->pop();
-				return;
-			}
+			return;
 		}
 		$this->shash->set($s, $this->scount++);
 		$this->buf->add("y");
@@ -47,11 +32,8 @@ class haxe_Serializer {
 		$this->buf->add(strlen($s));
 		$this->buf->add(":");
 		$this->buf->add($s);
-		$GLOBALS['%s']->pop();
 	}
 	public function serializeRef($v) {
-		$GLOBALS['%s']->push("haxe.Serializer::serializeRef");
-		$__hx__spos = $GLOBALS['%s']->length;
 		{
 			$_g1 = 0;
 			$_g = $this->cache->length;
@@ -60,24 +42,15 @@ class haxe_Serializer {
 				if(_hx_equal($this->cache[$i], $v)) {
 					$this->buf->add("r");
 					$this->buf->add($i);
-					{
-						$GLOBALS['%s']->pop();
-						return true;
-					}
+					return true;
 				}
 				unset($i);
 			}
 		}
 		$this->cache->push($v);
-		{
-			$GLOBALS['%s']->pop();
-			return false;
-		}
-		$GLOBALS['%s']->pop();
+		return false;
 	}
 	public function serializeFields($v) {
-		$GLOBALS['%s']->push("haxe.Serializer::serializeFields");
-		$__hx__spos = $GLOBALS['%s']->length;
 		{
 			$_g = 0;
 			$_g1 = Reflect::fields($v);
@@ -90,11 +63,8 @@ class haxe_Serializer {
 			}
 		}
 		$this->buf->add("g");
-		$GLOBALS['%s']->pop();
 	}
 	public function serialize($v) {
-		$GLOBALS['%s']->push("haxe.Serializer::serialize");
-		$__hx__spos = $GLOBALS['%s']->length;
 		{
 			$_g = Type::typeof($v);
 			switch($_g->index) {
@@ -105,10 +75,7 @@ class haxe_Serializer {
 				$v1 = $v;
 				if($v1 === 0) {
 					$this->buf->add("z");
-					{
-						$GLOBALS['%s']->pop();
-						return;
-					}
+					return;
 				}
 				$this->buf->add("i");
 				$this->buf->add($v1);
@@ -134,13 +101,9 @@ class haxe_Serializer {
 				{
 					if((is_object($_t = $c) && !($_t instanceof Enum) ? $_t === _hx_qtype("String") : $_t == _hx_qtype("String"))) {
 						$this->serializeString($v);
-						{
-							$GLOBALS['%s']->pop();
-							return;
-						}
+						return;
 					}
 					if($this->useCache && $this->serializeRef($v)) {
-						$GLOBALS['%s']->pop();
 						return;
 					}
 					switch($c) {
@@ -332,7 +295,6 @@ class haxe_Serializer {
 						$this->serializeString(Type::getEnumName($v));
 					} else {
 						if($this->useCache && $this->serializeRef($v)) {
-							$GLOBALS['%s']->pop();
 							return;
 						}
 						$this->buf->add("o");
@@ -345,7 +307,6 @@ class haxe_Serializer {
 				{
 					if($this->useCache) {
 						if($this->serializeRef($v)) {
-							$GLOBALS['%s']->pop();
 							return;
 						}
 						$this->cache->pop();
@@ -386,7 +347,6 @@ class haxe_Serializer {
 			}break;
 			}
 		}
-		$GLOBALS['%s']->pop();
 	}
 	public function __call($m, $a) {
 		if(isset($this->$m) && is_callable($this->$m))
@@ -402,16 +362,9 @@ class haxe_Serializer {
 	static $USE_ENUM_INDEX = false;
 	static $BASE64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789%:";
 	static function run($v) {
-		$GLOBALS['%s']->push("haxe.Serializer::run");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$s = new haxe_Serializer();
 		$s->serialize($v);
-		{
-			$tmp = $s->toString();
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return $s->toString();
 	}
 	function __toString() { return $this->toString(); }
 }

@@ -3,22 +3,13 @@
 class php_Web {
 	public function __construct(){}
 	static function getParams() {
-		$GLOBALS['%s']->push("php.Web::getParams");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$a = array_merge($_GET, $_POST);
 		if(get_magic_quotes_gpc()) {
 			reset($a); while(list($k, $v) = each($a)) $a[$k] = stripslashes((string)$v);
 		}
-		{
-			$tmp = php_Lib::hashOfAssociativeArray($a);
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return php_Lib::hashOfAssociativeArray($a);
 	}
 	static function getParamValues($param) {
-		$GLOBALS['%s']->push("php.Web::getParamValues");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$reg = new EReg("^" . _hx_string_or_null($param) . "(\\[|%5B)([0-9]*?)(\\]|%5D)=(.*?)\$", "");
 		$res = new _hx_array(array());
 		$explore = array(new _hx_lambda(array(&$param, &$reg, &$res), "php_Web_0"), 'execute');
@@ -36,35 +27,18 @@ class php_Web {
 			}
 		}
 		if($res->length === 0) {
-			$GLOBALS['%s']->pop();
 			return null;
 		}
-		{
-			$GLOBALS['%s']->pop();
-			return $res;
-		}
-		$GLOBALS['%s']->pop();
+		return $res;
 	}
 	static function getURI() {
-		$GLOBALS['%s']->push("php.Web::getURI");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$s = $_SERVER['REQUEST_URI'];
-		{
-			$tmp = _hx_array_get(_hx_explode("?", $s), 0);
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return _hx_array_get(_hx_explode("?", $s), 0);
 	}
 	static function redirect($url) {
-		$GLOBALS['%s']->push("php.Web::redirect");
-		$__hx__spos = $GLOBALS['%s']->length;
 		header("Location: " . _hx_string_or_null($url));
-		$GLOBALS['%s']->pop();
 	}
 	static function getClientHeader($k) {
-		$GLOBALS['%s']->push("php.Web::getClientHeader");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$k1 = null;
 		{
 			$s = strtoupper($k);
@@ -76,22 +50,13 @@ class php_Web {
 			unset($i);
 			$i = $__hx__it->next();
 			if($i->header === $k1) {
-				$tmp = $i->value;
-				$GLOBALS['%s']->pop();
-				return $tmp;
-				unset($tmp);
+				return $i->value;
 			}
 		}
-		{
-			$GLOBALS['%s']->pop();
-			return null;
-		}
-		$GLOBALS['%s']->pop();
+		return null;
 	}
 	static $_client_headers;
 	static function getClientHeaders() {
-		$GLOBALS['%s']->push("php.Web::getClientHeaders");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if(php_Web::$_client_headers === null) {
 			php_Web::$_client_headers = new HList();
 			$h = php_Lib::hashOfAssociativeArray($_SERVER);
@@ -109,29 +74,16 @@ class php_Web {
 				}
 			}
 		}
-		{
-			$tmp = php_Web::$_client_headers;
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return php_Web::$_client_headers;
 	}
 	static function getParamsString() {
-		$GLOBALS['%s']->push("php.Web::getParamsString");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if(isset($_SERVER["QUERY_STRING"])) {
-			$tmp = $_SERVER["QUERY_STRING"];
-			$GLOBALS['%s']->pop();
-			return $tmp;
+			return $_SERVER["QUERY_STRING"];
 		} else {
-			$GLOBALS['%s']->pop();
 			return "";
 		}
-		$GLOBALS['%s']->pop();
 	}
 	static function getPostData() {
-		$GLOBALS['%s']->push("php.Web::getPostData");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$h = fopen("php://input", "r");
 		$bsize = 8192;
 		$max = 32;
@@ -142,25 +94,12 @@ class php_Web {
 			$counter++;
 		}
 		fclose($h);
-		{
-			$GLOBALS['%s']->pop();
-			return $data;
-		}
-		$GLOBALS['%s']->pop();
+		return $data;
 	}
 	static function getCookies() {
-		$GLOBALS['%s']->push("php.Web::getCookies");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$tmp = php_Lib::hashOfAssociativeArray($_COOKIE);
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return php_Lib::hashOfAssociativeArray($_COOKIE);
 	}
 	static function getMultipart($maxSize) {
-		$GLOBALS['%s']->push("php.Web::getMultipart");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$h = new haxe_ds_StringMap();
 		$buf = null;
 		$curname = null;
@@ -168,16 +107,9 @@ class php_Web {
 		if($curname !== null) {
 			$h->set($curname, $buf->b);
 		}
-		{
-			$tmp = $h;
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return $h;
 	}
 	static function parseMultipart($onPart, $onData) {
-		$GLOBALS['%s']->push("php.Web::parseMultipart");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$a = $_POST;
 		if(get_magic_quotes_gpc()) {
 			reset($a); while(list($k, $v) = each($a)) $a[$k] = stripslashes((string)$v);
@@ -194,7 +126,6 @@ class php_Web {
 			unset($v);
 		}
 		if(!isset($_FILES)) {
-			$GLOBALS['%s']->pop();
 			return;
 		}
 		$parts = new _hx_array(array_keys($_FILES));
@@ -248,7 +179,6 @@ class php_Web {
 				unset($tmp,$part,$info,$file,$err);
 			}
 		}
-		$GLOBALS['%s']->pop();
 	}
 	static $isModNeko;
 	function __toString() { return 'php.Web'; }
@@ -256,10 +186,7 @@ class php_Web {
 php_Web::$isModNeko = !php_Lib::isCli();
 function php_Web_0(&$param, &$reg, &$res, $data) {
 	{
-		$GLOBALS['%s']->push("php.Web::getParamValues@66");
-		$__hx__spos2 = $GLOBALS['%s']->length;
 		if($data === null || strlen($data) === 0) {
-			$GLOBALS['%s']->pop();
 			return;
 		}
 		{
@@ -286,7 +213,6 @@ function php_Web_0(&$param, &$reg, &$res, $data) {
 				unset($part);
 			}
 		}
-		$GLOBALS['%s']->pop();
 	}
 }
 function php_Web_1(&$explore, &$param, &$reg, &$res) {
@@ -297,8 +223,6 @@ function php_Web_1(&$explore, &$param, &$reg, &$res) {
 }
 function php_Web_2(&$buf, &$curname, &$h, &$maxSize, $p, $_) {
 	{
-		$GLOBALS['%s']->push("php.Web::getMultipart@299");
-		$__hx__spos2 = $GLOBALS['%s']->length;
 		if($curname !== null) {
 			$h->set($curname, $buf->b);
 		}
@@ -308,13 +232,10 @@ function php_Web_2(&$buf, &$curname, &$h, &$maxSize, $p, $_) {
 		if($maxSize < 0) {
 			throw new HException("Maximum size reached");
 		}
-		$GLOBALS['%s']->pop();
 	}
 }
 function php_Web_3(&$buf, &$curname, &$h, &$maxSize, $str, $pos, $len) {
 	{
-		$GLOBALS['%s']->push("php.Web::getMultipart@307");
-		$__hx__spos2 = $GLOBALS['%s']->length;
 		$maxSize -= $len;
 		if($maxSize < 0) {
 			throw new HException("Maximum size reached");
@@ -323,6 +244,5 @@ function php_Web_3(&$buf, &$curname, &$h, &$maxSize, $str, $pos, $len) {
 			$s = $str->toString();
 			$buf->b .= _hx_string_or_null(_hx_substr($s, $pos, $len));
 		}
-		$GLOBALS['%s']->pop();
 	}
 }

@@ -3,20 +3,15 @@
 class templo_Loader {
 	public function __construct($file) {
 		if(!php_Boot::$skip_constructor) {
-		$GLOBALS['%s']->push("templo.Loader::new");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if(!templo_Loader::$OPTIMIZED) {
 			$this->compileTemplate($file);
 		}
 		$this->templatename = $file;
 		$this->file = $this->tmpFileId($file);
-		$GLOBALS['%s']->pop();
 	}}
 	public $file;
 	public $templatename;
 	public function execute($ctx) {
-		$GLOBALS['%s']->push("templo.Loader::execute");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if($ctx === null) {
 			$ctx = _hx_anonymous(array());
 		}
@@ -49,50 +44,30 @@ class templo_Loader {
 		$this->bufferReset();
 		$this->bufferCreate();
 		require($this->file);
-		{
-			$tmp = $this->bufferPop();
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return $this->bufferPop();
 	}
 	public $buf;
 	public $b;
 	public $content;
 	public function bufferReset() {
-		$GLOBALS['%s']->push("templo.Loader::bufferReset");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$this->b = (new _hx_array(array()));
 		$this->content = null;
-		$GLOBALS['%s']->pop();
 	}
 	public function bufferCreate() {
-		$GLOBALS['%s']->push("templo.Loader::bufferCreate");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$len = $this->b->length;
 		if($len > 0) {
 			$this->b->a[$len - 1] .= _hx_string_or_null($this->buf);
 			$this->buf = "";
 		}
 		$this->b->push("");
-		$GLOBALS['%s']->pop();
 	}
 	public function bufferPop() {
-		$GLOBALS['%s']->push("templo.Loader::bufferPop");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$len = $this->b->length;
 		$this->b->a[$len - 1] .= _hx_string_or_null($this->buf);
 		$this->buf = "";
-		{
-			$tmp = $this->b->pop();
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return $this->b->pop();
 	}
 	public function includeTemplate($file, $container, $ctx) {
-		$GLOBALS['%s']->push("templo.Loader::includeTemplate");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$old_content = $this->content;
 		$this->content = $this->bufferPop();
 		if(!templo_Loader::$OPTIMIZED) {
@@ -100,25 +75,15 @@ class templo_Loader {
 		}
 		require($this->tmpFileId($file));
 		$this->content = $old_content;
-		$GLOBALS['%s']->pop();
 	}
 	public function tmpFileId($path) {
-		$GLOBALS['%s']->push("templo.Loader::tmpFileId");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if(_hx_char_at($path, 0) === "/") {
 			$path = _hx_substr($path, 1, null);
 		}
 		$path = _hx_deref(new EReg("[/:\\\\]+", "g"))->replace($path, "__");
-		{
-			$tmp = _hx_string_or_null(templo_Loader::$TMP_DIR) . _hx_string_or_null($path) . ".php";
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return _hx_string_or_null(templo_Loader::$TMP_DIR) . _hx_string_or_null($path) . ".php";
 	}
 	public function getMacroPrefixes($paths) {
-		$GLOBALS['%s']->push("templo.Loader::getMacroPrefixes");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$prefixes = (new _hx_array(array()));
 		$re = new EReg("[/:.\\-]+", "g");
 		{
@@ -133,21 +98,13 @@ class templo_Loader {
 				unset($path);
 			}
 		}
-		{
-			$GLOBALS['%s']->pop();
-			return $prefixes;
-		}
-		$GLOBALS['%s']->pop();
+		return $prefixes;
 	}
 	public $cache_macro_functions;
 	public $macrosprefixes;
 	public function macroCall($name, $args) {
-		$GLOBALS['%s']->push("templo.Loader::macroCall");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if($this->cache_macro_functions->exists($name)) {
-			$tmp = call_user_func_array($this->cache_macro_functions->get($name), $args);
-			$GLOBALS['%s']->pop();
-			return $tmp;
+			return call_user_func_array($this->cache_macro_functions->get($name), $args);
 		}
 		{
 			$_g = 0;
@@ -158,22 +115,14 @@ class templo_Loader {
 				$n = _hx_string_or_null($pre) . "_" . _hx_string_or_null($name);
 				if(function_exists($n)) {
 					$this->cache_macro_functions->set($name, $n);
-					{
-						$tmp = call_user_func_array($n, $args);
-						$GLOBALS['%s']->pop();
-						return $tmp;
-						unset($tmp);
-					}
+					return call_user_func_array($n, $args);
 				}
 				unset($pre,$n);
 			}
 		}
 		throw new HException("invalid macro call to " . _hx_string_or_null($name));
-		$GLOBALS['%s']->pop();
 	}
 	public function compileTemplate($path) {
-		$GLOBALS['%s']->push("templo.Loader::compileTemplate");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$tmpFile = $this->tmpFileId($path);
 		if(file_exists($tmpFile)) {
 			$macroStamp = null;
@@ -185,7 +134,6 @@ class templo_Loader {
 			$sourceStamp = sys_FileSystem::stat(_hx_string_or_null(templo_Loader::$BASE_DIR) . _hx_string_or_null($path))->mtime->getTime();
 			$stamp = sys_FileSystem::stat($tmpFile)->mtime->getTime();
 			if($stamp >= $sourceStamp && ($macroStamp === null || $macroStamp < $stamp)) {
-				$GLOBALS['%s']->pop();
 				return;
 			}
 			@unlink($tmpFile);
@@ -210,7 +158,6 @@ class templo_Loader {
 		if($code !== 0) {
 			throw new HException("Temploc compilation of " . _hx_string_or_null($path) . " failed : " . _hx_string_or_null($p->stderr->readAll(null)->toString()));
 		}
-		$GLOBALS['%s']->pop();
 	}
 	public function __call($m, $a) {
 		if(isset($this->$m) && is_callable($this->$m))

@@ -3,8 +3,6 @@
 class sugoi_form_elements_DateInput extends sugoi_form_elements_DateDropdowns {
 	public function __construct($name, $label, $value = null, $required = null, $yearMin = null, $yearMax = null, $validators = null, $attibutes = null) {
 		if(!php_Boot::$skip_constructor) {
-		$GLOBALS['%s']->push("sugoi.form.elements.DateInput::new");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if($attibutes === null) {
 			$attibutes = "";
 		}
@@ -19,25 +17,16 @@ class sugoi_form_elements_DateInput extends sugoi_form_elements_DateDropdowns {
 		$this->hourSelector = new sugoi_form_elements_Selectbox(_hx_string_or_null($name) . "_hour", $t->_("hour", null), sugoi_form_ListData::getDateElement(0, 23, null), Std::string($this->date->getHours()), true, "-", "title=\"Hour\"");
 		$this->minuteSelector = new sugoi_form_elements_Selectbox(_hx_string_or_null($name) . "_minute", $t->_("minute", null), sugoi_form_ListData::getDateElement(0, 59, null), Std::string($this->date->getMinutes()), true, "-", "title=\"Minute\"");
 		if(sugoi_form_Form::$USE_TWITTER_BOOTSTRAP) {
-			$this->hourSelector->cssClass = "input-mini";
-			$this->minuteSelector->cssClass = "input-mini";
+			$this->hourSelector->cssClass = "form-control";
+			$this->minuteSelector->cssClass = "form-control";
 		}
-		$GLOBALS['%s']->pop();
 	}}
 	public $hourSelector;
 	public $minuteSelector;
 	public function isValid() {
-		$GLOBALS['%s']->push("sugoi.form.elements.DateInput::isValid");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$GLOBALS['%s']->pop();
-			return true;
-		}
-		$GLOBALS['%s']->pop();
+		return true;
 	}
 	public function render() {
-		$GLOBALS['%s']->push("sugoi.form.elements.DateInput::render");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$this->hourSelector->parentForm = $this->parentForm;
 		$this->minuteSelector->parentForm = $this->parentForm;
 		$s = _hx_string_or_null(parent::render()) . " : ";
@@ -48,15 +37,9 @@ class sugoi_form_elements_DateInput extends sugoi_form_elements_DateDropdowns {
 		}
 		$s .= _hx_string_or_null($this->hourSelector->render()) . " h ";
 		$s .= _hx_string_or_null($this->minuteSelector->render()) . " m ";
-		{
-			$GLOBALS['%s']->pop();
-			return $s;
-		}
-		$GLOBALS['%s']->pop();
+		return $s;
 	}
 	public function populate() {
-		$GLOBALS['%s']->push("sugoi.form.elements.DateInput::populate");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$n = _hx_string_or_null($this->parentForm->name) . "_" . _hx_string_or_null($this->hourSelector->name);
 		$v = App::$current->params->get($n);
 		$params = App::$current->params;
@@ -68,7 +51,6 @@ class sugoi_form_elements_DateInput extends sugoi_form_elements_DateDropdowns {
 			$year = Std::parseInt($params->get(_hx_string_or_null($this->parentForm->name) . "_" . _hx_string_or_null($this->yearSelector->name)));
 			$this->value = new Date($year, $month - 1, $day, $hour, $minute, 0);
 		}
-		$GLOBALS['%s']->pop();
 	}
 	public function __call($m, $a) {
 		if(isset($this->$m) && is_callable($this->$m))

@@ -3,12 +3,9 @@
 class sys_db_Serialized {
 	public function __construct($v) {
 		if(!php_Boot::$skip_constructor) {
-		$GLOBALS['%s']->push("sys.db.Serialized::new");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$this->value = $v;
 		$this->pos = 0;
 		$this->tabs = 0;
-		$GLOBALS['%s']->pop();
 	}}
 	public $value;
 	public $pos;
@@ -20,34 +17,17 @@ class sys_db_Serialized {
 	public $cur;
 	public $tabs;
 	public function encode() {
-		$GLOBALS['%s']->push("sys.db.Serialized::encode");
-		$__hx__spos = $GLOBALS['%s']->length;
 		throw new HException("You can't edit this without -lib hscript");
-		{
-			$GLOBALS['%s']->pop();
-			return null;
-		}
-		$GLOBALS['%s']->pop();
+		return null;
 	}
 	public function quote($s, $r = null) {
-		$GLOBALS['%s']->push("sys.db.Serialized::quote");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if($r !== null && $r->match($s)) {
-			$GLOBALS['%s']->pop();
 			return $s;
 		}
-		{
-			$tmp = "'" . _hx_string_or_null(_hx_explode("\x09", _hx_explode("\x0D", _hx_explode("\x0A", _hx_explode("'", _hx_explode("\\", $s)->join("\\\\"))->join("\\'"))->join("\\n"))->join("\\r"))->join("\\t")) . "'";
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return "'" . _hx_string_or_null(_hx_explode("\x09", _hx_explode("\x0D", _hx_explode("\x0A", _hx_explode("'", _hx_explode("\\", $s)->join("\\\\"))->join("\\'"))->join("\\n"))->join("\\r"))->join("\\t")) . "'";
 	}
 	public function escape() {
-		$GLOBALS['%s']->push("sys.db.Serialized::escape");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if($this->value === "") {
-			$GLOBALS['%s']->pop();
 			return "empty()";
 		}
 		$this->buf = new StringBuf();
@@ -57,42 +37,22 @@ class sys_db_Serialized {
 		}catch(Exception $__hx__e) {
 			$_ex_ = ($__hx__e instanceof HException) ? $__hx__e->e : $__hx__e;
 			if(($e = $_ex_) instanceof sys_db__Serialized_Errors){
-				$GLOBALS['%e'] = (new _hx_array(array()));
-				while($GLOBALS['%s']->length >= $__hx__spos) {
-					$GLOBALS['%e']->unshift($GLOBALS['%s']->pop());
-				}
-				$GLOBALS['%s']->push($GLOBALS['%e'][0]);
 				$this->pos = -1;
 			} else throw $__hx__e;;
 		}
 		if($this->pos !== strlen($this->value)) {
-			$tmp = "invalid(" . _hx_string_or_null($this->quote($this->value, null)) . ")";
-			$GLOBALS['%s']->pop();
-			return $tmp;
+			return "invalid(" . _hx_string_or_null($this->quote($this->value, null)) . ")";
 		}
 		$str = $this->buf->b;
 		if($this->useEnumIndex) {
 			$str = "indexes(" . _hx_string_or_null($str) . ")";
 		}
-		{
-			$GLOBALS['%s']->pop();
-			return $str;
-		}
-		$GLOBALS['%s']->pop();
+		return $str;
 	}
 	public function get($pos) {
-		$GLOBALS['%s']->push("sys.db.Serialized::get");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$tmp = _hx_char_code_at($this->value, $pos);
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return _hx_char_code_at($this->value, $pos);
 	}
 	public function readDigits() {
-		$GLOBALS['%s']->push("sys.db.Serialized::readDigits");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$k = 0;
 		$s = false;
 		$fpos = $this->pos;
@@ -119,15 +79,9 @@ class sys_db_Serialized {
 		if($s) {
 			$k *= -1;
 		}
-		{
-			$GLOBALS['%s']->pop();
-			return $k;
-		}
-		$GLOBALS['%s']->pop();
+		return $k;
 	}
 	public function loop() {
-		$GLOBALS['%s']->push("sys.db.Serialized::loop");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$_g = null;
 		{
 			$pos = $this->pos++;
@@ -365,11 +319,8 @@ class sys_db_Serialized {
 		} else {
 			throw new HException(sys_db__Serialized_Errors::$Invalid);
 		}
-		$GLOBALS['%s']->pop();
 	}
 	public function readString() {
-		$GLOBALS['%s']->push("sys.db.Serialized::readString");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$_g = _hx_char_code_at($this->value, $this->pos++);
 		if($_g !== null) {
 			switch($_g) {
@@ -382,21 +333,14 @@ class sys_db_Serialized {
 				$this->pos += $len;
 				$s = urldecode($s);
 				$this->scache->push($s);
-				{
-					$GLOBALS['%s']->pop();
-					return $s;
-				}
+				return $s;
 			}break;
 			case 82:{
 				$n = $this->readDigits();
 				if($n < 0 || $n >= $this->scache->length) {
 					throw new HException("Invalid string reference");
 				}
-				{
-					$tmp = $this->scache[$n];
-					$GLOBALS['%s']->pop();
-					return $tmp;
-				}
+				return $this->scache[$n];
 			}break;
 			default:{
 				throw new HException(sys_db__Serialized_Errors::$Invalid);
@@ -405,11 +349,8 @@ class sys_db_Serialized {
 		} else {
 			throw new HException(sys_db__Serialized_Errors::$Invalid);
 		}
-		$GLOBALS['%s']->pop();
 	}
 	public function loopObj($eof) {
-		$GLOBALS['%s']->push("sys.db.Serialized::loopObj");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$this->open("{", ", ", " ");
 		while(true) {
 			if($this->pos >= strlen($this->value)) {
@@ -425,20 +366,14 @@ class sys_db_Serialized {
 		}
 		$this->close("}", " ");
 		$this->pos++;
-		$GLOBALS['%s']->pop();
 	}
 	public function open($str, $sep, $prefix = null) {
-		$GLOBALS['%s']->push("sys.db.Serialized::open");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$this->buf->add($str);
 		$this->tabs++;
 		$this->cur = _hx_anonymous(array("old" => $this->cur, "sep" => $sep, "prefix" => $prefix, "lines" => (new _hx_array(array())), "buf" => $this->buf, "totalSize" => 0, "maxSize" => 0));
 		$this->buf = new StringBuf();
-		$GLOBALS['%s']->pop();
 	}
 	public function next() {
-		$GLOBALS['%s']->push("sys.db.Serialized::next");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$line = $this->buf->b;
 		if(strlen($line) > $this->cur->maxSize) {
 			$this->cur->maxSize = strlen($line);
@@ -446,11 +381,8 @@ class sys_db_Serialized {
 		$this->cur->totalSize += strlen($line);
 		$this->cur->lines->push($line);
 		$this->buf = new StringBuf();
-		$GLOBALS['%s']->pop();
 	}
 	public function close($end, $postfix = null) {
-		$GLOBALS['%s']->push("sys.db.Serialized::close");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$this->buf = $this->cur->buf;
 		$t = "\x0A";
 		{
@@ -508,7 +440,6 @@ class sys_db_Serialized {
 		}
 		$this->cur = $this->cur->old;
 		$this->tabs--;
-		$GLOBALS['%s']->pop();
 	}
 	public function __call($m, $a) {
 		if(isset($this->$m) && is_callable($this->$m))

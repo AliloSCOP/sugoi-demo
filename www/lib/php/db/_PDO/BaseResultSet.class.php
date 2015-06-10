@@ -3,15 +3,12 @@
 class php_db__PDO_BaseResultSet implements sys_db_ResultSet{
 	public function __construct($pdo, $typeStrategy) {
 		if(!php_Boot::$skip_constructor) {
-		$GLOBALS['%s']->push("php.db._PDO.BaseResultSet::new");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$this->pdo = $pdo;
 		$this->typeStrategy = $typeStrategy;
 		$this->_fields = $pdo->columnCount();
 		$this->_columnNames = (new _hx_array(array()));
 		$this->_columnTypes = (new _hx_array(array()));
 		$this->feedColumns();
-		$GLOBALS['%s']->pop();
 	}}
 	public $pdo;
 	public $typeStrategy;
@@ -19,8 +16,6 @@ class php_db__PDO_BaseResultSet implements sys_db_ResultSet{
 	public $_columnNames;
 	public $_columnTypes;
 	public function feedColumns() {
-		$GLOBALS['%s']->push("php.db._PDO.BaseResultSet::feedColumns");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$_g1 = 0;
 		$_g = $this->_fields;
 		while($_g1 < $_g) {
@@ -30,35 +25,20 @@ class php_db__PDO_BaseResultSet implements sys_db_ResultSet{
 			$this->_columnTypes->push($this->typeStrategy->map($data));
 			unset($i,$data);
 		}
-		$GLOBALS['%s']->pop();
 	}
 	public function getResult($index) {
-		$GLOBALS['%s']->push("php.db._PDO.BaseResultSet::getResult");
-		$__hx__spos = $GLOBALS['%s']->length;
 		throw new HException("must override");
-		$GLOBALS['%s']->pop();
 	}
 	public function hasNext() {
-		$GLOBALS['%s']->push("php.db._PDO.BaseResultSet::hasNext");
-		$__hx__spos = $GLOBALS['%s']->length;
 		throw new HException("must override");
-		$GLOBALS['%s']->pop();
 	}
 	public function get_length() {
-		$GLOBALS['%s']->push("php.db._PDO.BaseResultSet::get_length");
-		$__hx__spos = $GLOBALS['%s']->length;
 		throw new HException("must override");
-		$GLOBALS['%s']->pop();
 	}
 	public function nextRow() {
-		$GLOBALS['%s']->push("php.db._PDO.BaseResultSet::nextRow");
-		$__hx__spos = $GLOBALS['%s']->length;
 		throw new HException("must override");
-		$GLOBALS['%s']->pop();
 	}
 	public function next() {
-		$GLOBALS['%s']->push("php.db._PDO.BaseResultSet::next");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$row = $this->nextRow();
 		$o = _hx_anonymous(array());
 		{
@@ -71,24 +51,14 @@ class php_db__PDO_BaseResultSet implements sys_db_ResultSet{
 				unset($value,$i);
 			}
 		}
-		{
-			$GLOBALS['%s']->pop();
-			return $o;
-		}
-		$GLOBALS['%s']->pop();
+		return $o;
 	}
 	public function results() {
-		$GLOBALS['%s']->push("php.db._PDO.BaseResultSet::results");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$list = new HList();
 		while($this->hasNext()) {
 			$list->add($this->next());
 		}
-		{
-			$GLOBALS['%s']->pop();
-			return $list;
-		}
-		$GLOBALS['%s']->pop();
+		return $list;
 	}
 	public function __call($m, $a) {
 		if(isset($this->$m) && is_callable($this->$m))

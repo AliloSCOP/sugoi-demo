@@ -3,15 +3,10 @@
 class sugoi_BaseView {
 	public function __construct() {
 		if(!php_Boot::$skip_constructor) {
-		$GLOBALS['%s']->push("sugoi.BaseView::new");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$this->_vcache = new haxe_ds_StringMap();
-		$GLOBALS['%s']->pop();
 	}}
 	public $_vcache;
 	public function init() {
-		$GLOBALS['%s']->push("sugoi.BaseView::init");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$app = App::$current;
 		$this->user = $app->user;
 		$this->session = $app->session;
@@ -28,62 +23,33 @@ class sugoi_BaseView {
 				$this->sqlLog = $app->cnx->log;
 			}
 		}
-		$GLOBALS['%s']->pop();
 	}
 	public function getMessages() {
-		$GLOBALS['%s']->push("sugoi.BaseView::getMessages");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$session = App::$current->session;
 		if($session === null) {
-			$GLOBALS['%s']->pop();
 			return null;
 		}
 		if($session->get_messages() === null) {
-			$GLOBALS['%s']->pop();
 			return null;
 		}
 		$n = $session->get_messages()->pop();
 		if($n === null) {
-			$GLOBALS['%s']->pop();
 			return null;
 		}
-		{
-			$tmp = _hx_anonymous(array("text" => $n->text, "error" => $n->error, "next" => $session->get_messages()->length > 0));
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return _hx_anonymous(array("text" => $n->text, "error" => $n->error, "next" => $session->get_messages()->length > 0));
 	}
 	public function urlEncode($str) {
-		$GLOBALS['%s']->push("sugoi.BaseView::urlEncode");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$tmp = rawurlencode($str);
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return rawurlencode($str);
 	}
 	public function escapeJS($str) {
-		$GLOBALS['%s']->push("sugoi.BaseView::escapeJS");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$tmp = _hx_explode("\x0A", _hx_explode("\x0D", _hx_explode("'", _hx_explode("\\", $str)->join("\\\\"))->join("\\'"))->join("\\r"))->join("\\n");
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return _hx_explode("\x0A", _hx_explode("\x0D", _hx_explode("'", _hx_explode("\\", $str)->join("\\\\"))->join("\\'"))->join("\\r"))->join("\\n");
 	}
 	public function getVariable($file) {
-		$GLOBALS['%s']->push("sugoi.BaseView::getVariable");
-		$__hx__spos = $GLOBALS['%s']->length;
 		$v = $this->_vcache->get($file);
 		if($v !== null) {
-			$GLOBALS['%s']->pop();
 			return $v;
 		}
 		if(App::$current->maintain) {
-			$GLOBALS['%s']->pop();
 			return "";
 		}
 		$v = sugoi_db_Variable::get($file);
@@ -91,31 +57,13 @@ class sugoi_BaseView {
 			$v = "";
 		}
 		$this->_vcache->set($file, $v);
-		{
-			$GLOBALS['%s']->pop();
-			return $v;
-		}
-		$GLOBALS['%s']->pop();
+		return $v;
 	}
 	public function getParam($p) {
-		$GLOBALS['%s']->push("sugoi.BaseView::getParam");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$tmp = App::$current->params->get($p);
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return App::$current->params->get($p);
 	}
-	public function file($id) {
-		$GLOBALS['%s']->push("sugoi.BaseView::file");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$tmp = sugoi_db_File::makeSign($id);
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+	public function table($data) {
+		return _hx_deref(new sugoi_helper_Table("table"))->toString($data);
 	}
 	public $__dynamics = array();
 	public function __get($n) {

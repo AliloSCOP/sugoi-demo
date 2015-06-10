@@ -7,34 +7,13 @@ class Math {
 	static $POSITIVE_INFINITY;
 	static $NEGATIVE_INFINITY;
 	static function ceil($v) {
-		$GLOBALS['%s']->push("Math::ceil");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$tmp = (int) ceil($v);
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return (int) ceil($v);
 	}
 	static function isNaN($f) {
-		$GLOBALS['%s']->push("Math::isNaN");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$tmp = is_nan($f);
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return is_nan($f);
 	}
 	static function isFinite($f) {
-		$GLOBALS['%s']->push("Math::isFinite");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$tmp = is_finite($f);
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return is_finite($f);
 	}
 	function __toString() { return 'Math'; }
 }

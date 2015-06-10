@@ -3,34 +3,17 @@
 class sugoi_db_File extends sys_db_Object {
 	public function __construct() {
 		if(!php_Boot::$skip_constructor) {
-		$GLOBALS['%s']->push("sugoi.db.File::new");
-		$__hx__spos = $GLOBALS['%s']->length;
 		parent::__construct();
-		$GLOBALS['%s']->pop();
 	}}
 	public $id;
 	public $name;
 	public $comment;
 	public $data;
 	public function toString() {
-		$GLOBALS['%s']->push("sugoi.db.File::toString");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$tmp = "#" . _hx_string_rec($this->id, "") . " " . _hx_string_or_null($this->name);
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return "#" . _hx_string_rec($this->id, "") . " " . _hx_string_or_null($this->name);
 	}
 	public function __getManager() {
-		$GLOBALS['%s']->push("sugoi.db.File::__getManager");
-		$__hx__spos = $GLOBALS['%s']->length;
-		{
-			$tmp = sugoi_db_File::$manager;
-			$GLOBALS['%s']->pop();
-			return $tmp;
-		}
-		$GLOBALS['%s']->pop();
+		return sugoi_db_File::$manager;
 	}
 	public function __call($m, $a) {
 		if(isset($this->$m) && is_callable($this->$m))
@@ -46,28 +29,18 @@ class sugoi_db_File extends sys_db_Object {
 	static $__meta__;
 	static $CACHE;
 	static function makeSign($id) {
-		$GLOBALS['%s']->push("sugoi.db.File::makeSign");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if($id === null) {
-			$GLOBALS['%s']->pop();
 			return "";
 		}
 		$s = sugoi_db_File::$CACHE[$id];
 		if($s !== null) {
-			$GLOBALS['%s']->pop();
 			return $s;
 		}
 		$s = _hx_string_rec($id, "") . "_" . _hx_string_or_null(haxe_crypto_Md5::encode(_hx_string_rec($id, "") . _hx_string_or_null(App::$config->get("key", null))));
 		sugoi_db_File::$CACHE[$id] = $s;
-		{
-			$GLOBALS['%s']->pop();
-			return $s;
-		}
-		$GLOBALS['%s']->pop();
+		return $s;
 	}
 	static function create($stringData, $fileName = null) {
-		$GLOBALS['%s']->push("sugoi.db.File::create");
-		$__hx__spos = $GLOBALS['%s']->length;
 		if($fileName === null) {
 			$fileName = "";
 		}
@@ -75,11 +48,7 @@ class sugoi_db_File extends sys_db_Object {
 		$f->name = $fileName;
 		$f->data = _hx_deref(new haxe_io_StringInput($stringData))->readAll(null);
 		$f->insert();
-		{
-			$GLOBALS['%s']->pop();
-			return $f;
-		}
-		$GLOBALS['%s']->pop();
+		return $f;
 	}
 	static $manager;
 	function __toString() { return $this->toString(); }

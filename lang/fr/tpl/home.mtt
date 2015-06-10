@@ -11,50 +11,10 @@
 		</div>
 		<div class="col-md-6">
 			<ul>
-				<li><a href="/db">Database admin (works only in Neko)</a></li>
+				<li><a href="/db">Database admin</a></li>
 				<li><a href="/okMessage">Test "Ok" Message</a></li>
 				<li><a href="/errorMessage">Test "Error" Message</a></li>
 			</ul>
-			
-			<div class="form-group">
-				<div class='input-group date' id='datetimepicker1'>       
-					<span class="input-group-addon">
-						<span class="glyphicon glyphicon-calendar"></span>
-					</span>
-					<input type='text' class="form-control" name="datetimepicker1-source" />
-					
-				</div>
-			</div>
-			<input type='hidden' name="xxxxx" id="datetimepicker1-data" />
-			
-			<script type="text/javascript">
-				$(function () {
-					$('#datetimepicker1').datetimepicker({locale:'fr',format:'LLLL'});
-					//stores the date as timestamp in a hidden input element	
-					$('#datetimepicker1').on("dp.change",function(e){
-						var d = $('#datetimepicker1').data("DateTimePicker").date()._d;
-						$("#datetimepicker1-data").val( d.getTime());
-					});
-				});
-			</script>
-			
-			
 		</div>
 </div>
-	
-	
-
-
-
-		
-
-
-
-
-
-
-
-
-
-
 ::end::
