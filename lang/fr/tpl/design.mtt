@@ -7,18 +7,18 @@
 		<link rel="stylesheet" type="text/css" href="/css/::getVariable('css')::/style.min.css"/>
 		<!--<script type="text/javascript" src="/js/::getVariable('js')::/app.js"></script>-->
 		
-		<!-- JQUERY 
-		<script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>-->
+		<!-- JQUERY -->
+		<script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
 		
 		<!-- BOOTSTRAP -->		
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />
+		<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 		
-		<!-- bootstrap datepicker 
+		<!-- bootstrap datepicker -->
 		<script type="text/javascript" src="/bower_components/moment/min/moment.min.js"></script>
 		<script type="text/javascript" src="/bower_components/moment/locale/fr.js"></script>
 		<script type="text/javascript" src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
-		<link rel="stylesheet" href="/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />-->
+		<link rel="stylesheet" href="/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
 	</head>
 
 	<body class="container">
@@ -29,17 +29,20 @@
 		<ul class="nav nav-tabs" style="margin-bottom:12px;">
 		  <li ::attr class if(section=="home" )  'active' ::><a href="/">Home</a></li>
 		  <li ::attr class if(section=="users" ) 'active' ::><a href="/user">Users</a></li>
+		  <li ::attr class if(section=="testform" ) 'active' ::><a href="/testform">Test Form</a></li>
+		  <li><a href="/db">Database</a></li>
 		</ul>
 		
 		<!-- application messages -->
-		::set msg = getMessages()::
-		<div class="row" ::cond msg::>
+		::foreach msg getMessages()::
+		<div class="row">
 			<div class="col-md-12">
 				<div class="alert ::if msg.error:: alert-danger ::else:: alert-success ::end::" >
 					::raw msg.text::					
 				</div>
 			</div>
 		</div>	
+		::end::
 		
 		
 		

@@ -1,5 +1,7 @@
 package controller;
+import db.SampleObject;
 import haxe.web.Dispatch;
+import sugoi.form.Form;
 
 
 
@@ -49,6 +51,29 @@ class Main extends sugoi.BaseController {
 	function doDb(d:Dispatch) {
 		d.parts = []; //disable haxe.web.Dispatch
 		sys.db.Admin.handler();
+	}
+	
+	@tpl("form.mtt")
+	function doTestform(){
+		
+		var o = new SampleObject();
+		
+		var form = Form.fromSpod( o );
+		
+		if (form.isValid()){
+			//trace("_________form submit_______<br/>");
+			form.toSpod(o);
+			o.xp += 100;
+			o.insert();
+			
+			throw Ok("/testform", "Object created, xp is now "+o.xp);
+			
+		}
+		
+		view.title = "Test form";
+		view.form = form;
+		
+		
 	}
 	
 }

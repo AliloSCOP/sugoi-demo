@@ -1,4 +1,5 @@
 package ;
+import haxe.Log;
 
 #if neko
 import neko.Web;
