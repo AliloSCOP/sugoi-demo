@@ -1,20 +1,48 @@
 ::use 'design.mtt'::
 <div class="row">
 		<div class="col-md-6">
+			<div class="block">
 			::if user!=null::
 				You're currently logged as <strong>::user::</strong>
 			::else::
-				<a href="/user/login" class="btn btn-default">Login</a> 
-				
-				or <a href="/install">create the first default user.</a>
+				<p>
+					<a href="/user/login" class="btn btn-default">Login</a> 				
+					or
+					<a href="/install">create the first default user.</a>	
+				</p>
+				<p>
+					Default user credentials are : 
+					<ul>
+						<li>email : admin@localhost </li>
+						<li>password : admin</li>
+					</ul>
+				</p>
 			::end::
+			</div>
 		</div>
 		<div class="col-md-6">
-			<ul>
-				<li><a href="/db">Database admin</a></li>
-				<li><a href="/okMessage">Test "Ok" Message</a></li>
-				<li><a href="/errorMessage">Test "Error" Message</a></li>
-			</ul>
+			<div class="block">
+			<b>Database administration and migration</b>
+			<p>
+				The <a href="http://lib.haxe.org/p/dbadmin/" target="_blank">dbadmin</a> library provides an easy way to sync models to the database, and to search/edit/insert for table records.
+				The access is limited to admin users.
+			</p>	
+			<a href="/db" class="btn btn-default">dbadmin</a>	
+			
+			
+			</div>
+		</div>
+	
+		<div class="col-md-6">
+			<div class="block">
+				<b>Controller actions</b>
+				<p>
+					Throw controller actions like <b>Ok(url,msg)</b> or <b>Error(url,msg)</b> to manage what is commonly called "flash messages".
+				</p>
+				<a href="/okMessage" class="btn btn-default">Ok message</a>	<a href="/errorMessage" class="btn btn-default">Error message</a>
+				
+				
+			</div>
 		</div>
 </div>
 ::end::

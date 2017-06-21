@@ -8,7 +8,7 @@
     <movie fps="30" />
     <movie width="800" />
     <movie height="600" />
-    <movie version="1" />
+    <movie version="0" />
     <movie minorVersion="0" />
     <movie platform="PHP" />
     <movie background="#FFFFFF" />
@@ -20,7 +20,7 @@
   </classpaths>
   <!-- Build options -->
   <build>
-    <option directives="spod_macro" />
+    <option directives="php7" />
     <option flashStrict="False" />
     <option noInlineOnDebug="False" />
     <option mainClass="App" />
@@ -32,6 +32,7 @@
     <library name="dbadmin" />
     <library name="templo" />
     <library name="sugoi" />
+    <library name="record-macros" />
   </haxelib>
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>

@@ -5,7 +5,7 @@
 		<title>::NAME::</title>
 			
 		<link rel="stylesheet" type="text/css" href="/css/::getVariable('css')::/style.min.css"/>
-		<!--<script type="text/javascript" src="/js/::getVariable('js')::/app.js"></script>-->
+		<script type="text/javascript" src="/js/::getVariable('js')::/app.js"></script>
 		
 		<!-- JQUERY -->
 		<script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
@@ -23,6 +23,7 @@
 		<script type="text/javascript" src="/bower_components/moment/locale/fr.js"></script>
 		<script type="text/javascript" src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
 		<link rel="stylesheet" href="/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+
 	</head>
 
 	<body class="container">
@@ -48,10 +49,15 @@
 		</div>	
 		::end::
 		
-		
-		
 		<!-- main content -->
 		::raw __content__::		
+		
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<hr/>
+				Powered by <a href="http://sugoi.bubar.info">Sugoï Web Framework</a>, written in <a href="http://haxe.org">Haxe</a>
+			</div>
+		</div>
 		
 		<!--  SQL LOG -->
 		<table class="sqlLog table table-bordered" ::cond sqlLog:: >

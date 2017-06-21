@@ -61,7 +61,7 @@ class Main extends sugoi.BaseController {
 		var form = Form.fromSpod( o );
 		
 		if (form.isValid()){
-			//trace("_________form submit_______<br/>");
+
 			form.toSpod(o);
 			o.xp += 100;
 			o.insert();

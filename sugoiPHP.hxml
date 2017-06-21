@@ -1,6 +1,7 @@
 -lib dbadmin
 -lib templo
 -lib sugoi
+-lib record-macros
 -cp src
 -cp lang/fr/tpl
 -php www
