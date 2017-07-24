@@ -3,15 +3,15 @@
 		<div class="col-md-6">
 			<div class="block">
 			::if user!=null::
-				You're currently logged as <strong>::user::</strong>
+				::_("You're currently logged as <strong>::user::</strong>")::
 			::else::
 				<p>
 					<a href="/user/login" class="btn btn-default">Login</a> 				
-					or
+					::_("or")::
 					<a href="/install">create the first default user.</a>	
 				</p>
 				<p>
-					Default user credentials are : 
+					::_("Default user credentials are :")::
 					<ul>
 						<li>email : admin@localhost </li>
 						<li>password : admin</li>

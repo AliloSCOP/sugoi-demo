@@ -1,0 +1,23 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+
+#: ./lang/fr/tpl/home.mtt:6
+msgid "You're currently logged as <strong>::user::</strong>"
+msgstr ""
+
+#: ./lang/fr/tpl/home.mtt:10
+msgid "or"
+msgstr ""
+
+#: ./lang/fr/tpl/home.mtt:14
+msgid "Default user credentials are :"
+msgstr ""
+
+#: ./src/App.hx:19
+msgid "Hello there"
+msgstr ""
+
+
