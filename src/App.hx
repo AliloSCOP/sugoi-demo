@@ -1,4 +1,7 @@
 package ;
+import i18n.Locale;
+import i18n.Translater;
+import i18n.GetText;
 
 #if neko
 import neko.Web;
@@ -25,7 +28,7 @@ class App extends sugoi.BaseApp
 	public static function main() {
 		
 		#if i18n_parsing
-		if( false ) sugoi.i18n.GetText.parse(["src", "lang/master"], "lang/allTexts.pot");
+		if( false ) GetText.parse(["src", "lang/master"], "lang/allTexts.pot");
 		#end
 
 		sugoi.BaseApp.main();
@@ -38,5 +41,4 @@ class App extends sugoi.BaseApp
 			#end
 		}
 	}
-	
 }

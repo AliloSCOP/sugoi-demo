@@ -1,7 +1,11 @@
+package i18n;
 
+ /**
+  * @author tpfeiffer<thomas.pfeiffer@gmail.com> 
+  */
 class Locale
 {	
-	static public var texts	: sugoi.i18n.GetText;
+	static public var texts	: i18n.GetText;
 	
     public static function init(lang:String)
 	{
@@ -11,7 +15,7 @@ class Locale
 		App.log("loading "+fileName(lang));
 		var file = sys.io.File.getBytes(Sys.programPath()+"/../../"+fileName(lang));
 		#end
-        texts = new sugoi.i18n.GetText();
+        texts = new i18n.GetText();
 		texts.readMo(file);
 	}
 	

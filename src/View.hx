@@ -8,8 +8,4 @@ class View extends sugoi.BaseView
 		super();
 	}
 	
-	public function _(literal:String) 
-	{
-		return Locale.texts.get(literal);
-	}
 }
