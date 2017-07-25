@@ -2,13 +2,9 @@
 -lib templo
 -lib sugoi
 -cp src
--cp lang/fr/tpl
+-cp lang/master/tpl
 
 -D spod_macro
-
-#-D i18n_parsing   #POT GENERATION
-#-D i18n_generation  #TEMPLATES GENERATION FROM MASTER AND MO FILES
-
 -D no-deprecation-warnings
 
 -main App

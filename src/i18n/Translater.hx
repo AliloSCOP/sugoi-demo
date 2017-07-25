@@ -9,9 +9,11 @@ class Translater
 {
     macro public static function parse(path:ExprOf<String>)
     {
+        Sys.println("Translater::parse");
 		var langs = new sugoi.Config(neko.Web.getCwd()).LANGS;
         
         for( lang in langs ) {
+            Sys.println("generating the "+lang+" template files");
 			Locale.init(lang);
 			translateTemplates(lang, "lang/master");
 		}
@@ -30,23 +32,16 @@ class Translater
                 //create target directory
                 var langPath = StringTools.replace(folder+"/"+f, "master", lang);
                 sys.FileSystem.createDirectory(langPath);
-
 				translateTemplates(lang, folder+"/"+f);
 				continue;
 			}
 			
-			// Ignore non-sourcecode
 			var isTemplateFile = f.substr(f.length - 4) == ".mtt";
-			
 			if( !isTemplateFile )
 				continue;
-            
-            //copy the file to the correct new folder
-            var filePath = StringTools.replace(folder+"/"+f, "master", lang);
-          
+
 			var c = sys.io.File.getContent(folder+"/"+f);
-			//on peut peut etre passer tout le fichier direct
-            var out = strReg.map(c, function(e) {
+			var out = strReg.map(c, function(e) {
                 var str = e.matched(2);
                 Sys.println("str matched:"+str);
                 // Ignore commented strings
@@ -67,10 +62,12 @@ class Translater
                     cleanedStr = cleanedStr.substr(0,cleanedStr.indexOf("||"));
                     cleanedStr = StringTools.rtrim(cleanedStr);
                 }
-                
+
                 return Locale.texts.get(cleanedStr);
             });
 
+            //copy the file to the correct new folder
+            var filePath = StringTools.replace(folder+"/"+f, "master", lang);
             var langFile = sys.io.File.write(filePath, false);
             langFile.writeString(out);
             langFile.flush();

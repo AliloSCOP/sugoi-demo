@@ -1,0 +1,17 @@
+#TODO :clean !!!
+-lib dbadmin
+-lib templo
+-lib sugoi
+-cp src
+-cp lang/master/tpl
+
+-D spod_macro
+
+#POT GENERATION
+-D i18n_parsing
+#TEMPLATES GENERATION FROM MASTER AND MO FILES
+#-D i18n_generation
+
+-D no-deprecation-warnings
+-main App
+-neko www/index.n

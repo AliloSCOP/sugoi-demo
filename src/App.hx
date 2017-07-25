@@ -17,10 +17,10 @@ class App extends sugoi.BaseApp
 	public function new() 
 	{
 		super();
-		#if (i18n_generation)
+		#if i18n_generation
 		if( false ) Translater.parse("lang/master");
 		#end
-
+		
 		Locale.init(config.LANG);//TODO  use session instead
 		log(Locale.texts._("Hello there, text from hx file"));
 	}
