@@ -5,7 +5,9 @@
 -cp lang/fr/tpl
 
 -D spod_macro
--D i18n_parsing
+
+#-D i18n_parsing   #POT GENERATION
+#-D i18n_generation  #TEMPLATES GENERATION FROM MASTER AND MO FILES
 
 -D no-deprecation-warnings
 

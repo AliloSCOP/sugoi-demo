@@ -1,5 +1,4 @@
 package ;
-import haxe.Log;
 
 #if neko
 import neko.Web;
@@ -15,15 +14,20 @@ class App extends sugoi.BaseApp
 	public function new() 
 	{
 		super();
+		#if (i18n_generation)
+		if( false ) Translater.parse("lang/master");
+		#end
+
 		Locale.init(config.LANG);//TODO  use session instead
-		log(Locale.texts._("Hello there"));
+		log(Locale.texts._("Hello there, text from hx file"));
 	}
 	
 	public static function main() {
 		
 		#if i18n_parsing
-		if( false ) sugoi.i18n.GetText.parse(".", "lang/allTexts.pot");
+		if( false ) sugoi.i18n.GetText.parse(["src", "lang/master"], "lang/allTexts.pot");
 		#end
+
 		sugoi.BaseApp.main();
 	}
 	

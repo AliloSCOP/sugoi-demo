@@ -1,6 +1,6 @@
 <config
-	lang="fr"
-	langs="fr"
+	lang="en"
+	langs="fr;en"
 	host="sugoi"
 	name = "Sugoi Demo Site"
 	webmaster_email = "francois.barbut@gmail.com"

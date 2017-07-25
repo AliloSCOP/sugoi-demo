@@ -6,7 +6,6 @@ class View extends sugoi.BaseView
 	public function new() 
 	{
 		super();
-		
 	}
 	
 	public function _(literal:String) 
