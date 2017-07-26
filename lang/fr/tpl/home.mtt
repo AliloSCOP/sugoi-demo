@@ -1,10 +1,12 @@
 ::use 'design.mtt'::
 <div class="row">
 		<div class="col-md-6">
+			
 			<div class="block">
-			::if user!=null::
-				Vous êtes actuellement connecté en tant que <strong>::user::</strong> 
-			::else::
+				<h4>User management</h4>
+				::if user!=null::
+					Vous êtes actuellement connecté en tant que <strong>::user::</strong> 
+				::else::
 				<p>
 					<a href="/user/login" class="btn btn-default">Connexion</a> 				
 					ou
@@ -17,25 +19,25 @@
 						<li>password : admin</li>
 					</ul>
 				</p>
-			::end::
+				::end::
 			</div>
-		</div>
-		<div class="col-md-6">
+			
+		
+		
 			<div class="block">
-			<b>Administration et migration de base de données</b>
-			<p>
-				The <a href="http://lib.haxe.org/p/dbadmin/" target="_blank">dbadmin</a> library provides an easy way to sync models to the database, and to search/edit/insert for table records.
-				The access is limited to admin users.
-			</p>	
-			<a href="/db" class="btn btn-default">dbadmin</a>	
-			
-			
+				<h4>Administration et migration de base de données</h4>
+				<p>
+					The <a href="http://lib.haxe.org/p/dbadmin/" target="_blank">dbadmin</a> library provides an easy way to sync models to the database, and to search/edit/insert for table records.
+					The access is limited to admin users.
+				</p>	
+				<a href="/db" class="btn btn-default">dbadmin</a>	
 			</div>
 		</div>
 	
 		<div class="col-md-6">
+			
 			<div class="block">
-				<b>Controller actions</b>
+				<h4>Controller actions</h4>
 				<p>
 					Throw controller actions like <b>Ok(url,msg)</b> or <b>Error(url,msg)</b> to manage what is commonly called "flash messages".
 				</p>

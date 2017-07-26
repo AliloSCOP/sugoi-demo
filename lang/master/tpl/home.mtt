@@ -1,14 +1,16 @@
 ::use 'design.mtt'::
 <div class="row">
 		<div class="col-md-6">
+			
 			<div class="block">
-			::if user!=null::
-				::_("You're currently logged as <strong>::user::</strong>||example comment"):: 
-			::else::
+				<h4>User management</h4>
+				::if user!=null::
+					::_("You're currently logged as <strong>::user::</strong>||example comment"):: 
+				::else::
 				<p>
 					<a href="/user/login" class="btn btn-default">::_("Login")::</a> 				
 					::_("or")::
-					<a href="/install">create the first default user.</a>	
+					<a href="/install">::_("create the first default user.")::</a>	
 				</p>
 				<p>
 					::_("Default user credentials are :")::
@@ -17,25 +19,25 @@
 						<li>password : admin</li>
 					</ul>
 				</p>
-			::end::
+				::end::
 			</div>
-		</div>
-		<div class="col-md-6">
+			
+		
+		
 			<div class="block">
-			<b>::_("Database administration and migration")::</b>
-			<p>
-				The <a href="http://lib.haxe.org/p/dbadmin/" target="_blank">dbadmin</a> library provides an easy way to sync models to the database, and to search/edit/insert for table records.
-				The access is limited to admin users.
-			</p>	
-			<a href="/db" class="btn btn-default">dbadmin</a>	
-			
-			
+				<h4>::_("Database administration and migration")::</h4>
+				<p>
+					The <a href="http://lib.haxe.org/p/dbadmin/" target="_blank">dbadmin</a> library provides an easy way to sync models to the database, and to search/edit/insert for table records.
+					The access is limited to admin users.
+				</p>	
+				<a href="/db" class="btn btn-default">dbadmin</a>	
 			</div>
 		</div>
 	
 		<div class="col-md-6">
+			
 			<div class="block">
-				<b>Controller actions</b>
+				<h4>Controller actions</h4>
 				<p>
 					Throw controller actions like <b>Ok(url,msg)</b> or <b>Error(url,msg)</b> to manage what is commonly called "flash messages".
 				</p>
