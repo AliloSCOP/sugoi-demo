@@ -10,6 +10,8 @@ class Main extends sugoi.BaseController {
 	@tpl("home.mtt")
 	function doDefault() {
 		view.section = "home";
+		
+		//trace(sugoi.i18n.Locale.texts._("Text from code"));
 	}	
 	
 	function doUser(d:Dispatch) {
@@ -39,6 +41,11 @@ class Main extends sugoi.BaseController {
 		
 	}
 	
+	@tpl('translation.mtt')
+	function doTranslation(){
+		view.section = "translation";
+	}
+	
 	function doOkMessage() {
 		throw Ok("/", "Everything is allright !");
 	}
@@ -53,27 +60,6 @@ class Main extends sugoi.BaseController {
 		sys.db.Admin.handler();
 	}
 	
-	@tpl("form.mtt")
-	function doTestform(){
-		
-		var o = new SampleObject();
-		
-		var form = Form.fromSpod( o );
-		
-		if (form.isValid()){
-
-			form.toSpod(o);
-			o.xp += 100;
-			o.insert();
-			
-			throw Ok("/testform", "Object created, xp is now "+o.xp);
-			
-		}
-		
-		view.title = "Test form";
-		view.form = form;
-		
-		
-	}
+	
 	
 }

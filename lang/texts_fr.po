@@ -1,64 +1,70 @@
 msgid ""
 msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: François <francois@chapatiz.com>\n"
+"Language-Team: \n"
+"Language: fr_FR\n"
 "MIME-Version: 1.0\n"
-"Content-Transfer-Encoding: 8bit\n"
 "Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: lang/master/tpl/design.mtt:31
 msgid "Sugoï demo site"
-msgstr ""
+msgstr "Site démo Sugoï"
 
 #. example comment
 #: lang/master/tpl/home.mtt:6
 msgid "You're currently logged as <strong>::user::</strong>"
-msgstr ""
+msgstr "Vous êtes actuellement connecté en tant que <strong>::user::</strong>"
 
 #: lang/master/tpl/home.mtt:9
 msgid "Login"
-msgstr ""
+msgstr "Connexion"
 
 #: lang/master/tpl/home.mtt:10
 msgid "or"
-msgstr ""
+msgstr "ou"
 
 #: lang/master/tpl/home.mtt:14
 msgid "Default user credentials are :"
-msgstr ""
+msgstr "Les identifiants de l'utilisateur par défaut sont :"
 
 #: lang/master/tpl/home.mtt:25
 msgid "Database administration and migration"
-msgstr ""
+msgstr "Administration et migration de base de données"
 
 #: lang/master/tpl/translation.mtt:6
 msgid "Manage text translation with GetText"
-msgstr ""
+msgstr "Gérez la traduction du texte avec Gettext"
 
 #: lang/master/tpl/translation.mtt:9
 msgid "Switch to English"
-msgstr ""
+msgstr "Passer en anglais"
 
 #: lang/master/tpl/translation.mtt:10
 msgid "Switch to French"
-msgstr ""
+msgstr "Passer en français"
 
 #: lang/master/tpl/user/default.mtt:4
 msgid "Users"
-msgstr ""
+msgstr "Utilisateurs"
 
 #: lang/master/tpl/user/default.mtt:17
 msgid "Edit"
-msgstr ""
+msgstr "Modifier"
 
 #: lang/master/tpl/user/default.mtt:18
 msgid "Delete"
-msgstr ""
+msgstr "Supprimer"
 
 #: lang/master/tpl/user/default.mtt:24
 msgid "Insert"
-msgstr ""
+msgstr "Insérer"
 
 #: lang/master/tpl/user/default.mtt:30
 msgid "Here is an example of what you can do with form management."
-msgstr ""
-
-
+msgstr "Voici un exemple de ce qu'on peut avec la gestion de formulaire."

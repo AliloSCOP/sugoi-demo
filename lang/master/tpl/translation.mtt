@@ -1,0 +1,17 @@
+::use 'design.mtt'::
+<div class="row">
+		<div class="col-md-6">
+			<div class="block">
+				
+				<h4>::_("Manage text translation with GetText")::</h4>
+				
+				<p>
+					<a href="?lang=en" class="btn btn-default">::_("Switch to English")::</a>
+					<a href="?lang=fr" class="btn btn-default">::_("Switch to French")::</a>
+					
+				</p>
+			</div>
+		</div>
+		
+</div>
+::end::

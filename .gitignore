@@ -1,2 +1,8 @@
 lang/fr/tmp/*
+lang/en/tmp/*
+lang/es/tmp/*
+lang/de/tmp/*
 www/lib
+config.xml
+index.n
+index.php

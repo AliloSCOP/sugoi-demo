@@ -3,7 +3,7 @@
 		<div class="col-md-6">
 			<div class="block">
 			::if user!=null::
-				::_("You're currently logged as <strong>::user::</strong>")::
+				::_("You're currently logged as <strong>::user::</strong>||example comment"):: 
 			::else::
 				<p>
 					<a href="/user/login" class="btn btn-default">::_("Login")::</a> 				
@@ -22,7 +22,7 @@
 		</div>
 		<div class="col-md-6">
 			<div class="block">
-			<b>Database administration and migration</b>
+			<b>::_("Database administration and migration")::</b>
 			<p>
 				The <a href="http://lib.haxe.org/p/dbadmin/" target="_blank">dbadmin</a> library provides an easy way to sync models to the database, and to search/edit/insert for table records.
 				The access is limited to admin users.
