@@ -27,8 +27,8 @@
 			<div class="block">
 				<h4>::_("Database administration and migration")::</h4>
 				<p>
-					The <a href="http://lib.haxe.org/p/dbadmin/" target="_blank">dbadmin</a> library provides an easy way to sync models to the database, and to search/edit/insert for table records.
-					The access is limited to admin users.
+					::_("The <a href='http://lib.haxe.org/p/dbadmin/' target='_blank'>dbadmin</a> library provides an easy way to sync models to the database, and to search/edit/insert for table records.")::
+					::_("The access is limited to admin users.")::
 				</p>	
 				<a href="/db" class="btn btn-default">dbadmin</a>	
 			</div>
@@ -37,14 +37,36 @@
 		<div class="col-md-6">
 			
 			<div class="block">
-				<h4>Controller actions</h4>
+				<h4>::_("Controller actions")::</h4>
 				<p>
-					Throw controller actions like <b>Ok(url,msg)</b> or <b>Error(url,msg)</b> to manage what is commonly called "flash messages".
+					::_('Throw controller actions like <b>Ok(url,msg)</b> or <b>Error(url,msg)</b> to manage what is commonly called "flash messages".')::
 				</p>
 				<a href="/okMessage" class="btn btn-default">Ok message</a>	<a href="/errorMessage" class="btn btn-default">Error message</a>
+			</div>
+			
+			<div class="block">
+				<h4>::_("Debug or Production mode")::</h4>
+				::if DEBUG::
+				<p>
+					The app is currently in <b>DEBUG</b> mode. Change the value of "debug" to "0" in config.xml to switch to production mode. 
+				</p>
+				<p>
+					In debug mode, the templates are computed in real time ( by calling the temploc2 program ), no need to recompile.
+					The app will use the templates located in <em>master/tpl</em> folder.
+				</p>
 				
+				::else::
+				
+				<p>
+					The app is currently in <b>PRODUCTION</b> mode. Change the value of "debug" to "1" in config.xml to switch to debug mode. 
+				</p>
+				<p>
+					In production mode, the app will use the precompiled templates located in your current langage folder, like <em>en/tpl</em> or <em>fr/tpl</em>
+				</p>
+				::end::
 				
 			</div>
+			
 		</div>
 </div>
 ::end::

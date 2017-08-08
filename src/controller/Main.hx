@@ -10,8 +10,6 @@ class Main extends sugoi.BaseController {
 	@tpl("home.mtt")
 	function doDefault() {
 		view.section = "home";
-		
-		//trace(sugoi.i18n.Locale.texts._("Text from code"));
 	}	
 	
 	function doUser(d:Dispatch) {
@@ -47,11 +45,11 @@ class Main extends sugoi.BaseController {
 	}
 	
 	function doOkMessage() {
-		throw Ok("/", "Everything is allright !");
+		throw Ok("/", sugoi.i18n.Locale.texts._("Everything is allright !") );
 	}
 	
 	function doErrorMessage() {
-		throw Error("/", "Oops, something went wrong !");
+		throw Error("/", sugoi.i18n.Locale.texts._("Oops, something went wrong !") );
 	}
 	
 	@admin

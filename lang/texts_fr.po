@@ -12,30 +12,80 @@ msgstr ""
 "X-Generator: Poedit 1.8.7\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
+#: src/controller/Main.hx:48
+msgid "Everything is allright !"
+msgstr "Tout va bien !"
+
+#: src/controller/Main.hx:52
+msgid "Oops, something went wrong !"
+msgstr "Houlà, quelque chose s'est mal passé"
+
 #: lang/master/tpl/design.mtt:31
 msgid "Sugoï demo site"
 msgstr "Site démo Sugoï"
 
+#: lang/master/tpl/design.mtt:35
+msgid "Home"
+msgstr "Accueil"
+
+#: lang/master/tpl/design.mtt:36 lang/master/tpl/user/default.mtt:4
+msgid "Users"
+msgstr "Utilisateurs"
+
+#: lang/master/tpl/design.mtt:37
+msgid "Translation"
+msgstr "Traduction"
+
+#: lang/master/tpl/design.mtt:38
+msgid "Database"
+msgstr "Base de données"
+
 #. example comment
-#: lang/master/tpl/home.mtt:6
+#: lang/master/tpl/home.mtt:8
 msgid "You're currently logged as <strong>::user::</strong>"
 msgstr "Vous êtes actuellement connecté en tant que <strong>::user::</strong>"
 
-#: lang/master/tpl/home.mtt:9
+#: lang/master/tpl/home.mtt:11
 msgid "Login"
 msgstr "Connexion"
 
-#: lang/master/tpl/home.mtt:10
+#: lang/master/tpl/home.mtt:12
 msgid "or"
 msgstr "ou"
 
-#: lang/master/tpl/home.mtt:14
+#: lang/master/tpl/home.mtt:13
+msgid "create the first default user."
+msgstr "Créé le premier utilisateur par défaut."
+
+#: lang/master/tpl/home.mtt:16
 msgid "Default user credentials are :"
 msgstr "Les identifiants de l'utilisateur par défaut sont :"
 
-#: lang/master/tpl/home.mtt:25
+#: lang/master/tpl/home.mtt:28
 msgid "Database administration and migration"
 msgstr "Administration et migration de base de données"
+
+#: lang/master/tpl/home.mtt:30
+msgid "The <a href="
+msgstr ""
+
+#: lang/master/tpl/home.mtt:31
+msgid "The access is limited to admin users."
+msgstr "L'accès est limité aux administrateurs"
+
+#: lang/master/tpl/home.mtt:40
+msgid "Controller actions"
+msgstr "Actions de controlleurs"
+
+#: lang/master/tpl/home.mtt:42
+msgid ""
+"Throw controller actions like <b>Ok(url,msg)</b> or <b>Error(url,msg)</b> to "
+"manage what is commonly called "
+msgstr ""
+
+#: lang/master/tpl/home.mtt:48
+msgid "Debug or Production mode"
+msgstr "Mode Production ou Debug"
 
 #: lang/master/tpl/translation.mtt:6
 msgid "Manage text translation with GetText"
@@ -48,10 +98,6 @@ msgstr "Passer en anglais"
 #: lang/master/tpl/translation.mtt:10
 msgid "Switch to French"
 msgstr "Passer en français"
-
-#: lang/master/tpl/user/default.mtt:4
-msgid "Users"
-msgstr "Utilisateurs"
 
 #: lang/master/tpl/user/default.mtt:17
 msgid "Edit"
@@ -67,4 +113,4 @@ msgstr "Insérer"
 
 #: lang/master/tpl/user/default.mtt:30
 msgid "Here is an example of what you can do with form management."
-msgstr "Voici un exemple de ce qu'on peut avec la gestion de formulaire."
+msgstr "Voici un exemple de ce qu'on peut faire avec la gestion de formulaire."
