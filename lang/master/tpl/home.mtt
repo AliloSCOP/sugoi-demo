@@ -5,7 +5,8 @@
 			<div class="block">
 				<h4>User management</h4>
 				::if user!=null::
-					::_("You're currently logged as <strong>::user::</strong>||example comment"):: 
+					
+					::raw __("You're currently logged as <strong>::user::</strong>||example comment",{user:user}):: 
 				::else::
 				<p>
 					<a href="/user/login" class="btn btn-default">::_("Login")::</a> 				
