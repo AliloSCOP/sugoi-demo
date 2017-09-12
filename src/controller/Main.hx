@@ -2,7 +2,7 @@ package controller;
 import db.SampleObject;
 import haxe.web.Dispatch;
 import sugoi.form.Form;
-
+import Common;
 
 
 class Main extends sugoi.BaseController {
@@ -52,10 +52,28 @@ class Main extends sugoi.BaseController {
 		throw Error("/", sugoi.i18n.Locale.texts._("Oops, something went wrong !") );
 	}
 	
+	@tpl('plugins.mtt')
+	function doPlugins(){
+		
+		//send a navbar event to be catch by the plugin
+		var navbar = new Array<Link>();
+		navbar.push({id:"firstlink",link:"/plugin",name:"First link"});
+		var e = Nav(navbar,"demonav");
+		app.eventDispatcher.dispatch(e);
+		
+		//send the navbar to the view
+		view.navbar = e.getParameters()[0];
+		
+	}
+	
 	@admin
 	function doDb(d:Dispatch) {
 		d.parts = []; //disable haxe.web.Dispatch
 		sys.db.Admin.handler();
+	}
+	
+	public function doDemoPlugin(d:haxe.web.Dispatch) {
+		d.dispatch(new demoplugin.controller.Main());
 	}
 	
 	

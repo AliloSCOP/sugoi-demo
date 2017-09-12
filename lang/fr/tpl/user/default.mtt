@@ -1,37 +1,37 @@
-::use 'design.mtt'::
-<div class="row">
-	<div class="col-md-4">
-		<h2>Utilisateurs</h2>
-		
-		<table class="table table-bordered">
-			<tr>
-				<th>Id</th>
-				<th>Name</th>
-				<th>Actions</th>
-			</tr>
-			::foreach u users::
-				<tr>
-					<td>::u.id::</td>
-					<td>::u.name::</td>
-					<td>
-						<a href="/user/edit/::u.id::" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-edit"></span> Modifier</a>
-						<a href="/user/delete/::u.id::" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-remove"></span> Supprimer</a>
-					</td>
-				</tr>
-			::end::			
-		</table>
-		
-		<a href="/user/insert/" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-plus"></span> Insérer</a>
-		
-	</div>
-	
-	<div class="col-md-4">
-		
-		Voici un exemple de ce qu'on peut faire avec la gestion de formulaire.
-		
-	</div>
-</div>
-
-
-
+::use 'design.mtt'::
+<div class="row">
+	<div class="col-md-4">
+		<h2>Utilisateurs</h2>
+		
+		<table class="table table-bordered">
+			<tr>
+				<th>Id</th>
+				<th>Name</th>
+				<th>Actions</th>
+			</tr>
+			::foreach u users::
+				<tr>
+					<td>::u.id::</td>
+					<td>::u.name::</td>
+					<td>
+						<a href="/user/edit/::u.id::" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-edit"></span> Modifier</a>
+						<a href="/user/delete/::u.id::" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-remove"></span> Supprimer</a>
+					</td>
+				</tr>
+			::end::			
+		</table>
+		
+		<a href="/user/insert/" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-plus"></span> Insérer</a>
+		
+	</div>
+	
+	<div class="col-md-4">
+		
+		Voici un exemple de ce qu'on peut faire avec la gestion de formulaire.
+		
+	</div>
+</div>
+
+
+
 ::end::

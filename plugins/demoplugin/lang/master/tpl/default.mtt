@@ -1,0 +1,5 @@
+<h1>Demo plugin controller</h1>
+	
+<p>::_("This is the plugin main controller.")::</p>
+	
+<p>::msg::</p>
