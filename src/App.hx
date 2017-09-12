@@ -1,7 +1,5 @@
 package ;
-import sugoi.i18n.Locale;
 
-import sugoi.i18n.GetText;
 import sugoi.Web;
 
 class App extends sugoi.BaseApp
@@ -10,7 +8,6 @@ class App extends sugoi.BaseApp
 	public static var config = sugoi.BaseApp.config;
 	
 	public static function main() {
-		
 		sugoi.BaseApp.main();
 	}
 	

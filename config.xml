@@ -5,7 +5,7 @@
 	name = "Sugoi Demo Site"
 	webmaster_email = "francois.barbut@gmail.com"
 	webmaster_name = "François"
-	database="mysql://root:root@localhost/sugoi-demo"
+	database="mysql://root:root@localhost/sugoidemo"
 	sqllog="1"
 	debug="1"
 	cache="0"

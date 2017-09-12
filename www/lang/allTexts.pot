@@ -4,107 +4,52 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 
-#: src/controller/Main.hx:48
-msgid "Everything is allright !"
+#: src/controller/Main.hx:989 src/controller/Main.hx:1103
+msgid "!"
 msgstr ""
 
-#: src/controller/Main.hx:52
-msgid "Oops, something went wrong !"
+#: lang/master/tpl/design.mtt:1898 lang/master/tpl/design.mtt:2081 lang/master/tpl/design.mtt:2338 lang/master/tpl/home.mtt:1579 lang/master/tpl/user/default.mtt:562
+msgid "e"
 msgstr ""
 
-#: lang/master/tpl/design.mtt:31
-msgid "Sugoï demo site"
+#: lang/master/tpl/design.mtt:2176 lang/master/tpl/home.mtt:1206 lang/master/tpl/translation.mtt:173 lang/master/tpl/user/default.mtt:74
+msgid "s"
 msgstr ""
 
-#: lang/master/tpl/design.mtt:35
-msgid "Home"
+#: lang/master/tpl/design.mtt:2285 lang/master/tpl/home.mtt:392 lang/master/tpl/home.mtt:738 lang/master/tpl/home.mtt:2609
+msgid "n"
 msgstr ""
 
-#: lang/master/tpl/design.mtt:36 lang/master/tpl/user/default.mtt:4
-msgid "Users"
+#: lang/master/tpl/home.mtt:160 lang/master/tpl/home.mtt:2516 lang/master/tpl/translation.mtt:107 lang/master/tpl/user/default.mtt:425 lang/master/tpl/user/default.mtt:741
+msgid "t"
 msgstr ""
 
-#: lang/master/tpl/design.mtt:37
-msgid "Translation"
+#: lang/master/tpl/home.mtt:294 lang/master/tpl/home.mtt:529
+msgid ":"
 msgstr ""
 
-#: lang/master/tpl/design.mtt:38
-msgid "Database"
+#: lang/master/tpl/home.mtt:422
+msgid "r"
 msgstr ""
 
-#. example comment
-#: lang/master/tpl/home.mtt:8
-msgid "You're currently logged as <strong>::user::</strong>"
+#: lang/master/tpl/home.mtt:459 lang/master/tpl/home.mtt:809 lang/master/tpl/home.mtt:1007 lang/master/tpl/user/default.mtt:809
+msgid "."
 msgstr ""
 
-#: lang/master/tpl/home.mtt:11
-msgid "Login"
+#: lang/master/tpl/home.mtt:2728
+msgid "m"
 msgstr ""
 
-#: lang/master/tpl/home.mtt:12
-msgid "or"
+#: lang/master/tpl/home.mtt:2987
+msgid "p"
 msgstr ""
 
-#: lang/master/tpl/home.mtt:13
-msgid "create the first default user."
+#: lang/master/tpl/home.mtt:3012
+msgid ">"
 msgstr ""
 
-#: lang/master/tpl/home.mtt:16
-msgid "Default user credentials are :"
-msgstr ""
-
-#: lang/master/tpl/home.mtt:28
-msgid "Database administration and migration"
-msgstr ""
-
-#: lang/master/tpl/home.mtt:30
-msgid "The <a href="
-msgstr ""
-
-#: lang/master/tpl/home.mtt:31
-msgid "The access is limited to admin users."
-msgstr ""
-
-#: lang/master/tpl/home.mtt:40
-msgid "Controller actions"
-msgstr ""
-
-#: lang/master/tpl/home.mtt:42
-msgid ""
-"Throw controller actions like <b>Ok(url,msg)</b> or <b>Error(url,msg)</b> "
-"to manage what is commonly called "
-msgstr ""
-
-#: lang/master/tpl/home.mtt:48
-msgid "Debug or Production mode"
-msgstr ""
-
-#: lang/master/tpl/translation.mtt:6
-msgid "Manage text translation with GetText"
-msgstr ""
-
-#: lang/master/tpl/translation.mtt:9
-msgid "Switch to English"
-msgstr ""
-
-#: lang/master/tpl/translation.mtt:10
-msgid "Switch to French"
-msgstr ""
-
-#: lang/master/tpl/user/default.mtt:17
-msgid "Edit"
-msgstr ""
-
-#: lang/master/tpl/user/default.mtt:18
-msgid "Delete"
-msgstr ""
-
-#: lang/master/tpl/user/default.mtt:24
-msgid "Insert"
-msgstr ""
-
-#: lang/master/tpl/user/default.mtt:30
-msgid "Here is an example of what you can do with form management."
+#: lang/master/tpl/translation.mtt:302 lang/master/tpl/translation.mtt:382
+msgid "h"
 msgstr ""
 
 
