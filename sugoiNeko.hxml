@@ -1,8 +1,13 @@
 -lib dbadmin
 -lib templo
 -lib sugoi
+-lib hxevents
+
 -cp src
 -cp lang/master/tpl
+-cp plugins
+-cp common
+
 
 -D spod_macro
 -D no-deprecation-warnings

@@ -33,49 +33,46 @@ msgid "Database"
 msgstr ""
 
 #. example comment
-#: lang/master/tpl/home.mtt:8
+#: lang/master/tpl/home.mtt:9
 msgid "You're currently logged as <strong>::user::</strong>"
 msgstr ""
 
-#: lang/master/tpl/home.mtt:11
+#: lang/master/tpl/home.mtt:12
 msgid "Login"
 msgstr ""
 
-#: lang/master/tpl/home.mtt:12
+#: lang/master/tpl/home.mtt:13
 msgid "or"
 msgstr ""
 
-#: lang/master/tpl/home.mtt:13
+#: lang/master/tpl/home.mtt:14
 msgid "create the first default user."
 msgstr ""
 
-#: lang/master/tpl/home.mtt:16
+#: lang/master/tpl/home.mtt:17
 msgid "Default user credentials are :"
 msgstr ""
 
-#: lang/master/tpl/home.mtt:28
+#: lang/master/tpl/home.mtt:29
 msgid "Database administration and migration"
 msgstr ""
 
-#: lang/master/tpl/home.mtt:30
-msgid "The <a href="
+#: lang/master/tpl/home.mtt:31
+msgid ""
+"The <a href='http://lib.haxe.org/p/dbadmin/' target='_blank'>dbadmin</a> "
+"library provides an easy way to sync models to the database, and to search/edit/insert "
+"for table records."
 msgstr ""
 
-#: lang/master/tpl/home.mtt:31
+#: lang/master/tpl/home.mtt:32
 msgid "The access is limited to admin users."
 msgstr ""
 
-#: lang/master/tpl/home.mtt:40
+#: lang/master/tpl/home.mtt:41
 msgid "Controller actions"
 msgstr ""
 
-#: lang/master/tpl/home.mtt:42
-msgid ""
-"Throw controller actions like <b>Ok(url,msg)</b> or <b>Error(url,msg)</b> "
-"to manage what is commonly called "
-msgstr ""
-
-#: lang/master/tpl/home.mtt:48
+#: lang/master/tpl/home.mtt:49
 msgid "Debug or Production mode"
 msgstr ""
 
@@ -83,11 +80,15 @@ msgstr ""
 msgid "Manage text translation with GetText"
 msgstr ""
 
-#: lang/master/tpl/translation.mtt:9
+#: lang/master/tpl/translation.mtt:8
+msgid "The current app language is"
+msgstr ""
+
+#: lang/master/tpl/translation.mtt:11
 msgid "Switch to English"
 msgstr ""
 
-#: lang/master/tpl/translation.mtt:10
+#: lang/master/tpl/translation.mtt:12
 msgid "Switch to French"
 msgstr ""
 
