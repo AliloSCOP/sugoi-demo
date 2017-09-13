@@ -1,7 +1,7 @@
 ::use 'design.mtt'::
 <div class="row">
 	<div class="col-md-4">
-		<h2>Utilisateurs</h2>
+		<h2>::_("Utilisateurs")::</h2>
 		
 		<table class="table table-bordered">
 			<tr>
@@ -14,20 +14,20 @@
 					<td>::u.id::</td>
 					<td>::u.name::</td>
 					<td>
-						<a href="/user/edit/::u.id::" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-edit"></span> Modifier</a>
-						<a href="/user/delete/::u.id::" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-remove"></span> Supprimer</a>
+						<a href="/user/edit/::u.id::" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-edit"></span> ::_("Editer")::</a>
+						<a href="/user/delete/::u.id::" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-remove"></span> ::_("Supprimer")::</a>
 					</td>
 				</tr>
 			::end::			
 		</table>
 		
-		<a href="/user/insert/" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-plus"></span> Insérer</a>
+		<a href="/user/insert/" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-plus"></span> ::_("Insérer")::</a>
 		
 	</div>
 	
 	<div class="col-md-4">
 		
-		Voici un exemple de ce qu'on peut faire avec la gestion de formulaire.
+		::_("Voici un exemple de ce que vous pouvez faire avec la gestion des formulaires.")::
 		
 	</div>
 </div>

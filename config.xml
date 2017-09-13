@@ -7,7 +7,7 @@
 	webmaster_name = "François"
 	database="mysql://root:root@localhost/sugoidemo"
 	sqllog="1"
-	debug="1"
+	debug="0"
 	cache="0"
 	key="fnA0tkqknJu13RDFwZVa1dKgfHLFejtV"
 	maintain="0"

@@ -1,0 +1,66 @@
+::use 'design.mtt'::
+<div class="row">
+		<div class="col-md-6">
+			
+			<div class="block">
+				<h4>Plugins (WIP)</h4>
+				<p>
+					::_("This section shows that it's possible to handle plugins in sugoi. Be carefull, the implementation of plugins may change, it's still a work in progress"):: 
+				</p>
+					
+				<p>
+					::_("As in popular CMS, the core application send events which are catch by the plugins.")::					
+				</p>
+				<p>
+					::_("In this project, a DemoPlugin has been instanciated in order to show you how a plugin is made.")::
+				</p>
+
+			</div>
+			
+			
+			<div class="block">
+				<h4>How to create a plugin</h4>
+				<ul>
+					<li>Create a separate folder wich will host the plugin files and add it to your classpath ( it may be a haxelib )</li>
+					<li>A plugin is like a micro app : create a controller,db,js,lang and www folder</li>
+					<li>Create a main plugin class wich implements sugoi.plugin.IPlugIn</li>
+					<li>Instanciate the plugin in App.mainLoop()</li>
+					<li>Implement the onEvent() method to catch app events.</li>
+					<li>Create additionnal controllers, models, template files for your plugin !</li>
+				</ul>
+				
+			</div>
+			
+			
+		</div>
+	
+		<div class="col-md-6">
+			<div class="block">
+				<h4>Plugins catch events</h4>
+				<p>
+					::raw _("The DemoPlugin is listening to \"Nav\" events.<br/>
+					You can create any type of event in Common.hx depending on you application logic.<br/>
+					The plugins will be able to catch these events to execute some additionnal code or modify the content of the event.")::
+				</p>
+				<p>
+					::_("For instance, in this navigation bar, the second link has been added by the plugin. This link will lead to the plugin main controller.")::
+				</p>
+				
+				::if navbar!=null::
+					<ul id="subnav" class="nav nav-pills nav-stacked">
+					::foreach i navbar::
+					<li>
+						<a href="::i.link::">
+							<span ::cond i.icon:: class="glyphicon glyphicon-::i.icon::" ></span>
+							 ::i.name::</a>					
+					</li>
+					::end::		
+					</ul>
+				::end::
+			</div>
+			
+		</div>
+	
+	
+</div>
+::end::

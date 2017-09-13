@@ -2,8 +2,11 @@
 -lib dbadmin
 -lib templo
 -lib sugoi
+-lib hxevents
 -cp src
+-cp common
 -cp lang/master/tpl
+-cp plugins
 
 -D spod_macro
 

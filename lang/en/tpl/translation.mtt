@@ -3,13 +3,14 @@
 		<div class="col-md-6">
 			<div class="block">
 				
-				<h4>Manage text translation with GetText</h4>
+				<h4>::_("Manage text translation with GetText")::</h4>
 				<p>
-					The current app language is <b>::session.lang::</b>
+					::_("The current app language is"):: <b>::session.lang::</b>
 				</p>
 				<p>
-					<a href="?lang=en" class="btn btn-default">Switch to English</a>
-					<a href="?lang=fr" class="btn btn-default">Switch to French</a>
+					<a href="?lang=en" class="btn btn-default">::_("Switch to English")::</a>
+					<a href="?lang=fr" class="btn btn-default">::_("
+ Switch to French")::</a>
 					
 				</p>
 			</div>

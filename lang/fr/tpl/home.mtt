@@ -5,16 +5,18 @@
 			<div class="block">
 				<h4>User management</h4>
 				::if user!=null::
-					
-					::raw __("You're currently logged as <strong>::user::</strong>||example comment",{user:user}):: 
+					::raw __("You're currently logged as a super <strong>::user::</strong>
+						<em> test message</em>", {user:user}):: 
+
+					::__("test ::user::", {user:user})::
 				::else::
 				<p>
-					<a href="/user/login" class="btn btn-default">Connexion</a> 				
-					ou
-					<a href="/install">Créé le premier utilisateur par défaut.</a>	
+					<a href="/user/login" class="btn btn-default">::_("Connexion")::</a> 				
+					::_("ou")::
+					<a href="/install">::_("créer un premier utilisateur par défaut")::</a>	
 				</p>
 				<p>
-					Les identifiants de l'utilisateur par défaut sont :
+					::_("Les droits utilisateurs par défaut sont : ")::
 					<ul>
 						<li>email : admin@localhost </li>
 						<li>password : admin</li>
@@ -23,22 +25,20 @@
 				::end::
 			</div>
 			
-		
-		
 			<div class="block">
-				<h4>Administration et migration de base de données</h4>
+				<h4>::_("Administration et migration base de données")::</h4>
 				<p>
-					
-					L'accès est limité aux administrateurs
-				</p>	
-				<a href="/db" class="btn btn-default">dbadmin</a>	
+					::raw _("La librairie <a href='http://lib.haxe.org/p/dbadmin/' target='_blank'>dbadmin</a> propose une façon aisée de synchroniser les modèles de la base de données, ainsi que de réaliser les opération de recherche et édition des entrées.")::
+					::raw _("l'accès est limité aux admins")::
+				</p>
+				<a href="/db" class="btn btn-default">dbadmin</a>
 			</div>
 		</div>
-	
+
 		<div class="col-md-6">
 			
 			<div class="block">
-				<h4>Actions de controlleurs</h4>
+				<h4>::_("Actions du controlleur")::</h4>
 				<p>
 					::_('Throw controller actions like <b>Ok(url,msg)</b> or <b>Error(url,msg)</b> to manage what is commonly called "flash messages".')::
 				</p>
@@ -46,7 +46,7 @@
 			</div>
 			
 			<div class="block">
-				<h4>Mode Production ou Debug</h4>
+				<h4>::_("Mode Debug ou Production")::</h4>
 				::if DEBUG::
 				<p>
 					The app is currently in <b>DEBUG</b> mode. Change the value of "debug" to "0" in config.xml to switch to production mode. 
@@ -70,4 +70,24 @@
 			
 		</div>
 </div>
+
+<div class="row">
+	<div class="col-md-12" >
+		<div id="footer">
+			<a href="http://www.cagette.net" target="_blank">::_("Cagette.net")::</a>  &#8226; 
+			<a href="http://www.cagette.net/wiki" target="_blank">::_("Documentation")::</a> &#8226;
+			<a href="https://groups.google.com/forum/?hl=fr#!forum/cagette" target="_blank">::_("Forum")::</a>  &#8226;
+			<a href="https://www.facebook.com/cagette" target="_blank"> Facebook</a>  &#8226;
+			<a href="https://twitter.com/Cagettenet" target="_blank"> Twitter</a>  &#8226;
+		
+		</div>
+	</div>
+</div>
+
+
+<div class="block">
+	<h3>::_("Aide")::</h3>
+	::raw _("Here you can import a large amount of members in your database from a simple Excel or Libre Office file.<br/><ul><li>The first step is to <a href=\"/adherents.xls\">download this demo file.</a></li><li>Fill out the table, of modify your existing file to striclty match the columns order.</li><li>Once your file is completed, click on \"save as\" in your spreadsheet software, and select \"CSV\" format</li><li>Select the following options : separator : <b>coma</b>, encoding : <b>Unicode UTF-8</b></li><li>Save the file</li><li>finally, click on  \"select a file\" on this page and upload it.</li></ul>")::
+</div>
+
 ::end::

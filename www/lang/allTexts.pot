@@ -4,107 +4,180 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 
-#: src/controller/Main.hx:48
+#: src/controller/Main.hx:1003
 msgid "Everything is allright !"
 msgstr ""
 
-#: src/controller/Main.hx:52
+#: src/controller/Main.hx:1117
 msgid "Oops, something went wrong !"
 msgstr ""
 
-#: lang/master/tpl/design.mtt:31
+#: lang/master/tpl/design.mtt:1898
 msgid "Sugoï demo site"
 msgstr ""
 
-#: lang/master/tpl/design.mtt:35
+#: lang/master/tpl/design.mtt:2078
 msgid "Home"
 msgstr ""
 
-#: lang/master/tpl/design.mtt:36 lang/master/tpl/user/default.mtt:4
+#: lang/master/tpl/design.mtt:2173 lang/master/tpl/user/default.mtt:74
 msgid "Users"
 msgstr ""
 
-#: lang/master/tpl/design.mtt:37
+#: lang/master/tpl/design.mtt:2282
 msgid "Translation"
 msgstr ""
 
-#: lang/master/tpl/design.mtt:38
+#: lang/master/tpl/design.mtt:2389
+msgid "Plugins"
+msgstr ""
+
+#: lang/master/tpl/design.mtt:2438
 msgid "Database"
 msgstr ""
 
 #. example comment
-#: lang/master/tpl/home.mtt:9
-msgid "You're currently logged as <strong>::user::</strong>"
+#: lang/master/tpl/home.mtt:161
+msgid ""
+"You're currently logged as a super <strong>::user::</strong>
+						<em> "
+"test message</em>"
 msgstr ""
 
-#: lang/master/tpl/home.mtt:12
+#: lang/master/tpl/home.mtt:309
+msgid "test ::user::"
+msgstr ""
+
+#: lang/master/tpl/home.mtt:420
 msgid "Login"
 msgstr ""
 
-#: lang/master/tpl/home.mtt:13
+#: lang/master/tpl/home.mtt:450
 msgid "or"
 msgstr ""
 
-#: lang/master/tpl/home.mtt:14
+#: lang/master/tpl/home.mtt:487
 msgid "create the first default user."
 msgstr ""
 
-#: lang/master/tpl/home.mtt:17
+#: lang/master/tpl/home.mtt:557
 msgid "Default user credentials are :"
 msgstr ""
 
-#: lang/master/tpl/home.mtt:29
+#: lang/master/tpl/home.mtt:766
 msgid "Database administration and migration"
 msgstr ""
 
-#: lang/master/tpl/home.mtt:31
+#: lang/master/tpl/home.mtt:837
 msgid ""
 "The <a href='http://lib.haxe.org/p/dbadmin/' target='_blank'>dbadmin</a> "
 "library provides an easy way to sync models to the database, and to search/edit/insert "
 "for table records."
 msgstr ""
 
-#: lang/master/tpl/home.mtt:32
+#: lang/master/tpl/home.mtt:1035
 msgid "The access is limited to admin users."
 msgstr ""
 
-#: lang/master/tpl/home.mtt:41
+#: lang/master/tpl/home.mtt:1234
 msgid "Controller actions"
 msgstr ""
 
-#: lang/master/tpl/home.mtt:49
+#: lang/master/tpl/home.mtt:1607
 msgid "Debug or Production mode"
 msgstr ""
 
-#: lang/master/tpl/translation.mtt:6
+#: lang/master/tpl/home.mtt:2544
+msgid "Cagette.net"
+msgstr ""
+
+#: lang/master/tpl/home.mtt:2637
+msgid "Documentation"
+msgstr ""
+
+#: lang/master/tpl/home.mtt:2756
+msgid "Forum"
+msgstr ""
+
+#: lang/master/tpl/home.mtt:3015
+msgid "Help"
+msgstr ""
+
+#: lang/master/tpl/home.mtt:3040
+msgid ""
+"Here you can import a large amount of members in your database from a simple "
+"Excel or Libre Office file.<br/><ul><li>The first step is to <a href=\"/adherents.xls\">download "
+"this demo file.</a></li><li>Fill out the table, of modify your existing file "
+"to striclty match the columns order.</li><li>Once your file is completed, "
+"click on \"save as\" in your spreadsheet software, and select \"CSV\" format</li><li>Select "
+"the following options : separator : <b>coma</b>, encoding : <b>Unicode UTF-8</b></li><li>Save "
+"the file</li><li>finally, click on  \"select a file\" on this page and upload "
+"it.</li></ul>"
+msgstr ""
+
+#: lang/master/tpl/plugins.mtt:140
+msgid ""
+"This section shows that it's possible to handle plugins in sugoi. Be carefull, "
+"the implementation of plugins may change, it's still a work in progress "
+msgstr ""
+
+#: lang/master/tpl/plugins.mtt:334
+msgid ""
+"As in popular CMS, the core application send events which are catch by the "
+"plugins."
+msgstr ""
+
+#: lang/master/tpl/plugins.mtt:457
+msgid ""
+"In this project, a DemoPlugin has been instanciated in order to show you "
+"how a plugin is made."
+msgstr ""
+
+#: lang/master/tpl/plugins.mtt:1327
+msgid ""
+"The DemoPlugin is listening to \"Nav\" events.<br/>
+					You can create "
+"any type of event in Common.hx depending on you application logic.<br/>
+					The "
+"plugins will be able to catch these events to execute some additionnal code "
+"or modify the content of the event."
+msgstr ""
+
+#: lang/master/tpl/plugins.mtt:1628
+msgid ""
+"For instance, in this navigation bar, the second link has been added by the "
+"plugin. This link will lead to the plugin main controller."
+msgstr ""
+
+#: lang/master/tpl/translation.mtt:107
 msgid "Manage text translation with GetText"
 msgstr ""
 
-#: lang/master/tpl/translation.mtt:8
+#: lang/master/tpl/translation.mtt:173
 msgid "The current app language is"
 msgstr ""
 
-#: lang/master/tpl/translation.mtt:11
+#: lang/master/tpl/translation.mtt:302
 msgid "Switch to English"
 msgstr ""
 
-#: lang/master/tpl/translation.mtt:12
+#: lang/master/tpl/translation.mtt:382
 msgid "Switch to French"
 msgstr ""
 
-#: lang/master/tpl/user/default.mtt:17
+#: lang/master/tpl/user/default.mtt:425
 msgid "Edit"
 msgstr ""
 
-#: lang/master/tpl/user/default.mtt:18
+#: lang/master/tpl/user/default.mtt:562
 msgid "Delete"
 msgstr ""
 
-#: lang/master/tpl/user/default.mtt:24
+#: lang/master/tpl/user/default.mtt:741
 msgid "Insert"
 msgstr ""
 
-#: lang/master/tpl/user/default.mtt:30
+#: lang/master/tpl/user/default.mtt:809
 msgid "Here is an example of what you can do with form management."
 msgstr ""
 
