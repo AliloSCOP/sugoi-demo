@@ -5,8 +5,11 @@
 			<div class="block">
 				<h4>User management</h4>
 				::if user!=null::
-					
-					::raw __("You're currently logged as <strong>::user::</strong>||example comment",{user:user}):: 
+					::raw _("You're currently logged as a super <strong>::user::</strong>
+						<em> test message</em>
+						||example comment"):: 
+
+					::_("test ::user::")::
 				::else::
 				<p>
 					<a href="/user/login" class="btn btn-default">::_("Login")::</a> 				
@@ -23,18 +26,16 @@
 				::end::
 			</div>
 			
-		
-		
 			<div class="block">
 				<h4>::_("Database administration and migration")::</h4>
 				<p>
-					::_("The <a href='http://lib.haxe.org/p/dbadmin/' target='_blank'>dbadmin</a> library provides an easy way to sync models to the database, and to search/edit/insert for table records.")::
-					::_("The access is limited to admin users.")::
-				</p>	
-				<a href="/db" class="btn btn-default">dbadmin</a>	
+					::raw _("The <a href='http://lib.haxe.org/p/dbadmin/' target='_blank'>dbadmin</a> library provides an easy way to sync models to the database, and to search/edit/insert for table records.")::
+					::raw _("The access is limited to admin users.")::
+				</p>
+				<a href="/db" class="btn btn-default">dbadmin</a>
 			</div>
 		</div>
-	
+
 		<div class="col-md-6">
 			
 			<div class="block">
@@ -70,19 +71,28 @@
 			
 		</div>
 </div>
-			
-			
-			<div class="row">
-			<div class="col-md-12" >
-				<div id="footer"> ::_("Cagette.net")::
-					<a href="http://www.cagette.net" target="blank"></a>  &#8226; 
-					<a href="http://www.cagette.net/wiki" target="blank"> ::_("Documentation"):: </a> &#8226;
-					<a href="https://groups.google.com/forum/?hl=fr#!forum/cagette" target="_blank">::_("Forum")::</a>  &#8226;
-					<a href="https://cagette.uservoice.com" target="_blank">::_("Propose features")::</a>  &#8226;
-					<a href="https://www.facebook.com/cagette" target="_blank"> Facebook</a>  &#8226;
-					<a href="https://twitter.com/Cagettenet" target="_blank"> Twitter</a>  &#8226;
-					<span style="color:#666;">version ::VERSION::-</span>
-				</div>
-			</div>
+
+
+<!-- TEST -->
+
+<div class="row">
+	<div class="col-md-12" >
+		<div id="footer">
+			<a href="http://www.cagette.net" target="_blank">::_("Cagette.net")::</a>  &#8226; 
+			<a href="http://www.cagette.net/wiki" target="_blank">::_("Documentation")::</a> &#8226;
+			<a href="https://groups.google.com/forum/?hl=fr#!forum/cagette" target="_blank">::_("Forum")::</a>  &#8226;
+			<a href="https://www.facebook.com/cagette" target="_blank"> Facebook</a>  &#8226;
+			<a href="https://twitter.com/Cagettenet" target="_blank"> Twitter</a>  &#8226;
+		
 		</div>
+	</div>
+</div>
+
+
+<div class="block">
+	<h3>::_("Help")::</h3>
+	::raw _("Here you can import a large amount of members in your database from a simple Excel or Libre Office file.<br/><ul><li>The first step is to <a href=\"/adherents.xls\">download this demo file.</a></li><li>Fill out the table, of modify your existing file to striclty match the columns order.</li><li>Once your file is completed, click on \"save as\" in your spreadsheet software, and select \"CSV\" format</li><li>Select the following options : separator : <b>coma</b>, encoding : <b>Unicode UTF-8</b></li><li>Save the file</li><li>finally, click on  \"select a file\" on this page and upload it.</li></ul>")::
+</div>
+
+
 ::end::

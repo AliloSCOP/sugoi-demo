@@ -1,7 +1,5 @@
 package ;
-import sugoi.i18n.Locale;
 import Common;
-import sugoi.i18n.GetText;
 import sugoi.Web;
 
 class App extends sugoi.BaseApp
@@ -14,7 +12,6 @@ class App extends sugoi.BaseApp
 	public var plugins : Array<sugoi.plugin.IPlugIn>;
 	
 	public static function main() {
-		
 		sugoi.BaseApp.main();
 	}
 	
