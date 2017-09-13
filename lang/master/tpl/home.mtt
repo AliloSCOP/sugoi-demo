@@ -70,4 +70,19 @@
 			
 		</div>
 </div>
+			
+			
+			<div class="row">
+			<div class="col-md-12" >
+				<div id="footer"> ::_("Cagette.net")::
+					<a href="http://www.cagette.net" target="blank"></a>  &#8226; 
+					<a href="http://www.cagette.net/wiki" target="blank"> ::_("Documentation"):: </a> &#8226;
+					<a href="https://groups.google.com/forum/?hl=fr#!forum/cagette" target="_blank">::_("Forum")::</a>  &#8226;
+					<a href="https://cagette.uservoice.com" target="_blank">::_("Propose features")::</a>  &#8226;
+					<a href="https://www.facebook.com/cagette" target="_blank"> Facebook</a>  &#8226;
+					<a href="https://twitter.com/Cagettenet" target="_blank"> Twitter</a>  &#8226;
+					<span style="color:#666;">version ::VERSION::-</span>
+				</div>
+			</div>
+		</div>
 ::end::
