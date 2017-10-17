@@ -5,11 +5,9 @@
 			<div class="block">
 				<h4>User management</h4>
 				::if user!=null::
-					::raw _("You're currently logged as a super <strong>::user::</strong>
+					::raw __("You're currently logged as a super <strong>::user::</strong>
 						<em> test message</em>
-						||example comment"):: 
-
-					::_("test ::user::")::
+						||example comment",{user:user}):: 
 				::else::
 				<p>
 					<a href="/user/login" class="btn btn-default">::_("Login")::</a> 				
@@ -41,7 +39,7 @@
 			<div class="block">
 				<h4>::_("Controller actions")::</h4>
 				<p>
-					::_('Throw controller actions like <b>Ok(url,msg)</b> or <b>Error(url,msg)</b> to manage what is commonly called "flash messages".')::
+					::raw _('Throw controller actions like <b>Ok(url,msg)</b> or <b>Error(url,msg)</b> to manage what is commonly called "flash messages".')::
 				</p>
 				<a href="/okMessage" class="btn btn-default">Ok message</a>	<a href="/errorMessage" class="btn btn-default">Error message</a>
 			</div>

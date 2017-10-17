@@ -45,7 +45,7 @@ class Main extends sugoi.BaseController {
 	}
 	
 	function doOkMessage() {
-		throw Ok("/", sugoi.i18n.Locale.texts._("Everything is allright !") );
+		throw Ok("/", sugoi.i18n.Locale.texts._("Everything is allright <b>::user::</b> !",{user:app.user.name}) );
 	}
 	
 	function doErrorMessage() {
