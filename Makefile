@@ -9,8 +9,8 @@ compile_php :
 #generate translated templates and precompile templates	
 templates:
 	haxe templateGeneration.hxml
-	(cd lang/en/tpl; temploc2 -macros macros.mtt -output ../tmp/ *.mtt )
-	(cd lang/fr/tpl; temploc2 -macros macros.mtt -output ../tmp/ *.mtt )
+	(cd lang/en/tpl; temploc2 -macros macros.mtt -output ../tmp/ *.mtt */*.mtt)
+	(cd lang/fr/tpl; temploc2 -macros macros.mtt -output ../tmp/ *.mtt */*.mtt)
 
 #generate pot file for translation	
 update_pot:

@@ -5,10 +5,9 @@
 			<div class="block">
 				<h4>User management</h4>
 				::if user!=null::
-					::raw __("You're currently logged as a super <strong>::user::</strong>
-						<em> test message</em>", {user:user}):: 
+					::raw __("You're currently logged as a super 
+					<strong>::user::</strong>",{user:user}):: 
 
-					::__("test ::user::", {user:user})::
 				::else::
 				<p>
 					<a href="/user/login" class="btn btn-default">::_("Login")::</a> 				
@@ -40,7 +39,7 @@
 			<div class="block">
 				<h4>::_("Controller actions")::</h4>
 				<p>
-					::_('Throw controller actions like <b>Ok(url,msg)</b> or <b>Error(url,msg)</b> to manage what is commonly called "flash messages".')::
+					::raw _('Throw controller actions like <b>Ok(url,msg)</b> or <b>Error(url,msg)</b> to manage what is commonly called "flash messages".')::
 				</p>
 				<a href="/okMessage" class="btn btn-default">Ok message</a>	<a href="/errorMessage" class="btn btn-default">Error message</a>
 			</div>
@@ -72,6 +71,9 @@
 		</div>
 </div>
 
+
+<!-- TEST -->
+
 <div class="row">
 	<div class="col-md-12" >
 		<div id="footer">
@@ -85,12 +87,6 @@
 		
 		</div>
 	</div>
-</div>
-
-
-<div class="block">
-	<h3>::_("Help")::</h3>
-	::raw _("Here you can import a large amount of members in your database from a simple Excel or Libre Office file.<br/><ul><li>The first step is to <a href=\"/adherents.xls\">download this demo file.</a></li><li>Fill out the table, of modify your existing file to striclty match the columns order.</li><li>Once your file is completed, click on \"save as\" in your spreadsheet software, and select \"CSV\" format</li><li>Select the following options : separator : <b>coma</b>, encoding : <b>Unicode UTF-8</b></li><li>Save the file</li><li>finally, click on  \"select a file\" on this page and upload it.</li></ul>")::
 </div>
 
 ::end::
