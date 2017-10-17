@@ -38,68 +38,66 @@ msgstr ""
 
 #. example comment
 #: lang/master/tpl/home.mtt:161
-msgid ""
-"You're currently logged as a super <strong>::user::</strong>
-						<em> "
-"test message</em>"
+msgid "You're currently logged as a super 
+					<strong>::user::</strong>"
 msgstr ""
 
-#: lang/master/tpl/home.mtt:374
+#: lang/master/tpl/home.mtt:352
 msgid "Login"
 msgstr ""
 
-#: lang/master/tpl/home.mtt:404
+#: lang/master/tpl/home.mtt:382
 msgid "or"
 msgstr ""
 
-#: lang/master/tpl/home.mtt:441
+#: lang/master/tpl/home.mtt:419
 msgid "create the first default user."
 msgstr ""
 
-#: lang/master/tpl/home.mtt:511
+#: lang/master/tpl/home.mtt:489
 msgid "Default user credentials are :"
 msgstr ""
 
-#: lang/master/tpl/home.mtt:720
+#: lang/master/tpl/home.mtt:698
 msgid "Database administration and migration"
 msgstr ""
 
-#: lang/master/tpl/home.mtt:791
+#: lang/master/tpl/home.mtt:769
 msgid ""
 "The <a href='http://lib.haxe.org/p/dbadmin/' target='_blank'>dbadmin</a> "
 "library provides an easy way to sync models to the database, and to search/edit/insert "
 "for table records."
 msgstr ""
 
-#: lang/master/tpl/home.mtt:989
+#: lang/master/tpl/home.mtt:967
 msgid "The access is limited to admin users."
 msgstr ""
 
-#: lang/master/tpl/home.mtt:1188
+#: lang/master/tpl/home.mtt:1166
 msgid "Controller actions"
 msgstr ""
 
-#: lang/master/tpl/home.mtt:1565
+#: lang/master/tpl/home.mtt:1543
 msgid "Debug or Production mode"
 msgstr ""
 
-#: lang/master/tpl/home.mtt:2521
+#: lang/master/tpl/home.mtt:2499
 msgid "Cagette.net"
 msgstr ""
 
-#: lang/master/tpl/home.mtt:2614
+#: lang/master/tpl/home.mtt:2592
 msgid "Documentation"
 msgstr ""
 
-#: lang/master/tpl/home.mtt:2733
+#: lang/master/tpl/home.mtt:2711
 msgid "Forum"
 msgstr ""
 
-#: lang/master/tpl/home.mtt:2992
+#: lang/master/tpl/home.mtt:2970
 msgid "Help"
 msgstr ""
 
-#: lang/master/tpl/home.mtt:3017
+#: lang/master/tpl/home.mtt:2995
 msgid ""
 "Here you can import a large amount of members in your database from a simple "
 "Excel or Libre Office file.<br/><ul><li>The first step is to <a href=\"/adherents.xls\">download "

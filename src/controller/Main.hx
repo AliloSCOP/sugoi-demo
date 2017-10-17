@@ -75,7 +75,4 @@ class Main extends sugoi.BaseController {
 	public function doDemoPlugin(d:haxe.web.Dispatch) {
 		d.dispatch(new demoplugin.controller.Main());
 	}
-	
-	
-	
 }

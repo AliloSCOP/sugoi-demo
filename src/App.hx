@@ -1,6 +1,6 @@
 package ;
-import Common;
 import sugoi.Web;
+import Common;
 
 class App extends sugoi.BaseApp
 {

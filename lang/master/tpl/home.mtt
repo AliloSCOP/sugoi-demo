@@ -5,9 +5,10 @@
 			<div class="block">
 				<h4>User management</h4>
 				::if user!=null::
-					::raw __("You're currently logged as a super <strong>::user::</strong>
-						<em> test message</em>
-						||example comment",{user:user}):: 
+					::raw __("You're currently logged as a super 
+					<strong>::user::</strong>
+					||example comment",{user:user}):: 
+
 				::else::
 				<p>
 					<a href="/user/login" class="btn btn-default">::_("Login")::</a> 				
