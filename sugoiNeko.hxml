@@ -1,8 +1,11 @@
--lib dbadmin
+-lib sugoi:git:https://github.com/bablukid/sugoi#master
 -lib templo
--lib sugoi
+-lib record-macros:git:https://github.com/HaxeFoundation/record-macros#master
+-lib dbadmin:git:https://github.com/ncannasse/dbadmin.git#master
 -cp src
 -cp lang/fr/tpl
 -neko www/index.n
 -D spod_macro
 -main App
+
+
