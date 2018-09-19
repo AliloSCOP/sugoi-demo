@@ -1,2 +1,8 @@
-lang/fr/tmp/*
+lang/fr/tmp/*.n
+lang/fr/tmp/*.php
+lang/master/tmp/*.n
+lang/master/tmp/*.php
 www/lib
+www/index.n
+www/index.php
+.haxelib/*
