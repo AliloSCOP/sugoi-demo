@@ -2,7 +2,6 @@
 -lib templo
 -lib record-macros:git:https://github.com/HaxeFoundation/record-macros#master
 -lib dbadmin:git:https://github.com/ncannasse/dbadmin.git#master
--lib sugoi
 -lib hxevents
 
 -cp src

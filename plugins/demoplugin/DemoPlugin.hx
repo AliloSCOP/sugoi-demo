@@ -31,10 +31,7 @@ class DemoPlugin extends PlugIn implements IPlugIn{
 	}
 	
 
-	public function getName() {
-		return name;
-		
-	}
+
 	
 	public function getController() {
 		return null;
