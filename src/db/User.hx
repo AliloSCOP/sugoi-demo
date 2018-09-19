@@ -40,5 +40,21 @@ class User extends sys.db.Object
 	public function isAdmin() {
 		return id == 1;
 	}
+
+	public static function isBanned(){		
+		var ip = sugoi.Web.getClientIP();
+		var badTries:Int = sugoi.db.Cache.get("ip-ban-"+ip);
+		if(badTries==null) return false;
+		if(badTries>=5) return true;
+		return false;
+
+	}
+
+	public static function recordBadLogin(){
+		var ip = sugoi.Web.getClientIP();
+		var badTries:Int = sugoi.db.Cache.get("ip-ban-"+ip);
+		if(badTries==null) badTries = 0;
+		sugoi.db.Cache.set("ip-ban-"+ip,badTries+1, 60 * 10);
+	}
 	
 }

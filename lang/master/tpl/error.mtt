@@ -1,15 +1,35 @@
-﻿::use 'design.mtt'::
-
-<h1>Error</h1>
-
-<pre>
-	::message::
-</pre>
-
-::if stack::
-	<h2>Stack</h2>
-	<pre>::stack::</pre>
-::end::
-
-
-::end::
+﻿<html lang="::LANG::">
+	<head>
+		<!-- BOOTSTRAP -->		
+		<!-- Latest compiled and minified CSS -->
+		<link 	rel="stylesheet" 
+				href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+				integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" 
+				crossorigin="anonymous" />		
+	</head>
+	<body class="container">
+		<div class="row" style="margin-top:40px;">
+			<div class="col-md-2"></div>
+			<div class="col-md-8 article">
+				<h1>::_("Ouch !")::</h1>
+				<p>
+					::_("An error occurred.")::
+				</p>					
+				<p>
+					::_("If the website is unavailable, please try again in few minutes.")::
+					<br/>
+					::_("If this happen repeatedly, please let us know so we can solve the issue.")::
+				</p>
+					
+				<h4>::_("Technical description of the error")::</h4>
+					
+				<pre id="error_msg">::message::</pre>
+					
+				::if stack::
+				<h4>Stack</h4>
+					<pre>::stack::</pre>
+				::end::
+			</div>
+		</div>
+	</body>
+</html>
