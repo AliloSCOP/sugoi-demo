@@ -3,7 +3,6 @@
 -lib sugoi
 -lib record-macros
 -cp src
--cp lang/fr/tpl
+-cp lang/master/tpl
 -php www
--D spod_macro
 -main App

@@ -1,5 +1,4 @@
 import js.JQuery;
-import js.SWFObject;
 
 class App {
 	

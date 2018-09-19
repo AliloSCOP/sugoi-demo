@@ -1,0 +1,19 @@
+::use 'design.mtt'::
+<div class="row">
+		<div class="col-md-6">
+			<div class="block">
+				
+				<h4>::_("Gestion des traductions avec GetText")::</h4>
+				<p>
+					::_("Le langage de l'application est"):: <b>::session.lang::</b>
+				</p>
+				<p>
+					<a href="?lang=en" class="btn btn-default">::_("Changer vers le Français")::</a>
+					<a href="?lang=fr" class="btn btn-default">::_("Changer vers l'Anglais")::</a>
+					
+				</p>
+			</div>
+		</div>
+		
+</div>
+::end::

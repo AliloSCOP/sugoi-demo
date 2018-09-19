@@ -1,0 +1,158 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: POEditor.com\n"
+"Project-Id-Version: Sugoi\n"
+"Language: fr\n"
+
+#: lang/master/tpl/home.mtt:450
+msgid "or"
+msgstr "ou"
+
+#: lang/master/tpl/home.mtt:557
+msgid "Default user credentials are :"
+msgstr "Les droits utilisateurs par défaut sont : "
+
+#: lang/master/tpl/home.mtt:420
+msgid "Login"
+msgstr "Connexion"
+
+#: src/controller/Main.hx:1003
+msgid "Everything is allright !"
+msgstr "Tout est correct"
+
+#: src/controller/Main.hx:1117
+msgid "Oops, something went wrong !"
+msgstr "aïe, quelque chose s'est mal passé"
+
+#: lang/master/tpl/design.mtt:1898
+msgid "Sugoï demo site"
+msgstr "Site de démonstration Sugoï"
+
+#: lang/master/tpl/design.mtt:2078
+msgid "Home"
+msgstr "Accueil"
+
+#: lang/master/tpl/design.mtt:2173 lang/master/tpl/user/default.mtt:74
+msgid "Users"
+msgstr "Utilisateurs"
+
+#: lang/master/tpl/design.mtt:2282
+msgid "Translation"
+msgstr "Traductions"
+
+#: lang/master/tpl/design.mtt:2389
+msgid "Plugins"
+msgstr "Plugins"
+
+#: lang/master/tpl/design.mtt:2438
+msgid "Database"
+msgstr "Base de données"
+
+#. example comment
+#: lang/master/tpl/home.mtt:161
+msgid "You're currently logged as a super <strong>::user::</strong><em> test message</em>"
+msgstr "Vous êtes actuellement connectés en tant que <strong>::user::</strong> <em>test message</em>"
+
+#: lang/master/tpl/home.mtt:309
+msgid "test ::user::"
+msgstr "test ::user::"
+
+#: lang/master/tpl/home.mtt:487
+msgid "create the first default user."
+msgstr "créer un premier utilisateur par défaut"
+
+#: lang/master/tpl/home.mtt:766
+msgid "Database administration and migration"
+msgstr "Administration et migration base de données"
+
+#: lang/master/tpl/home.mtt:1035
+msgid "The access is limited to admin users."
+msgstr "l'accès est limité aux admins"
+
+#: lang/master/tpl/home.mtt:1234
+msgid "Controller actions"
+msgstr "Actions du controlleur"
+
+#: lang/master/tpl/home.mtt:1607
+msgid "Debug or Production mode"
+msgstr "Mode Debug ou Production"
+
+#: lang/master/tpl/home.mtt:2544
+msgid "Cagette.net"
+msgstr "Cagette.net"
+
+#: lang/master/tpl/home.mtt:2637
+msgid "Documentation"
+msgstr "Documentation"
+
+#: lang/master/tpl/home.mtt:2756
+msgid "Forum"
+msgstr "Forum"
+
+#: lang/master/tpl/home.mtt:3015
+msgid "Help"
+msgstr "Aide"
+
+#: lang/master/tpl/home.mtt:3040
+msgid "Here you can import a large amount of members in your database from a simple Excel or Libre Office file.<br/><ul><li>The first step is to <a href=\"/adherents.xls\">download this demo file.</a></li><li>Fill out the table, of modify your existing file to striclty match the columns order.</li><li>Once your file is completed, click on \"save as\" in your spreadsheet software, and select \"CSV\" format</li><li>Select the following options : separator : <b>coma</b>, encoding : <b>Unicode UTF-8</b></li><li>Save the file</li><li>finally, click on  \"select a file\" on this page and upload it.</li></ul>"
+msgstr "Vous pouvez depuis ici importer une grande quantité de membres dans votre base de données depuis un simple Excel ou fichier Libre Office.<br/>\n"
+"<ul><li>La première étape est de <a href=\"/adherents.xls\">télécharger ce fichier d'exemple.</a></li>\n"
+"</ul>"
+
+#: lang/master/tpl/plugins.mtt:140
+msgid "This section shows that it's possible to handle plugins in sugoi. Be carefull, the implementation of plugins may change, it's still a work in progress "
+msgstr "Cette section montre qu'il est possible de gérer des plugins depuis Sugoi.\n"
+"Attention, les implémentations des plugins peut changer, il s'agit d'un travail en cours de développement"
+
+#: lang/master/tpl/plugins.mtt:334
+msgid "As in popular CMS, the core application send events which are catch by the plugins."
+msgstr "Comme dans d'autre CMS populaires, l'application principale envoie des évennements qui sont ensuite capturés par les plugins"
+
+#: lang/master/tpl/plugins.mtt:457
+msgid "In this project, a DemoPlugin has been instanciated in order to show you how a plugin is made."
+msgstr "Dans ce projet, un plugin de démonstration a été installé de façon à montrer comment un plugin est fabriqué."
+
+#: lang/master/tpl/plugins.mtt:1327
+msgid "The DemoPlugin is listening to \"Nav\" events.<br/>You can create any type of event in Common.hx depending on you application logic.<br/>The plugins will be able to catch these events to execute some additionnal code or modify the content of the event."
+msgstr "Le plugin DemoPlugin écoute l'évènement \"Nav\".<br/>Vous pouvez créer tout type d'évennement dans Common.hx selon les besoins de votre application.<br/>\n"
+""
+
+#: lang/master/tpl/plugins.mtt:1628
+msgid "For instance, in this navigation bar, the second link has been added by the plugin. This link will lead to the plugin main controller."
+msgstr "Par exemple, dans cette barre de navigation, le second lien a été ajouté par le plugin.  Ce lien redirige vers le controlleur principal du plugin."
+
+#: lang/master/tpl/translation.mtt:107
+msgid "Manage text translation with GetText"
+msgstr "Gestion des traductions avec GetText"
+
+#: lang/master/tpl/translation.mtt:173
+msgid "The current app language is"
+msgstr "Le langage de l'application est"
+
+#: lang/master/tpl/translation.mtt:302
+msgid "Switch to English"
+msgstr "Changer vers le Français"
+
+#: lang/master/tpl/translation.mtt:382
+msgid "Switch to French"
+msgstr "Changer vers l'Anglais"
+
+#: lang/master/tpl/user/default.mtt:425
+msgid "Edit"
+msgstr "Editer"
+
+#: lang/master/tpl/user/default.mtt:562
+msgid "Delete"
+msgstr "Supprimer"
+
+#: lang/master/tpl/user/default.mtt:741
+msgid "Insert"
+msgstr "Insérer"
+
+#: lang/master/tpl/user/default.mtt:809
+msgid "Here is an example of what you can do with form management."
+msgstr "Voici un exemple de ce que vous pouvez faire avec la gestion des formulaires."
+

@@ -6,3 +6,9 @@ www/lib
 www/index.n
 www/index.php
 .haxelib/*
+
+lang/fr/tmp/*
+lang/en/tmp/*
+lang/es/tmp/*
+lang/de/tmp/*
+config.xml

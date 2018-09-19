@@ -6,7 +6,6 @@ package controller;
  */
 class User extends sugoi.BaseController
 {
-
 	public function new() {
 		super();
 		view.section = "users";
@@ -14,12 +13,8 @@ class User extends sugoi.BaseController
 	
 	@tpl('user/default.mtt')
 	public function doDefault() {
-		
 		view.users = db.User.manager.all();
-		
 	}
-	
-	
 	
 	public function doDelete(user:db.User) {
 		if (user.isAdmin()) throw Error('/user', 'Can\'t delete an admin user');
@@ -44,15 +39,12 @@ class User extends sugoi.BaseController
 		
 		view.form = form;
 		view.title = "Edit " + user.name;
-		
 	}
-	
 	
 	@tpl('form.mtt')
 	public function doInsert() {
 		var user = new db.User();
 		var form = sugoi.form.Form.fromSpod(user);
-		
 		
 		if (form.isValid()) {
 			form.toSpod(user);
@@ -63,15 +55,12 @@ class User extends sugoi.BaseController
 		
 		view.form = form;
 		view.title = "Insert a user";
-		
 	}
 	
 	@tpl('user/login.mtt')
 	public function doLogin() {
-		
 		//already logged
 		if (App.current.user != null) throw Redirect('/');
-		
 		//generate a form
 		var form = sugoi.form.Form.fromObject( { email:"",pass:"" } );
 		
@@ -93,5 +82,4 @@ class User extends sugoi.BaseController
 		
 		view.form = form;
 	}
-	
 }

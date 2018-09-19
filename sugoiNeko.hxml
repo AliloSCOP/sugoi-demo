@@ -2,10 +2,17 @@
 -lib templo
 -lib record-macros:git:https://github.com/HaxeFoundation/record-macros#master
 -lib dbadmin:git:https://github.com/ncannasse/dbadmin.git#master
+-lib sugoi
+-lib hxevents
+
 -cp src
--cp lang/fr/tpl
--neko www/index.n
+-cp lang/master/tpl
+-cp plugins
+-cp common
+
 -D spod_macro
+-D no-deprecation-warnings
+
 -main App
 
-
+-neko www/index.n

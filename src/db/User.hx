@@ -1,18 +1,14 @@
 package db;
 import sys.db.Types;
 
-
 enum UserType {
 	Wizzard;
 	Warrior;
 	Archer;
 }
 
-
-
 class User extends sys.db.Object
 {
-
 	public var id : SId;
 	public var name : SString<64>;
 	public var email : SString<128>;
@@ -23,19 +19,26 @@ class User extends sys.db.Object
 	public var type : SEnum<UserType>;	
 	public var xp : SInt;
 	
-	
-	
 	public function new() 
 	{
 		super();
+		reset();
 	}
 	
+	function reset()
+	{
+		ldate = Date.now();
+		xp = 0;
+		type = UserType.Archer;
+		lang = App.config.LANG; 
+	}
+
 	public override function toString() {
 		return name;
 	}
 
 	public function isAdmin() {
-		return id==1;
+		return id == 1;
 	}
 	
 }

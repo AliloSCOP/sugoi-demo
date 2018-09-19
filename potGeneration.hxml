@@ -1,0 +1,17 @@
+-lib dbadmin
+-lib templo
+-lib sugoi
+-lib hxevents
+-cp src
+-cp common
+-cp lang/master/tpl
+-cp plugins
+
+#POT GENERATION
+-D i18n_parsing
+
+-D spod_macro
+-D no-deprecation-warnings
+
+-main App
+-neko www/index.n

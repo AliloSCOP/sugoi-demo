@@ -2,7 +2,7 @@ package controller;
 import db.SampleObject;
 import haxe.web.Dispatch;
 import sugoi.form.Form;
-
+import Common;
 
 
 class Main extends sugoi.BaseController {
@@ -39,12 +39,31 @@ class Main extends sugoi.BaseController {
 		
 	}
 	
+	@tpl('translation.mtt')
+	function doTranslation(){
+		view.section = "translation";
+	}
+	
 	function doOkMessage() {
-		throw Ok("/", "Everything is allright !");
+		throw Ok("/", sugoi.i18n.Locale.texts._("Everything is allright <b>::user::</b> !",{user:app.user.name}) );
 	}
 	
 	function doErrorMessage() {
-		throw Error("/", "Oops, something went wrong !");
+		throw Error("/", sugoi.i18n.Locale.texts._("Oops, something went wrong !") );
+	}
+	
+	@tpl('plugins.mtt')
+	function doPlugins(){
+		
+		//send a navbar event to be catch by the plugin
+		var navbar = new Array<Link>();
+		navbar.push({id:"firstlink",link:"/plugin",name:"First link"});
+		var e = Nav(navbar,"demonav");
+		app.eventDispatcher.dispatch(e);
+		
+		//send the navbar to the view
+		view.navbar = e.getParameters()[0];
+		
 	}
 	
 	@admin
@@ -53,27 +72,7 @@ class Main extends sugoi.BaseController {
 		sys.db.Admin.handler();
 	}
 	
-	@tpl("form.mtt")
-	function doTestform(){
-		
-		var o = new SampleObject();
-		
-		var form = Form.fromSpod( o );
-		
-		if (form.isValid()){
-
-			form.toSpod(o);
-			o.xp += 100;
-			o.insert();
-			
-			throw Ok("/testform", "Object created, xp is now "+o.xp);
-			
-		}
-		
-		view.title = "Test form";
-		view.form = form;
-		
-		
+	public function doDemoPlugin(d:haxe.web.Dispatch) {
+		d.dispatch(new demoplugin.controller.Main());
 	}
-	
 }

@@ -1,13 +1,16 @@
 div.block {
-  border: 1px solid #DDD;
-  border-radius: 8px;
-  padding: 12px; }
+	border: 1px solid #DDD;
+	border-radius: 8px;
+	padding: 12px;
+	margin-bottom:14px;
+}
 
 .sqlLog {
-  margin-top: 24px;
-  color: #888;
-  font-size: 11px; }
-  .sqlLog .badSql {
-    color: red; }
+	margin-top: 24px;
+	color: #888;
+	font-size: 11px;
+}
 
-/*# sourceMappingURL=style.css.map */
+.sqlLog .badSql {
+	color: red;
+}

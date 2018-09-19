@@ -10,12 +10,12 @@
 
 				::else::
 				<p>
-					<a href="/user/login" class="btn btn-default">::_("Connexion")::</a> 				
-					::_("ou")::
-					<a href="/install">::_("créer un premier utilisateur par défaut")::</a>	
+					<a href="/user/login" class="btn btn-default">::_("Login")::</a> 				
+					::_("or")::
+					<a href="/install">::_("create the first default user.")::</a>	
 				</p>
 				<p>
-					::_("Les droits utilisateurs par défaut sont : ")::
+					::_("Default user credentials are :")::
 					<ul>
 						<li>email : admin@localhost </li>
 						<li>password : admin</li>
@@ -25,10 +25,10 @@
 			</div>
 			
 			<div class="block">
-				<h4>::_("Administration et migration base de données")::</h4>
+				<h4>::_("Database administration and migration")::</h4>
 				<p>
-					::raw _("La librairie <a href='http://lib.haxe.org/p/dbadmin/' target='_blank'>dbadmin</a> propose une façon aisée de synchroniser les modèles de la base de données, ainsi que de réaliser les opération de recherche et édition des entrées.")::
-					::raw _("l'accès est limité aux admins")::
+					::raw _("The <a href='http://lib.haxe.org/p/dbadmin/' target='_blank'>dbadmin</a> library provides an easy way to sync models to the database, and to search/edit/insert for table records.")::
+					::raw _("The access is limited to admin users.")::
 				</p>
 				<a href="/db" class="btn btn-default">dbadmin</a>
 			</div>
@@ -37,7 +37,7 @@
 		<div class="col-md-6">
 			
 			<div class="block">
-				<h4>::_("Actions du controlleur")::</h4>
+				<h4>::_("Controller actions")::</h4>
 				<p>
 					::raw _('Throw controller actions like <b>Ok(url,msg)</b> or <b>Error(url,msg)</b> to manage what is commonly called "flash messages".')::
 				</p>
@@ -45,7 +45,8 @@
 			</div>
 			
 			<div class="block">
-				<h4>::_("Mode Debug ou Production")::</h4>
+				<h4>::_("
+ Debug or Production mode")::</h4>
 				::if DEBUG::
 				<p>
 					The app is currently in <b>DEBUG</b> mode. Change the value of "debug" to "0" in config.xml to switch to production mode. 
@@ -77,8 +78,10 @@
 	<div class="col-md-12" >
 		<div id="footer">
 			<a href="http://www.cagette.net" target="_blank">::_("Cagette.net")::</a>  &#8226; 
-			<a href="http://www.cagette.net/wiki" target="_blank">::_("Documentation")::</a> &#8226;
-			<a href="https://groups.google.com/forum/?hl=fr#!forum/cagette" target="_blank">::_("Forum")::</a>  &#8226;
+			<a href="http://www.cagette.net/wiki" target="_blank">::_("
+ Documentation")::</a> &#8226;
+			<a href="https://groups.google.com/forum/?hl=fr#!forum/cagette" target="_blank">::_("
+ Forum")::</a>  &#8226;
 			<a href="https://www.facebook.com/cagette" target="_blank"> Facebook</a>  &#8226;
 			<a href="https://twitter.com/Cagettenet" target="_blank"> Twitter</a>  &#8226;
 		
