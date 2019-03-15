@@ -1,19 +1,19 @@
 <macros>
 
-	<macro name="jsConfirm(?text)">confirm(::if text==null::'Confirmer cette action ?'::else::'::escapeJS(text)::'::end::)</macro>
+	<macro name="jsConfirm(?text)">confirm({%if text==null%}'Confirmer cette action ?'{{else}}'{{escapeJS(text)}}'{%endfor%})</macro>
 	
-	<macro name="confirm(?text)" onclick="return $$jsConfirm(::text::)"/>
+	<macro name="confirm(?text)" onclick="return $$jsConfirm({{text}})"/>
 	
-	<macro name="file(id,?def)">::if id == null && def != null::::def::::else::/file/::makeFileSign(id)::.png::end::</macro>
+	<macro name="file(id,?def)">::if id == null && def != null::{{defelse}}/file/{{makeFileSign(id)}}.png{%endfor%}</macro>
 	
-	<macro name="img(id,?def)"><img src="$$file(::id::,::def::)"/></macro>
+	<macro name="img(id,?def)"><img src="$$file({{id}},{{def}})"/></macro>
 
 	
 	<macro name="nullsafe(text)">
-		::if text==null::
-		::else::
-			::text::
-		::end::
+		{%if text==null%}
+		{{else}}
+			{{text}}
+		{%endfor%}
 	</macro>
 	
 	

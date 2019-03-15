@@ -14,7 +14,7 @@ class User extends sugoi.BaseController
 		t = sugoi.i18n.Locale.texts;
 	}
 	
-	@tpl('user/default.mtt')
+	@tpl('user/default.twig')
 	public function doDefault() {
 		view.users = db.User.manager.all();
 	}
@@ -26,16 +26,16 @@ class User extends sugoi.BaseController
 		throw Ok('/user', 'User deleted');
 	}
 	
-	@tpl('form.mtt')
+	@tpl('form.twig')
 	public function doEdit(user:db.User) {
 		
 		var form = sugoi.form.Form.fromSpod(user);
-		form.getElement('pass').value = "";
+		form.removeElementByName('pass');
+		form.removeElementByName('ldate');
 		
 		if (form.isValid()) {
 			user.lock();
 			form.toSpod(user);
-			user.pass = haxe.crypto.Md5.encode(App.config.KEY + user.pass);
 			user.update();
 			throw Ok('/user','User edited successfully');
 		}
@@ -44,7 +44,7 @@ class User extends sugoi.BaseController
 		view.title = "Edit " + user.name;
 	}
 	
-	@tpl('form.mtt')
+	@tpl('form.twig')
 	public function doInsert() {
 		var user = new db.User();
 		var form = sugoi.form.Form.fromSpod(user);
@@ -60,11 +60,11 @@ class User extends sugoi.BaseController
 		view.title = "Insert a user";
 	}
 	
-	@tpl('user/login.mtt')
+	@tpl('user/login.twig')
 	public function doLogin() {
 
 		//Already logged ?
-		if (App.current.user != null) throw Redirect('/');
+		if (App.current.user != null) throw Ok('/','You already signed in');
 		
 		//Generate a form
 		var form = sugoi.form.Form.fromObject( { email:"",pass:"" } );

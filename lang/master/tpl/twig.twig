@@ -1,0 +1,57 @@
+
+{% extends "design.twig" %}
+
+{% block content %}
+
+<div class="row">
+		<div class="col-md-6">			
+            <h3>Iterating on haxe Arrays, Lists or Maps :</h3>
+			<div class="block">                                
+                colorArray dumped in PHP style :  
+                <pre>{{dump(colorArray)}}</pre>
+                <br/>
+                colorArray dumped in haxe style :
+                <pre>{{colorArray|debug}}</pre>
+                <br/>
+
+                colorArray 
+                <table class="table table-bordered">
+                    <tr>
+                        <th>index</th>
+                        <th>key</th>
+                        <th>value</th>
+                    </tr>
+                    {%for key,color in colorArray%}
+                    <tr>
+                        <td>{{loop.index}}</td>
+                        <td>{{key}}</td>
+                        <td>{{color}}</td>
+                    </tr>
+                    {%endfor%}
+                </table>
+                
+                colorMap : 
+                <ul>
+                    {%for c in colorMap%}
+                    <li>{{c}}</li>
+                    {%endfor%}
+                </ul>                
+
+                colorList :
+                <ul>
+                    {%for c in colorList%}
+                    <li>{{c}}</li>
+                    {%endfor%}
+                </ul>                
+            </div>				
+		</div>
+
+		<div class="col-md-6">			
+			<div class="block">
+			
+				
+			</div>			
+		</div>
+</div>
+
+{% endblock %}

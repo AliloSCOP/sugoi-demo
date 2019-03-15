@@ -1,8 +1,19 @@
--lib dbadmin
--lib templo
 -lib sugoi
 -lib record-macros
+-lib dbadmin
+-lib hxevents
+-lib hx3compat
+-lib hxtwig
+-lib jstack
+
 -cp src
 -cp lang/master/tpl
+-cp common
+-cp plugins
+
+-D php7
+
+-debug
+
 -php www
 -main App

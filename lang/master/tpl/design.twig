@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" xml:lang="{{LANG}}" lang="{{LANG}}" />
+		<title>{{NAME}}</title>
+			
+		<link rel="stylesheet" type="text/css" href="/css/{{getVariable('css')}}/style.min.css"/>
+		<script type="text/javascript" src="/js/{{getVariable('js')}}/app.js"></script>
+		
+		<!-- JQUERY -->
+		<script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+		
+		<!-- BOOTSTRAP -->		
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		
+	</head>
+
+	<body class="container">
+		
+		<h1>{{_("Site de démonstration Sugoï")}}</h1>
+			
+		<!-- navbar -->
+		<ul class="nav nav-tabs" style="margin-bottom:12px">
+		  <li><a href="/">{{_("Accueil")}}</a></li>
+		  <li><a href="/user">{{_("Utilisateurs")}}</a></li>
+		  <li><a href="/twig">{{_("Twig Playground")}}</a></li>
+		  <li><a href="/translation">{{_("Traductions")}}</a></li>
+		  <li><a href="/plugins">{{_("Plugins")}}</a></li>
+		  <li><a href="/db">{{_("Base de données")}}</a></li>
+		</ul>
+		
+		
+
+		<!-- application messages -->		
+		{% for msg in getMessages()|tophparray %}
+		<div class='row'>
+			<div class='col-md-12'>
+				<div class='alert {%if msg.error%} alert-danger {%else%} alert-success {%endif%}'>
+					{{msg.text}}
+				</div>
+			</div>
+		</div>	
+		{% endfor %}
+
+		<!-- main content -->
+		{% block content %}{%endblock%}
+		
+		<div class='row'>
+			<div class='col-md-12 text-center'>
+				<hr/>
+				Powered by <a href='http://sugoi.bubar.info'>Sugoï Web Framework</a>, 
+				written in <a href='http://haxe.org'>Haxe</a>
+			</div>
+		</div>
+		
+		<!--  SQL LOG -->
+		{%if(sqlLog!=null)%}
+			<table class='sqlLog table table-bordered'>
+			<tr>
+				<th>SQL Log</th>
+			</tr>
+			<tr>
+				<th>Duration</th>
+				<th>Results</th>
+				<th></th>
+			</tr>
+			{%for r in sqlLog%}
+				<tr>
+					<td>{{r.t}}ms</td>
+					<td>{{r.length}}</td>					
+					<td>{{r.sql}}</td>
+				</tr>
+			{%endfor%}
+			</table>
+		{%endif%}
+
+		
+	</body>
+</html>

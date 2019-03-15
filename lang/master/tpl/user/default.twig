@@ -1,0 +1,36 @@
+{% extends "design.twig" %}
+
+{% block content %}
+
+<div class="row">
+	<div class="col-md-4">
+		<h2>{{_("Users")}}</h2>
+		
+		<table class="table table-bordered">
+			<tr>
+				<th>Id</th>
+				<th>Name</th>
+				<th>Actions</th>
+			</tr>
+			{% for u in users %}
+				<tr>
+					<td>{{u.id}}</td>
+					<td>{{u.name}}</td>
+					<td>
+						<a href="/user/edit/{{u.id}}" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-edit"></span> {{_("Edit")}}</a>
+						<a href="/user/delete/{{u.id}}" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-remove"></span> {{_("Delete")}}</a>
+					</td>
+				</tr>
+			{% endfor %}			
+		</table>
+		
+		<a href="/user/insert/" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-plus"></span> {{_("Insérer")}}</a>
+		
+	</div>
+	
+	<div class="col-md-4">		
+		{{_("Voici un exemple de ce que vous pouvez faire avec la gestion des formulaires.")}}		
+	</div>
+</div>
+
+{% endblock %}

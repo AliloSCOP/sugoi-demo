@@ -17,21 +17,18 @@ class User extends sys.db.Object
 	public var ldate : SDateTime; //last connexion
 	
 	public var type : SEnum<UserType>;	
-	public var xp : SInt;
+	//public var xp : SInt;
+	public var age : SInt;
 	
 	public function new() 
 	{
 		super();
-		reset();
-	}
-	
-	function reset()
-	{
 		ldate = Date.now();
-		xp = 0;
+		//xp = 0;
 		type = UserType.Archer;
 		lang = App.config.LANG; 
 	}
+	
 
 	public override function toString() {
 		return name;

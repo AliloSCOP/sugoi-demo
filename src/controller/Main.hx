@@ -4,10 +4,9 @@ import haxe.web.Dispatch;
 import sugoi.form.Form;
 import Common;
 
-
 class Main extends sugoi.BaseController {
 
-	@tpl("home.mtt")
+	@tpl("home.twig")
 	function doDefault() {
 		view.section = "home";
 	}	
@@ -45,11 +44,28 @@ class Main extends sugoi.BaseController {
 	}
 	
 	function doOkMessage() {
-		throw Ok("/", sugoi.i18n.Locale.texts._("Everything is allright <b>::user::</b> !",{user:app.user.name}) );
+		throw Ok("/", "Everything is allright !" );
 	}
 	
 	function doErrorMessage() {
-		throw Error("/", sugoi.i18n.Locale.texts._("Oops, something went wrong !") );
+		throw Error("/", "Oops, something went wrong !" );
+	}
+
+	@tpl('twig.twig')
+	function doTwig(){
+
+		var colorMap : Map<String,String> = [
+			"first"=>"red",
+			"second"=>"orange",
+			"third"=>"green"
+		];
+		var colorArray = ["red","orange","green"];
+		var colorList = Lambda.list(colorArray);
+		view.colorMap = colorMap;
+		view.colorArray = colorArray;
+		view.colorList = colorList;
+
+
 	}
 	
 	@tpl('plugins.mtt')
@@ -69,10 +85,10 @@ class Main extends sugoi.BaseController {
 	@admin
 	function doDb(d:Dispatch) {
 		d.parts = []; //disable haxe.web.Dispatch
-		sys.db.Admin.handler();
+		sys.db.admin.Admin.handler();
 	}
 	
-	public function doDemoPlugin(d:haxe.web.Dispatch) {
+	/*public function doDemoPlugin(d:haxe.web.Dispatch) {
 		d.dispatch(new demoplugin.controller.Main());
-	}
+	}*/
 }

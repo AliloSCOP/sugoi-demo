@@ -7,18 +7,7 @@
  * Events that plugins may catch
  */
 enum Event {
-	
 	Nav(nav:Array<Link>,id:String);	//a navigation is displayed
-	/* 
-	//crons
-	DailyCron;
-	HourlyCron;
-	MinutelyCron;
-
-	SendEmail(message : sugoi.mail.Mail);		//an email is sent
-	
-	Page(uri:String);							//a page is displayed	
-	*/
 }
 
 /**

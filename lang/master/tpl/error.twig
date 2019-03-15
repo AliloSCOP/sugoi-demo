@@ -1,4 +1,4 @@
-﻿<html lang="::LANG::">
+﻿<html lang="{{LANG}}">
 	<head>
 		<!-- BOOTSTRAP -->		
 		<!-- Latest compiled and minified CSS -->
@@ -11,24 +11,24 @@
 		<div class="row" style="margin-top:40px;">
 			<div class="col-md-2"></div>
 			<div class="col-md-8 article">
-				<h1>::_("Ouch !")::</h1>
+				<h1>{{_("Ouch !")}}</h1>				
 				<p>
-					::_("An error occurred.")::
+					{{_("An error occurred.")}}
 				</p>					
 				<p>
-					::_("If the website is unavailable, please try again in few minutes.")::
+					{{_("If the website is unavailable, please try again in few minutes.")}}
 					<br/>
-					::_("If this happen repeatedly, please let us know so we can solve the issue.")::
+					{{_("If this happen repeatedly, please let us know so we can solve the issue.")}}
 				</p>
 					
-				<h4>::_("Technical description of the error")::</h4>
+				<h4>{{_("Technical description of the error")}}</h4>
 					
-				<pre id="error_msg">::message::</pre>
+				<pre id="error_msg">{{message}}</pre>
 					
-				::if stack::
+				{%if stack%}
 				<h4>Stack</h4>
-					<pre>::stack::</pre>
-				::end::
+					<pre>{{stack}}</pre>
+				{%endif%}
 			</div>
 		</div>
 	</body>

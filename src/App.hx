@@ -1,6 +1,4 @@
 package ;
-import sugoi.Web;
-import Common;
 
 class App extends sugoi.BaseApp
 {
@@ -8,7 +6,7 @@ class App extends sugoi.BaseApp
 	public static var config = sugoi.BaseApp.config;
 	
 	//plugin mgmt
-	public var eventDispatcher :hxevents.Dispatcher<Event>;	
+	public var eventDispatcher :hxevents.Dispatcher<Common.Event>;	
 	public var plugins : Array<sugoi.plugin.IPlugIn>;
 	
 	public static function main() {
@@ -19,7 +17,7 @@ class App extends sugoi.BaseApp
 	 * Init plugins and event dispatcher just before launching the app
 	 */
 	override public function mainLoop() {
-		eventDispatcher = new hxevents.Dispatcher<Event>();
+		eventDispatcher = new hxevents.Dispatcher<Common.Event>();
 		plugins = [];
 	
 		//init plugins
@@ -30,9 +28,7 @@ class App extends sugoi.BaseApp
 	
 	public static function log(t:Dynamic) {
 		if (config.DEBUG) {
-			#if neko
-			Web.logMessage(Std.string(t));
-			#end
+
 		}
 	}
 }

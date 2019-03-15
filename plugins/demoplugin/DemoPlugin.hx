@@ -8,7 +8,7 @@ class DemoPlugin extends PlugIn implements IPlugIn{
 	public function new() {
 		super();
 		name = "Demo plugin";
-		file = sugoi.tools.Macros.getFilePath();
+		//file = sugoi.tools.Macros.getFilePath();
 		//suscribe to events
 		App.current.eventDispatcher.add(onEvent);
 		

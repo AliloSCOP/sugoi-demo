@@ -1,7 +1,7 @@
--lib sugoi:git:https://github.com/bablukid/sugoi#master
+-lib sugoi
 -lib templo
--lib record-macros:git:https://github.com/HaxeFoundation/record-macros#master
--lib dbadmin:git:https://github.com/ncannasse/dbadmin.git#master
+-lib record-macros
+-lib dbadmin
 -lib hxevents
 
 -cp src
