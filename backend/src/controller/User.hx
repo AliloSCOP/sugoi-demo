@@ -1,5 +1,7 @@
 package controller;
 
+import sugoi.form.elements.Html;
+
 /**
  * User Controller
  * @author fbarbut<francois.barbut@gmail.com>
@@ -48,7 +50,6 @@ class User extends sugoi.BaseController
 	public function doInsert() {
 		var user = new db.User();
 		var form = sugoi.form.Form.fromSpod(user);
-		
 		if (form.isValid()) {
 			form.toSpod(user);
 			user.pass = haxe.crypto.Md5.encode(App.config.KEY + user.pass);

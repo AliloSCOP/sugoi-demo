@@ -2,13 +2,16 @@ lang/fr/tmp/*.n
 lang/fr/tmp/*.php
 lang/master/tmp/*.n
 lang/master/tmp/*.php
-www/lib
-www/index.n
-www/index.php
+
+public/lib
+public/index.n
+public/index.php
+
 .haxelib/*
 
 lang/fr/tmp/*
 lang/en/tmp/*
 lang/es/tmp/*
 lang/de/tmp/*
+
 config.xml

@@ -48,24 +48,19 @@
 			
 			<div class="block">
 				<h4>{{_("Mode Debug ou Production")}}</h4>
-				{%if DEBUG%}
+				{% if DEBUG %}
 				<p>
 					The app is currently in <b>DEBUG</b> mode. Change the value of "debug" to "0" in config.xml to switch to production mode. 
 				</p>
-				<p>
-					In debug mode, the templates are computed in real time ( by calling the temploc2 program ), no need to recompile.
-					The app will use the templates located in <em>master/tpl</em> folder.
-				</p>
 				
-				{%else%}
+				
+				{% else %}
 				
 				<p>
 					The app is currently in <b>PRODUCTION</b> mode. Change the value of "debug" to "1" in config.xml to switch to debug mode. 
 				</p>
-				<p>
-					In production mode, the app will use the precompiled templates located in your current langage folder, like <em>en/tpl</em> or <em>fr/tpl</em>
-				</p>
-				{%endif%}
+				
+				{% endif %}
 				
 			</div>
 			

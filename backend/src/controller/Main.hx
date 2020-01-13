@@ -38,7 +38,7 @@ class Main extends sugoi.BaseController {
 		
 	}
 	
-	@tpl('translation.mtt')
+	@tpl('translation.twig')
 	function doTranslation(){
 		view.section = "translation";
 	}
@@ -55,12 +55,14 @@ class Main extends sugoi.BaseController {
 	function doTwig(){
 
 		var colorMap : Map<String,String> = [
-			"first"=>"red",
-			"second"=>"orange",
-			"third"=>"green"
+			"first"  => "red",
+			"second" => "orange",
+			"third"  => "green"
 		];
+
 		var colorArray = ["red","orange","green"];
 		var colorList = Lambda.list(colorArray);
+		
 		view.colorMap = colorMap;
 		view.colorArray = colorArray;
 		view.colorList = colorList;
@@ -85,7 +87,7 @@ class Main extends sugoi.BaseController {
 	@admin
 	function doDb(d:Dispatch) {
 		d.parts = []; //disable haxe.web.Dispatch
-		sys.db.admin.Admin.handler();
+		sys.db.Admin.handler();
 	}
 	
 	/*public function doDemoPlugin(d:haxe.web.Dispatch) {

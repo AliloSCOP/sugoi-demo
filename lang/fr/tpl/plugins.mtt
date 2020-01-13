@@ -48,19 +48,19 @@
 				
 				::if navbar!=null::
 					<ul id="subnav" class="nav nav-pills nav-stacked">
-					::foreach i navbar::
+					{%for i in navbar%}
 					<li>
-						<a href="::i.link::">
-							<span ::cond i.icon:: class="glyphicon glyphicon-::i.icon::" ></span>
-							 ::i.name::</a>					
+						<a href="{{i.link}}">
+							<span {{cond i.icon}} class="glyphicon glyphicon-{{i.icon}}" ></span>
+							 {{i.name}}</a>					
 					</li>
-					::end::		
+					{%endfor%}		
 					</ul>
-				::end::
+				{%endfor%}
 			</div>
 			
 		</div>
 	
 	
 </div>
-::end::
+{%endfor%}

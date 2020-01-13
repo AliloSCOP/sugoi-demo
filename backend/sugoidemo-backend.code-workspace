@@ -1,0 +1,25 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../public"
+		},
+		{
+			"path": "../common"
+		},
+		{
+			"path": "../lang/master/tpl"
+		},
+		{
+			"path": "src"
+		},
+		{
+			"path": "/home/bubar/projects/sugoi"
+		},
+		{
+			"path": "/home/bubar/projects/hxtwig"
+		}
+	]
+}

@@ -44,7 +44,7 @@
 		{% endfor %}
 
 		<!-- main content -->
-		{% block content %}{%endblock%}
+		{% block content %}{% endblock %}
 		
 		<div class='row'>
 			<div class='col-md-12 text-center'>
@@ -55,7 +55,7 @@
 		</div>
 		
 		<!--  SQL LOG -->
-		{%if(sqlLog!=null)%}
+		{% if sqlLog!=null %}
 			<table class='sqlLog table table-bordered'>
 			<tr>
 				<th>SQL Log</th>
@@ -65,15 +65,15 @@
 				<th>Results</th>
 				<th></th>
 			</tr>
-			{%for r in sqlLog%}
+			{% for r in sqlLog %}
 				<tr>
 					<td>{{r.t}}ms</td>
 					<td>{{r.length}}</td>					
 					<td>{{r.sql}}</td>
 				</tr>
-			{%endfor%}
+			{% endfor %}
 			</table>
-		{%endif%}
+		{% endif %}
 
 		
 	</body>

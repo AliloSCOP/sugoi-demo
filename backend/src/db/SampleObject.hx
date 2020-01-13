@@ -9,9 +9,7 @@ import sys.db.Types;
 class SampleObject extends Object
 {
 	public var id:SId;
-	
 	public var name:SString<32>;
-
 	public var xp : SInt;
 	
 }

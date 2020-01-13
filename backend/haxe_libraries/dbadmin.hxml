@@ -1,0 +1,3 @@
+# @install: lix --silent download "gh://github.com/ncannasse/dbadmin#188924932e2e272a214c7dc33d1250e3a3a353b3" into dbadmin/1.1.0/github/188924932e2e272a214c7dc33d1250e3a3a353b3
+-cp ${HAXE_LIBCACHE}/dbadmin/1.1.0/github/188924932e2e272a214c7dc33d1250e3a3a353b3/
+-D dbadmin=1.1.0

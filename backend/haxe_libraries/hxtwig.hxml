@@ -1,0 +1,3 @@
+-D hxtwig=0.0.0
+# @install: lix --silent download "git:git@github.com:bablukid/hxtwig.git#ff6e3f3cec2b1ce20080a1093c9a29c1fddd2b60" into untitled/0.0.0/git/ff6e3f3cec2b1ce20080a1093c9a29c1fddd2b60
+-cp /home/bubar/projects/hxtwig/src

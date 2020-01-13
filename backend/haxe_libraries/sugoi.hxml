@@ -1,0 +1,3 @@
+-D sugoi=1.0.0
+# @install: lix --silent download "gh://github.com/bablukid/sugoi#412dfee170a09bc291f7ef4c3a5134ecf4d0ed84" into sugoi/1.0.0/github/412dfee170a09bc291f7ef4c3a5134ecf4d0ed84
+-cp /home/bubar/projects/sugoi/src

@@ -2,18 +2,18 @@
 -lib record-macros
 -lib dbadmin
 -lib hxevents
--lib hx3compat
 -lib hxtwig
 -lib jstack
+-lib tink_core
+-lib hx3compat
 
 -cp src
--cp lang/master/tpl
--cp common
--cp plugins
+-cp ../lang/master/tpl
+-cp ../common
+-cp ../plugins
 
 -D php7
 
 -debug
-
--php www
+-php ../public
 -main App

@@ -5,7 +5,7 @@
 				
 				<h4>::_("Gestion des traductions avec GetText")::</h4>
 				<p>
-					::_("Le langage de l'application est"):: <b>::session.lang::</b>
+					::_("Le langage de l'application est"):: <b>{{session.lang}}</b>
 				</p>
 				<p>
 					<a href="?lang=en" class="btn btn-default">::_("Changer vers le Français")::</a>
@@ -16,4 +16,4 @@
 		</div>
 		
 </div>
-::end::
+{%endfor%}

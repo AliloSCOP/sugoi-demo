@@ -21,27 +21,27 @@
                         <th>key</th>
                         <th>value</th>
                     </tr>
-                    {%for key,color in colorArray%}
+                    {% for key,color in colorArray %}
                     <tr>
                         <td>{{loop.index}}</td>
                         <td>{{key}}</td>
                         <td>{{color}}</td>
                     </tr>
-                    {%endfor%}
+                    {% endfor %}
                 </table>
                 
                 colorMap : 
                 <ul>
-                    {%for c in colorMap%}
+                    {% for c in colorMap %}
                     <li>{{c}}</li>
-                    {%endfor%}
+                    {% endfor %}
                 </ul>                
 
                 colorList :
                 <ul>
-                    {%for c in colorList%}
+                    {% for c in colorList %}
                     <li>{{c}}</li>
-                    {%endfor%}
+                    {% endfor %}
                 </ul>                
             </div>				
 		</div>
