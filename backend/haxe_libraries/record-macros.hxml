@@ -1,4 +1,5 @@
 # @install: lix --silent download "gh://github.com/haxefoundation/record-macros#5555144d22e132395377ff7fc59aac0b2143b955" into record-macros/1.0.0-alpha/github/5555144d22e132395377ff7fc59aac0b2143b955
--cp ${HAXE_LIBCACHE}/record-macros/1.0.0-alpha/github/5555144d22e132395377ff7fc59aac0b2143b955/src
+#-cp ${HAXE_LIBCACHE}/record-macros/1.0.0-alpha/github/5555144d22e132395377ff7fc59aac0b2143b955/src
+-cp /home/bubar/projects/spod/src
 -D record-macros=1.0.0-alpha
 --macro addGlobalMetadata("Date.toString", "@:keep", false, false, true)

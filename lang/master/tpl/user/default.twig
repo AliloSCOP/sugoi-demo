@@ -15,7 +15,7 @@
 			{% for u in users %}
 				<tr>
 					<td>{{u.id}}</td>
-					<td>{{u.name}}</td>
+					<td>{{u.toString()}}</td>
 					<td>
 						<a href="/user/edit/{{u.id}}" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-edit"></span> {{_("Edit")}}</a>
 						<a href="/user/delete/{{u.id}}" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-remove"></span> {{_("Delete")}}</a>

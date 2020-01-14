@@ -70,7 +70,7 @@ class Main extends sugoi.BaseController {
 
 	}
 	
-	@tpl('plugins.mtt')
+	@tpl('plugins.twig')
 	function doPlugins(){
 		
 		//send a navbar event to be catch by the plugin
@@ -87,7 +87,7 @@ class Main extends sugoi.BaseController {
 	@admin
 	function doDb(d:Dispatch) {
 		d.parts = []; //disable haxe.web.Dispatch
-		sys.db.Admin.handler();
+		sys.db.admin.Admin.handler();
 	}
 	
 	/*public function doDemoPlugin(d:haxe.web.Dispatch) {

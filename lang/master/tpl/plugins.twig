@@ -1,18 +1,21 @@
-::use 'design.mtt'::
+{% extends "design.twig" %}
+
+{% block content %}
+
 <div class="row">
 		<div class="col-md-6">
 			
 			<div class="block">
 				<h4>Plugins (WIP)</h4>
 				<p>
-					::_("This section shows that it's possible to handle plugins in sugoi. Be carefull, the implementation of plugins may change, it's still a work in progress "):: 
+					{{_("This section shows that it's possible to handle plugins in sugoi. Be carefull, the implementation of plugins may change, it's still a work in progress ")}}
 				</p>
 					
 				<p>
-					::_("As in popular CMS, the core application send events which are catch by the plugins.")::					
+					{{_("As in popular CMS, the core application send events which are catch by the plugins.")}}					
 				</p>
 				<p>
-					::_("In this project, a DemoPlugin has been instanciated in order to show you how a plugin is made.")::
+					{{_("In this project, a DemoPlugin has been instanciated in order to show you how a plugin is made.")}}
 				</p>
 
 			</div>
@@ -38,29 +41,28 @@
 			<div class="block">
 				<h4>Plugins catch events</h4>
 				<p>
-					::raw _("The DemoPlugin is listening to \"Nav\" events.<br/>
+					{{_("The DemoPlugin is listening to \"Nav\" events.<br/>
 					You can create any type of event in Common.hx depending on you application logic.<br/>
-					The plugins will be able to catch these events to execute some additionnal code or modify the content of the event.")::
+					The plugins will be able to catch these events to execute some additionnal code or modify the content of the event.")|raw}}
 				</p>
 				<p>
-					::_("For instance, in this navigation bar, the second link has been added by the plugin. This link will lead to the plugin main controller.")::
+					{{_("For instance, in this navigation bar, the second link has been added by the plugin. This link will lead to the plugin main controller.")}}
 				</p>
 				
-				::if navbar!=null::
+				{% if navbar!=null %}
 					<ul id="subnav" class="nav nav-pills nav-stacked">
-					{%for i in navbar%}
+					{% for i in navbar %}
 					<li>
-						<a href="{{i.link}}">
-							<span {{cond i.icon}} class="glyphicon glyphicon-{{i.icon}}" ></span>
-							 {{i.name}}</a>					
+						{% set x = arrayOfObject(i) %}						
+						<a href="{{x.link}}" class="btn btn-default">						
+							{{x.name}}
+						</a>
 					</li>
-					{%endfor%}		
+					{% endfor %}		
 					</ul>
-				{%endfor%}
+				{% endif %}
 			</div>
 			
 		</div>
-	
-	
 </div>
-{%endfor%}
+{% endblock %}

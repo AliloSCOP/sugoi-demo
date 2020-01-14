@@ -1,6 +1,6 @@
 -lib sugoi
 -lib record-macros
--lib dbadmin
+#-lib dbadmin
 -lib hxevents
 -lib hxtwig
 -lib jstack
@@ -12,8 +12,9 @@
 -cp ../common
 -cp ../plugins
 
--D php7
-
+-D JSTACK_FORCE
+-D JSTACK_FORMAT=vscode
+-D JSTACK_HAXE_DEV
 -debug
 -php ../public
 -main App

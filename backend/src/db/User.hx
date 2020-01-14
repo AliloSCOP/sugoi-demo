@@ -31,7 +31,7 @@ class User extends sys.db.Object
 	
 
 	public override function toString() {
-		return name;
+		return name.substr(0,1).toUpperCase()+name.substr(1).toLowerCase();
 	}
 
 	public function isAdmin() {
